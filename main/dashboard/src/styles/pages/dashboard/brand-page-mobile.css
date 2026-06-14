@@ -1,0 +1,7 @@
+@media (width <=28rem) {
+    .dashboard__brand {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--sp-1h);
+    }
+}

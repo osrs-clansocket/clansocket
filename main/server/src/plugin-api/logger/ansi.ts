@@ -1,0 +1,41 @@
+const USE_COLOR = process.stdout.isTTY === true;
+
+export const ANSI = USE_COLOR
+    ? {
+          reset: "\x1b[0m",
+          bold: "\x1b[1m",
+          dim: "\x1b[2m",
+          red: "\x1b[31m",
+          green: "\x1b[32m",
+          yellow: "\x1b[33m",
+          blue: "\x1b[34m",
+          magenta: "\x1b[35m",
+          cyan: "\x1b[36m",
+          white: "\x1b[37m",
+          brightGreen: "\x1b[92m",
+          brightYellow: "\x1b[93m",
+          brightRed: "\x1b[91m",
+          brightCyan: "\x1b[96m",
+      }
+    : {
+          reset: "",
+          bold: "",
+          dim: "",
+          red: "",
+          green: "",
+          yellow: "",
+          blue: "",
+          magenta: "",
+          cyan: "",
+          white: "",
+          brightGreen: "",
+          brightYellow: "",
+          brightRed: "",
+          brightCyan: "",
+      };
+
+export type Color = keyof typeof ANSI;
+
+export function color(c: Color, s: string): string {
+    return ANSI[c] + s + ANSI.reset;
+}

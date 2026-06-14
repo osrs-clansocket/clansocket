@@ -1,0 +1,16 @@
+.account__icon-btn {
+    background: transparent;
+    border: 0;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    padding: 0 var(--sp-1);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-flat);
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+}
+.account__icon-btn:hover {
+    color: var(--base-gold-300);
+    background: var(--base-graphite-500);
+}

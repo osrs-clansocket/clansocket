@@ -1,0 +1,8 @@
+.tt-team-chart {
+    padding: var(--sp-2);
+    min-block-size: 12rem;
+}
+.tt-team-chart canvas {
+    max-inline-size: 100%;
+    block-size: auto;
+}

@@ -1,0 +1,8 @@
+import "../dom/clans/routes/manage-route.js";
+import "../dom/clans/routes/live-route.js";
+import "../dom/clans/routes/clan-route.js";
+import "../dom/clans/routes/home-route.js";
+import "../dom/clans/routes/account-route.js";
+import "../dom/auth/routes/login-device-route.js";
+import "../dom/auth/routes/recover-route.js";
+import "../dom/data-rights/routes/data-rights-route.js";

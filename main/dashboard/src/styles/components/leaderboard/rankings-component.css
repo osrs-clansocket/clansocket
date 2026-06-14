@@ -1,0 +1,106 @@
+.rankings {
+    display: flex;
+    flex-direction: column;
+}
+.rankings__head {
+    align-items: center;
+    flex-wrap: wrap;
+}
+.rankings__caption {
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--base-graphite-300);
+    margin-inline-end: auto;
+}
+.rankings__body {
+    display: grid;
+    grid-template-areas: "stack";
+    block-size: 16rem;
+}
+.rankings__view {
+    grid-area: stack;
+    visibility: hidden;
+}
+.rankings[data-active-tab="leaderboard"] .rankings__view--leaderboard {
+    visibility: visible;
+}
+.rankings[data-active-tab="gains"] .rankings__view--gains {
+    visibility: visible;
+}
+.rankings__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding-block-start: var(--sp-2);
+    margin-block-start: var(--sp-2);
+    border-block-start: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.15);
+}
+.rankings__views {
+    display: flex;
+    gap: var(--sp-1);
+    flex-shrink: 0;
+    padding-inline-end: var(--sp-2);
+    border-inline-end: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.2);
+}
+.rankings__metrics {
+    display: flex;
+    gap: var(--sp-1);
+    flex: 1;
+    min-inline-size: 0;
+    overflow: auto hidden;
+    padding: var(--sp-0) var(--sp-1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--base-graphite-600) transparent;
+}
+.rankings__metrics::-webkit-scrollbar {
+    block-size: var(--sp-1);
+}
+.rankings__metrics::-webkit-scrollbar-thumb {
+    background: var(--base-graphite-600);
+    border-radius: var(--radius-sm);
+}
+.rankings__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-1) var(--sp-3);
+    background: var(--base-graphite-800);
+    border: var(--sp-hairline) solid rgb(from var(--base-graphite-500) r g b / 0.3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    opacity: var(--opacity-medium);
+    transition:
+        opacity var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+}
+.rankings__tab:hover {
+    opacity: 1;
+    border-color: rgb(from var(--base-gold-500) r g b / 0.4);
+}
+.rankings__tab--active {
+    opacity: 1;
+    border-color: var(--base-gold-500);
+    box-shadow: var(--shadow-glow);
+}
+.rankings__tab .metric-icon {
+    block-size: 1.125rem;
+    inline-size: auto;
+}
+.rankings__metric {
+    flex-shrink: 0;
+    padding: var(--sp-1) var(--sp-2);
+}
+.rankings__metric .metric-icon {
+    block-size: 1rem;
+    inline-size: auto;
+}
+.rankings__metric-label {
+    margin-inline-start: auto;
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--base-gold-300);
+}

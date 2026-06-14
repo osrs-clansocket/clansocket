@@ -1,0 +1,29 @@
+@media (width<=40rem) {
+    .ai-memory__body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        gap: var(--sp-2);
+        padding: var(--sp-2);
+    }
+    .ai-memory__sidebar {
+        max-block-size: 12rem;
+    }
+}
+@media (width<=40rem) {
+    .ai-memory__textarea {
+        min-block-size: 8rem;
+    }
+    .ai-memory__editor {
+        gap: var(--sp-2);
+    }
+}
+@media (width<=40rem) {
+    .ai-memory__inline-body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        max-block-size: none;
+    }
+    .ai-memory__inline-body .ai-memory__sidebar {
+        max-block-size: 10rem;
+    }
+}

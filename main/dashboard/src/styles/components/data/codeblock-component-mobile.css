@@ -1,0 +1,6 @@
+@media (width <= 30rem) {
+    .codeblock {
+        padding: var(--sp-1h);
+        font-size: var(--fs-3xs);
+    }
+}

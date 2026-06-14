@@ -1,0 +1,9 @@
+.route-data-rights__detail-body {
+    flex: 1;
+    overflow-block: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding: var(--sp-2);
+    min-block-size: 0;
+}

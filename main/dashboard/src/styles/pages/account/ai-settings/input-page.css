@@ -1,0 +1,25 @@
+.account-ai-settings__input--entry {
+    inline-size: 100%;
+    font-size: var(--fs-2xs);
+}
+
+.account-ai-settings__input--block {
+    inline-size: 100%;
+    min-block-size: var(--sp-8);
+    resize: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-tight);
+}
+
+.account-ai-settings__input--number {
+    inline-size: var(--sp-12);
+    text-align: end;
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+}
+
+.account-ai-settings__input--select {
+    inline-size: 100%;
+    font-size: var(--fs-2xs);
+}

@@ -1,0 +1,7 @@
+@media (prefers-reduced-motion: reduce) {
+    [class*="fx-"] {
+        animation: none;
+        transition: none;
+        will-change: auto;
+    }
+}

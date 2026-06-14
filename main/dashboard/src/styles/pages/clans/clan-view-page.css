@@ -1,0 +1,29 @@
+.clans-clan__view-toggle {
+    display: inline-flex;
+    gap: var(--sp-hairline);
+    background: var(--base-graphite-900);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-hairline);
+}
+.clans-clan__view-btn {
+    background: transparent;
+    border: none;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    padding: var(--sp-0) var(--sp-2);
+    font-size: var(--fs-3xs);
+    letter-spacing: var(--ls-snug);
+    text-transform: uppercase;
+    border-radius: calc(var(--radius-sm) - 0.125rem);
+    transition:
+        background 0.12s,
+        color 0.12s;
+}
+.clans-clan__view-btn:hover {
+    color: var(--base-gold-300);
+}
+.clans-clan__view-btn--active {
+    background: var(--base-graphite-700);
+    color: var(--base-gold-300);
+}

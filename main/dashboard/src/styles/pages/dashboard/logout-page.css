@@ -1,0 +1,7 @@
+.dashboard__logout[hidden] {
+    display: none;
+}
+.dashboard__logout:hover {
+    color: var(--base-gold-500);
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+}

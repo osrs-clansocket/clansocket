@@ -1,0 +1,38 @@
+@media (width<=40rem) {
+    .account__list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-0);
+    }
+    .account__list > .account__row {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        gap: var(--sp-1) var(--sp-1);
+        padding: var(--sp-1h) var(--sp-1);
+    }
+    .account__list > .account__row > .bi {
+        flex: 0 0 auto;
+    }
+    .account__list > .account__row > .account__row-primary {
+        flex: 0 1 auto;
+        min-inline-size: 0;
+        justify-self: start;
+        text-align: start;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    .account__list > .account__row > .account__row-meta {
+        flex: 1 1 auto;
+        min-inline-size: 0;
+        justify-self: start;
+        text-align: start;
+        white-space: normal;
+    }
+    .account__list > .account__row > button,
+    .account__list > .account__row > .account__session-ping {
+        flex: 0 0 auto;
+        margin-inline-start: auto;
+    }
+}

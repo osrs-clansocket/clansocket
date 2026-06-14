@@ -1,0 +1,11 @@
+.toast-stack {
+    position: fixed;
+    inset-block-start: var(--sp-2);
+    inset-inline-end: var(--sp-2);
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    max-inline-size: 24rem;
+    pointer-events: none;
+}

@@ -1,0 +1,7 @@
+@media (width<=40rem) {
+    .route-data-rights__tree-host {
+        border-inline-end: none;
+        border-block-end: var(--bw-hairline) solid transparent;
+        border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    }
+}

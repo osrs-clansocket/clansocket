@@ -1,0 +1,43 @@
+#!/bin/bash
+# Rendered from check-deployment.sh.template by deployment/utils/env/template-renderer.js — do not edit the rendered file.
+
+echo "=== PM2 Process Status ==="
+source ~/.nvm/nvm.sh
+pm2 status
+
+echo ""
+echo "=== PM2 Logs (last 50 lines) ==="
+pm2 logs --lines 50 --nostream
+
+echo ""
+echo "=== Check if ports are listening ==="
+netstat -tlnp | grep -E ':${DEPLOY_BACKEND_PORT}' || echo "No processes listening on expected port ${DEPLOY_BACKEND_PORT}"
+
+echo ""
+echo "=== Check ecosystem.config.cjs ==="
+cat ${DEPLOY_REMOTE_PATH}/ecosystem.config.cjs | head -20
+
+echo ""
+echo "=== Check if files exist ==="
+ls -la ${DEPLOY_REMOTE_PATH}/ | head -20
+
+echo ""
+echo "=== Check discord main ==="
+ls -la ${DEPLOY_REMOTE_PATH}/main/discord/src/main.js || echo "❌ discord main.js not found"
+
+echo ""
+echo "=== Check server entry ==="
+ls -la ${DEPLOY_REMOTE_PATH}/main/server/src/index.ts || echo "❌ server index.ts not found"
+
+echo ""
+echo "=== Check dashboard build ==="
+ls -la ${DEPLOY_REMOTE_PATH}/dist/ 2>/dev/null | head -5 || echo "❌ dist/ not found — run npm run build on remote"
+
+echo ""
+echo "=== Check node_modules ==="
+ls ${DEPLOY_REMOTE_PATH}/node_modules/ 2>/dev/null | wc -l
+echo "node_modules packages installed"
+
+echo ""
+echo "=== Try to connect to server port ==="
+curl -I http://localhost:${DEPLOY_BACKEND_PORT} 2>&1 | head -5 || echo "❌ Cannot connect to port ${DEPLOY_BACKEND_PORT}"

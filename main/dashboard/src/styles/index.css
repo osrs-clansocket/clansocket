@@ -1,0 +1,7 @@
+@import "./tokens/index.css" layer(tokens);
+@import "./auto-gen/index.css" layer(base);
+@import "./globals/index.css" layer(base);
+@import "./effects/index.css" layer(effects);
+@import "./components/index.css" layer(components);
+@import "./pages/dashboard/index.css" layer(pages);
+@import "./globals/base/motion-override-global.css" layer(motion-override);

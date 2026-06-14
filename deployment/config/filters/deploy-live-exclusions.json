@@ -1,0 +1,16 @@
+[
+    "main/server/data",
+    "main/server/certs",
+    "main/server/tests",
+    "node_modules",
+    "main/discord/data",
+    "main/discord/tests",
+    "shared/config",
+    "shared/farm/test",
+    "scripts",
+    "assets-optimization",
+    "deployment",
+    "public",
+    ".lint-reports",
+    ".cache"
+]

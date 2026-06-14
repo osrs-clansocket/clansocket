@@ -1,0 +1,9 @@
+.bg-fx-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-behind);
+    pointer-events: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout paint;
+}

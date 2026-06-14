@@ -1,0 +1,82 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-8);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-snug);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        background-color var(--dur-fast) var(--ease-out),
+        transform var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn:hover {
+    transform: translateY(calc(-1 * var(--sp-hairline)));
+}
+.btn:active {
+    transform: translateY(0);
+}
+.btn--primary {
+    background: linear-gradient(135deg, var(--base-graphite-500), var(--base-gold-500));
+    color: var(--base-graphite-900);
+}
+.btn--primary:hover {
+    background: linear-gradient(135deg, var(--base-gold-500), var(--base-gold-400));
+    box-shadow: var(--shadow-btn-primary-hover);
+}
+.btn--outline {
+    background: transparent;
+    color: var(--base-gold-500);
+    border: var(--sp-hairline) solid var(--base-graphite-500);
+}
+.btn--outline:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    border-color: var(--base-gold-500);
+}
+.btn {
+    user-select: none;
+}
+.btn:disabled {
+    opacity: var(--opacity-low);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.btn.is-loading {
+    opacity: var(--opacity-medium);
+    cursor: wait;
+    pointer-events: none;
+}
+.btn--compact {
+    padding: var(--sp-0) var(--sp-1h);
+    font-size: var(--fs-3xs);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: var(--fw-medium);
+    border-radius: var(--radius-sm);
+}
+@media (pointer: coarse) {
+    .btn--compact {
+        min-block-size: var(--sp-8);
+        min-inline-size: var(--sp-8);
+    }
+}
+.btn--error-flash {
+    animation: btn-error-flash var(--dur-slow) var(--ease-out);
+}
+@keyframes btn-error-flash {
+    0% {
+        box-shadow: 0 0 0 0 rgb(from var(--base-ember-300) r g b / 0);
+    }
+    30% {
+        box-shadow: var(--shadow-error-flash);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgb(from var(--base-ember-300) r g b / 0);
+    }
+}

@@ -1,0 +1,46 @@
+.account__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-0);
+    padding: 0 var(--sp-1);
+    background: var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    color: var(--base-cream-100);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-snug);
+    border-inline-start: var(--sp-0) solid var(--clan-accent, transparent);
+    user-select: none;
+}
+.account__chip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--icon-md);
+    block-size: var(--icon-md);
+}
+.account__chip-icon-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+}
+.account__chip-icon-glyph {
+    font-size: var(--icon-md);
+    line-height: var(--lh-tight);
+}
+.account__chip-name {
+    white-space: nowrap;
+}
+.account__chip-x {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: var(--opacity-medium);
+    padding: 0;
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-tight);
+}
+.account__chip-x:hover {
+    opacity: 1;
+}

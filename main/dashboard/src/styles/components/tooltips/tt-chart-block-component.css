@@ -1,0 +1,16 @@
+.tt-chart-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+    padding: var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-600);
+    border-radius: var(--radius-sm);
+    block-size: 10rem;
+    overflow: hidden;
+}
+.tt-chart-block canvas {
+    flex: 1;
+    min-block-size: 0;
+    max-inline-size: 100%;
+}

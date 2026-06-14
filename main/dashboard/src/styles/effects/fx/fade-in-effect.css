@@ -1,0 +1,12 @@
+@keyframes fx-fade-in-anim {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fx-fade-in {
+    animation: fx-fade-in-anim var(--dur-base) var(--ease-out);
+}

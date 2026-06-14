@@ -1,0 +1,62 @@
+.btn-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    cursor: pointer;
+    padding: var(--sp-0h) var(--sp-1h);
+    background: linear-gradient(
+        160deg,
+        rgb(from var(--base-graphite-700) r g b / 0.5) 0%,
+        rgb(from var(--base-graphite-900) r g b / 0.7) 100%
+    );
+    backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
+    border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--base-gold-300);
+    font: inherit;
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+    line-height: var(--lh-flat);
+    transition:
+        border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+}
+.btn-chip:hover {
+    border-color: var(--base-gold-500);
+    box-shadow: var(--shadow-date-hover);
+}
+.btn-chip.is-active {
+    border-color: var(--base-gold-500);
+}
+.btn-chip svg {
+    inline-size: var(--fs-2xs);
+    block-size: var(--fs-2xs);
+}
+.btn-chip {
+    user-select: none;
+}
+.btn-chip:disabled {
+    opacity: var(--opacity-low);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.btn-chip.is-loading {
+    opacity: var(--opacity-medium);
+    cursor: wait;
+    pointer-events: none;
+}
+.btn-chip.btn--error-flash {
+    animation: btn-error-flash var(--dur-slow) var(--ease-out);
+}
+@keyframes btn-error-flash {
+    0% {
+        box-shadow: 0 0 0 0 rgb(from var(--base-ember-300) r g b / 0);
+    }
+    30% {
+        box-shadow: var(--shadow-error-flash);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgb(from var(--base-ember-300) r g b / 0);
+    }
+}

@@ -1,0 +1,8 @@
+.clans-manage__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    padding: var(--sp-1) var(--sp-3) 0;
+}

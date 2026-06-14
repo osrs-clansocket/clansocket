@@ -1,0 +1,7 @@
+.clans-clan__section-title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    color: var(--base-gold-300);
+    margin: 0;
+    line-height: var(--lh-tight);
+}

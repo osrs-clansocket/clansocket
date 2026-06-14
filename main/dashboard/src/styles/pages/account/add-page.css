@@ -1,0 +1,18 @@
+.account__add-clan {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+.account__add-clan-form {
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding: var(--sp-2);
+    align-items: stretch;
+}
+.account__add-clan-form[hidden] {
+    display: none;
+}

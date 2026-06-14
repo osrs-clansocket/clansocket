@@ -1,0 +1,63 @@
+.account__session-row-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    overflow: hidden;
+}
+.account__session-rsn {
+    font-size: var(--fs-2xs);
+}
+.account__session-world {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+    font-size: var(--fs-3xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-tight);
+    padding: 0 var(--sp-1);
+    margin-inline-end: var(--sp-1);
+    border-radius: var(--radius-sm);
+    background: rgb(from var(--base-gold-500) r g b / 0.18);
+    color: var(--base-gold-300);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.account__session-world--offline {
+    background: rgb(from var(--base-graphite-300) r g b / 0.18);
+    color: var(--base-graphite-300);
+}
+.account__session-ping {
+    font-variant-numeric: tabular-nums;
+    font-size: var(--fs-2xs);
+    padding: 0 var(--sp-1);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+}
+.account__session-ping--good {
+    color: var(--base-forest-100);
+    background: rgb(from var(--base-forest-300) r g b / 0.18);
+}
+.account__session-ping--ok {
+    color: var(--base-gold-300);
+    background: rgb(from var(--base-gold-500) r g b / 0.12);
+}
+.account__session-ping--bad {
+    color: var(--base-ember-100);
+    background: rgb(from var(--base-ember-500) r g b / 0.18);
+}
+.account__session-ping--unknown {
+    color: var(--base-graphite-300);
+}
+.account__session-edit-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    flex: 1;
+}
+.account__session-log {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+}

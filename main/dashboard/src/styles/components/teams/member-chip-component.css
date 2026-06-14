@@ -1,0 +1,12 @@
+.member-chip {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    letter-spacing: var(--ls-wider);
+    color: var(--base-gold-400);
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+    border: var(--border-dim);
+    border-radius: var(--radius-sm);
+    padding: 0 var(--sp-0h);
+    flex-shrink: 0;
+    line-height: var(--lh-snug);
+}

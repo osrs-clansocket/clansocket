@@ -1,0 +1,6 @@
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+}

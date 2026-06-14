@@ -1,0 +1,11 @@
+.player-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-0h);
+    color: var(--base-cream-100);
+    cursor: pointer;
+    transition: color var(--dur-fast);
+}
+.player-link:hover {
+    color: var(--base-gold-500);
+}

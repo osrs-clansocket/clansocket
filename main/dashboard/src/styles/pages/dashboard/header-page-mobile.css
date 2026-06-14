@@ -1,0 +1,7 @@
+@media (width <=28rem) {
+    .dashboard__header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: "brand controls" "nav nav";
+        column-gap: var(--sp-1);
+    }
+}

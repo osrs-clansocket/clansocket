@@ -1,0 +1,27 @@
+.route-data-rights__filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-2);
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    flex-shrink: 0;
+}
+.route-data-rights__filter-bar .glass-date {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+}
+.route-data-rights__filter-bar .glass-date .glass-date__trigger,
+.route-data-rights__filter-bar > .glass-date > .glass-date__trigger {
+    padding: var(--sp-0) var(--sp-1h);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: var(--fw-medium);
+    min-block-size: 1.05rem;
+    box-sizing: border-box;
+    align-items: center;
+}

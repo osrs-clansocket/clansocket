@@ -1,0 +1,35 @@
+.account__vault-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--sp-1) var(--sp-2);
+    padding: var(--sp-1) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-2xs);
+    align-items: center;
+}
+.account__vault-row__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    overflow: hidden;
+}
+.account__vault-row__head > .account__row-primary {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.account__vault-row__head-end,
+.account__vault-row__foot-end {
+    justify-self: end;
+}
+.account__vault-row__key {
+    color: var(--base-graphite-300);
+    font-family: var(--font-mono, monospace);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

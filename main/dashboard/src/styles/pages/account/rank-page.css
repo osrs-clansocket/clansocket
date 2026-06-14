@@ -1,0 +1,18 @@
+.account__rank-grid {
+    grid-template-columns: repeat(auto-fill, minmax(var(--sp-6), 1fr));
+    max-block-size: 18rem;
+}
+.account__rank-icon-btn {
+    block-size: var(--sp-6);
+    padding: var(--sp-hairline);
+    opacity: var(--opacity-faint);
+}
+.account__rank-icon-btn.account__branding-icon--active {
+    opacity: 1;
+}
+.account__rank-icon-btn.account__branding-icon--active .account__rank-icon-img {
+    transform: scale(1.1);
+}
+.account__rank-icon-btn--locked {
+    cursor: default;
+}

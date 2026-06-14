@@ -1,0 +1,10 @@
+@media (width<=60rem) {
+    .dashboard__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (width<=30rem) {
+    .dashboard__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

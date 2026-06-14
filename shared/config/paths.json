@@ -1,0 +1,54 @@
+{
+  "root": "clansocket-app",
+  "modules": {
+    "discord": {
+      "root": "main/discord/src",
+      "entry": "index.ts",
+      "language": "ts",
+      "sourceType": "module",
+      "logger": "import logger from '@clansocket/logger';",
+      "include": ["**/*.ts"],
+      "exclude": ["**/node_modules/**", "**/data/**", "**/logs/**"]
+    },
+    "dashboard": {
+      "root": "main/dashboard/src",
+      "entry": "main.ts",
+      "language": "ts",
+      "sourceType": "module",
+      "logger": "import logger from '@clansocket/logger';",
+      "include": ["**/*.ts"],
+      "exclude": ["**/node_modules/**", "**/dist/**"]
+    },
+    "server": {
+      "root": "main/server/src",
+      "entry": "index.ts",
+      "language": "ts",
+      "sourceType": "module",
+      "logger": "import logger from '@clansocket/logger';",
+      "include": ["**/*.ts"],
+      "exclude": []
+    },
+    "assets": {
+      "root": "assets-optimization",
+      "entry": "optimize.js",
+      "language": "js",
+      "sourceType": "module",
+      "logger": "import logger from '@clansocket/logger';",
+      "include": ["**/*.js"],
+      "exclude": ["**/ffmpeg/**", "**/.cache/sync/**"]
+    }
+  },
+  "shared": {
+    "config": "shared/config",
+    "docs": "shared/docs",
+    "binary": "shared/binary"
+  },
+  "globalExclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.cache/**",
+    "**/.git/**",
+    "**/coverage/**"
+  ]
+}

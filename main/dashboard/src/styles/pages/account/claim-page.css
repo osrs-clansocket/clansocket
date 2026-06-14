@@ -1,0 +1,30 @@
+.account__claim-banner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    border-inline-start: 0.125rem solid var(--base-gold-300);
+}
+.account__claim-banner-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    overflow: hidden;
+}
+.account__claim-banner[hidden] {
+    display: none;
+}
+.account__claim-banner--success {
+    border-inline-start-color: var(--base-forest-300);
+}
+.account__claim-banner--danger {
+    border-inline-start-color: var(--base-ember-300);
+}
+.account__claim-banner--muted {
+    border-inline-start-color: var(--base-graphite-300);
+    opacity: var(--opacity-medium);
+}
+.account__claim-banner--success > .account__row-meta {
+    color: var(--base-forest-300);
+}
+.account__claim-banner--danger > .account__row-meta {
+    color: var(--base-ember-300);
+}

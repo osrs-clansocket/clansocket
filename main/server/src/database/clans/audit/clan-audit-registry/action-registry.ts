@@ -1,0 +1,87 @@
+import { ClanAuditActions, ClanAuditTargetTypes } from "../clan-audit-actions.js";
+import { def, type ActionDef, type AnyAuditAction } from "./action-def.js";
+
+export const ReadActions = {
+    ReadManagers: "server:read.managers" as const,
+    ReadManagerRequests: "server:read.manager_requests" as const,
+    ReadAuditLog: "server:read.audit_log" as const,
+    ReadRosterDiffs: "server:read.roster_diffs" as const,
+    ReadWhitelist: "server:read.whitelist" as const,
+};
+
+export const ActionRegistry: Record<string, ActionDef> = {
+    [ClanAuditActions.RosterChanged]: def("server", ClanAuditTargetTypes.Roster, true),
+    [ClanAuditActions.ClaimCompleted]: def("server", ClanAuditTargetTypes.Clan, true),
+    [ClanAuditActions.ClaimTransferred]: def("server", ClanAuditTargetTypes.Clan, true, true),
+    [ClanAuditActions.ClaimConsentRequested]: def("server", ClanAuditTargetTypes.ConsentRequest, true),
+    [ClanAuditActions.ClaimConsentConfirmed]: def("server", ClanAuditTargetTypes.ConsentRequest, true),
+    [ClanAuditActions.ClaimConsentRejected]: def("server", ClanAuditTargetTypes.ConsentRequest, true),
+    [ClanAuditActions.ManagerGranted]: def("server", ClanAuditTargetTypes.Manager, true, true),
+    [ClanAuditActions.ManagerRevoked]: def("server", ClanAuditTargetTypes.Manager, true),
+    [ClanAuditActions.ManagerRequestCreated]: def("server", ClanAuditTargetTypes.ManagerRequest, true),
+    [ClanAuditActions.ManagerRequestApproved]: def("server", ClanAuditTargetTypes.ManagerRequest, true),
+    [ClanAuditActions.ManagerRequestDenied]: def("server", ClanAuditTargetTypes.ManagerRequest, true),
+    [ClanAuditActions.BrandingUpdated]: def("server", ClanAuditTargetTypes.Branding, true, true),
+    [ClanAuditActions.BrandingCustomized]: def("server", ClanAuditTargetTypes.Branding, true),
+    [ClanAuditActions.WhitelistAdded]: def("server", ClanAuditTargetTypes.Whitelist, true),
+    [ClanAuditActions.WhitelistRemoved]: def("server", ClanAuditTargetTypes.Whitelist, true),
+    [ReadActions.ReadManagers]: def("server", ClanAuditTargetTypes.Manager, false),
+    [ReadActions.ReadManagerRequests]: def("server", ClanAuditTargetTypes.ManagerRequest, false),
+    [ReadActions.ReadAuditLog]: def("server", null, false),
+    [ReadActions.ReadRosterDiffs]: def("server", ClanAuditTargetTypes.Roster, false),
+    [ReadActions.ReadWhitelist]: def("server", ClanAuditTargetTypes.Whitelist, false),
+    "client:click": def("client", null, false),
+    "client:submit": def("client", null, false),
+    "client:route": def("client", null, false),
+    [ClanAuditActions.AuthRejected]: def("server", null, false),
+    [ClanAuditActions.ClaimRejected]: def("server", ClanAuditTargetTypes.Clan, false),
+    [ClanAuditActions.DiscordChannelsCreate]: def("discord", ClanAuditTargetTypes.DiscordChannel, true),
+    [ClanAuditActions.DiscordChannelsUpdate]: def("discord", ClanAuditTargetTypes.DiscordChannel, true, true),
+    [ClanAuditActions.DiscordChannelsDelete]: def("discord", ClanAuditTargetTypes.DiscordChannel, true),
+    [ClanAuditActions.DiscordChannelsMove]: def("discord", ClanAuditTargetTypes.DiscordChannel, true),
+    [ClanAuditActions.DiscordChannelsSetPermissions]: def("discord", ClanAuditTargetTypes.DiscordChannel, true),
+    [ClanAuditActions.DiscordRolesCreate]: def("discord", ClanAuditTargetTypes.DiscordRole, true),
+    [ClanAuditActions.DiscordRolesUpdate]: def("discord", ClanAuditTargetTypes.DiscordRole, true, true),
+    [ClanAuditActions.DiscordRolesDelete]: def("discord", ClanAuditTargetTypes.DiscordRole, true),
+    [ClanAuditActions.DiscordRolesSetPosition]: def("discord", ClanAuditTargetTypes.DiscordRole, true),
+    [ClanAuditActions.DiscordRolesSetPermissions]: def("discord", ClanAuditTargetTypes.DiscordRole, true),
+    [ClanAuditActions.VaultDiscordBotRead]: def("server", ClanAuditTargetTypes.VaultEntry, false),
+    [ClanAuditActions.VaultDiscordBotWrite]: def("server", ClanAuditTargetTypes.VaultEntry, true),
+    [ClanAuditActions.VaultDiscordBotDelete]: def("server", ClanAuditTargetTypes.VaultEntry, true),
+    [ClanAuditActions.VaultDiscordBotVerify]: def("server", ClanAuditTargetTypes.VaultEntry, true),
+    [ClanAuditActions.DiscordBotLinkerReassigned]: def("server", ClanAuditTargetTypes.DiscordBotIdentity, true),
+    [ClanAuditActions.DiscordMembersSetNickname]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersAddRole]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersRemoveRole]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersTimeout]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersKick]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersBan]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordMembersUnban]: def("discord", ClanAuditTargetTypes.DiscordMember, true),
+    [ClanAuditActions.DiscordWebhooksCreate]: def("discord", ClanAuditTargetTypes.DiscordWebhook, true),
+    [ClanAuditActions.DiscordWebhooksUpdate]: def("discord", ClanAuditTargetTypes.DiscordWebhook, true, true),
+    [ClanAuditActions.DiscordWebhooksDelete]: def("discord", ClanAuditTargetTypes.DiscordWebhook, true),
+    [ClanAuditActions.DiscordWebhooksRegenerateToken]: def("discord", ClanAuditTargetTypes.DiscordWebhook, true),
+    [ClanAuditActions.DiscordServerEmojisCreate]: def("discord", ClanAuditTargetTypes.DiscordEmoji, true),
+    [ClanAuditActions.DiscordServerEmojisRename]: def("discord", ClanAuditTargetTypes.DiscordEmoji, true),
+    [ClanAuditActions.DiscordServerEmojisDelete]: def("discord", ClanAuditTargetTypes.DiscordEmoji, true),
+    [ClanAuditActions.DiscordServerStickersCreate]: def("discord", ClanAuditTargetTypes.DiscordSticker, true),
+    [ClanAuditActions.DiscordServerStickersRename]: def("discord", ClanAuditTargetTypes.DiscordSticker, true),
+    [ClanAuditActions.DiscordServerStickersDelete]: def("discord", ClanAuditTargetTypes.DiscordSticker, true),
+    [ClanAuditActions.DiscordGuildSettingsSetName]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetIcon]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetBanner]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetDescription]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetSystemChannel]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetAfk]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetWelcomeScreen]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordGuildSettingsSetVerificationLevel]: def("discord", ClanAuditTargetTypes.DiscordGuildSettings, true),
+    [ClanAuditActions.DiscordChannelsDeletePermissions]: def("discord", ClanAuditTargetTypes.DiscordChannel, true),
+};
+
+export function isKnownAction(action: string): action is AnyAuditAction {
+    return Object.prototype.hasOwnProperty.call(ActionRegistry, action);
+}
+
+export function lookupAction(action: string): ActionDef | null {
+    return ActionRegistry[action] ?? null;
+}

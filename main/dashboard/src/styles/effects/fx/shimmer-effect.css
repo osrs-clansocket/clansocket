@@ -1,0 +1,19 @@
+@keyframes fx-shimmer-anim {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.fx-shimmer {
+    background: linear-gradient(
+        90deg,
+        var(--base-graphite-800) 0%,
+        rgb(from var(--base-gold-500) r g b / 0.08) 50%,
+        var(--base-graphite-800) 100%
+    );
+    background-size: 200% 100%;
+    animation: fx-shimmer-anim 1.6s linear infinite;
+}

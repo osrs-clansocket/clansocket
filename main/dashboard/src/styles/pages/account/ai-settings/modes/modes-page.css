@@ -1,0 +1,10 @@
+.account-ai-settings__modes {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-ai-settings__modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--sp-1h);
+}

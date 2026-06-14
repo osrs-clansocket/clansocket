@@ -1,0 +1,56 @@
+.account__row {
+    display: flex;
+    align-items: start;
+    padding: var(--sp-1) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-2xs);
+    gap: var(--sp-2);
+    min-inline-size: 0;
+}
+.account__row > .account__row-primary {
+    flex: 0 0 auto;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+}
+.account__row > .account__row-meta {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+}
+.account__row-meta-prefix {
+    color: var(--base-graphite-300);
+}
+.account__row-meta-date {
+    font-variant-numeric: tabular-nums;
+}
+.account__row-primary {
+    color: var(--base-gold-300);
+    font-weight: var(--fw-semi);
+}
+.account__row-meta {
+    color: var(--base-graphite-300);
+}
+.account__row-actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--sp-1);
+    margin-inline-start: auto;
+    justify-self: end;
+}
+.account__row-pending {
+    margin-inline-start: var(--sp-1);
+    color: var(--base-graphite-300);
+    font-weight: normal;
+}
+.account__row--editing {
+    border-color: var(--base-gold-500);
+    background: var(--base-graphite-900);
+}
+.account__row--editing .account__row-actions {
+    opacity: 1;
+}
+.account__row--editing {
+    align-items: stretch;
+}

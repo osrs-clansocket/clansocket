@@ -1,0 +1,7 @@
+.account__request-result-line {
+    margin: 0;
+    padding-block: var(--sp-0h);
+    color: var(--base-cream-100);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-snug);
+}

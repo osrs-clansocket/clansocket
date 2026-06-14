@@ -1,0 +1,79 @@
+.account-ai-settings__concern {
+    display: flex;
+    flex-direction: column;
+    border-block-end: 0.0625rem solid var(--base-graphite-500);
+}
+
+.account-ai-settings__concern-head {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-1);
+    cursor: pointer;
+    color: var(--base-cream-100);
+    transition: background var(--dur-fast) var(--ease-out);
+}
+
+.account-ai-settings__concern-head:hover {
+    background: var(--base-graphite-800);
+}
+
+.account-ai-settings__concern-head:focus-visible {
+    outline: 0.125rem solid var(--base-gold-500);
+    outline-offset: -0.125rem;
+}
+
+.account-ai-settings__concern-icon {
+    flex: 0 0 auto;
+    color: var(--base-gold-300);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-flat);
+}
+
+.account-ai-settings__concern-title {
+    flex: 1 1 auto;
+    margin: 0;
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+}
+
+.account-ai-settings__concern-badge {
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-3xs);
+    color: var(--base-gold-500);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    padding: var(--sp-0) var(--sp-1);
+    border: var(--border-hairline-active);
+    border-color: var(--base-gold-500);
+    border-radius: var(--radius-sm);
+}
+
+.account-ai-settings__concern-chevron {
+    flex: 0 0 auto;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-flat);
+    transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.account-ai-settings__concern--open .account-ai-settings__concern-chevron {
+    transform: rotate(180deg);
+}
+
+.account-ai-settings__concern-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-1) var(--sp-3) var(--sp-2);
+}
+
+.account-ai-settings__concern-body[hidden] {
+    display: none;
+}

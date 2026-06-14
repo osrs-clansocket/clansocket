@@ -1,0 +1,30 @@
+.account-ai-settings__memory-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-1h);
+    padding: var(--sp-2);
+    margin-block-end: var(--sp-2);
+    border: var(--border-hairline-active);
+    border-color: var(--base-gold-500);
+    border-radius: var(--radius-sm);
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+}
+
+.account-ai-settings__memory-banner[hidden] {
+    display: none;
+}
+
+.account-ai-settings__memory-banner-icon {
+    flex: 0 0 auto;
+    color: var(--base-gold-500);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-flat);
+}
+
+.account-ai-settings__memory-banner-text {
+    flex: 1 1 auto;
+    margin: 0;
+    color: var(--base-cream-100);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-normal);
+}

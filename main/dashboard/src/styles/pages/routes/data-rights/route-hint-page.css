@@ -1,0 +1,8 @@
+.route-data-rights__hint {
+    font-family: var(--font-body);
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-300);
+    margin: 0;
+    padding: var(--sp-1) var(--sp-2);
+    font-style: italic;
+}

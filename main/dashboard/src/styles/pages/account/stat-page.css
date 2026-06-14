@@ -1,0 +1,27 @@
+.account__stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--sp-0) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: var(--border-hairline-active);
+    border-radius: var(--radius-sm);
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    line-height: var(--lh-snug);
+}
+.account__stat-label {
+    color: var(--base-graphite-300);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-tight);
+}
+.account__stat-value {
+    color: var(--base-gold-300);
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

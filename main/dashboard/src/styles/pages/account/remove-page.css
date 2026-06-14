@@ -1,0 +1,18 @@
+.account__remove-clan-btn.btn--outline {
+    background: linear-gradient(
+        135deg,
+        rgb(from var(--base-ember-500) r g b / 0.45),
+        rgb(from var(--base-ember-500) r g b / 0.15)
+    );
+    border-color: var(--base-ember-300);
+    color: var(--base-ember-300);
+}
+.account__remove-clan-btn.btn--outline:hover {
+    background: linear-gradient(
+        135deg,
+        rgb(from var(--base-ember-500) r g b / 0.65),
+        rgb(from var(--base-ember-500) r g b / 0.3)
+    );
+    border-color: var(--base-ember-100);
+    color: var(--base-ember-100);
+}

@@ -1,0 +1,4 @@
+.dashboard__updated {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-300);
+}

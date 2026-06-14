@@ -1,0 +1,10 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--sp-2);
+    grid-auto-rows: 1fr;
+}
+.card-grid--auto {
+    grid-auto-rows: auto;
+    align-items: start;
+}

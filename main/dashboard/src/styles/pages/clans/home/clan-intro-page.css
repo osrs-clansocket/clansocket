@@ -1,0 +1,7 @@
+.clans-home__intro {
+    font-size: var(--fs-xs);
+    color: var(--base-graphite-300);
+    margin: 0 0 var(--sp-1);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+}

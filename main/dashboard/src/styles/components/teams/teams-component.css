@@ -1,0 +1,241 @@
+.teams {
+    display: block;
+}
+.teams__panel {
+    padding: var(--sp-3);
+}
+.teams__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    margin-block-end: var(--sp-3);
+    flex-wrap: wrap;
+}
+.teams__caption {
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--base-graphite-300);
+    flex: 1 1 auto;
+}
+.teams__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--sp-2);
+}
+.teams__mode--overview {
+    grid-template: "list head" auto "list chart" 1fr / min-content minmax(0, 1fr);
+    gap: var(--sp-2) var(--sp-4);
+    align-items: start;
+}
+.teams__mode--overview .teams__list {
+    grid-area: list;
+    align-self: stretch;
+    border-inline-end: var(--border-dim);
+    padding-inline-end: var(--sp-3);
+}
+.teams__mode--overview .teams-scoreboard__head {
+    grid-area: head;
+    min-inline-size: 0;
+}
+.teams__mode--overview .teams-scoreboard__chart-wrap {
+    grid-area: chart;
+    min-inline-size: 0;
+}
+.teams__mode {
+    display: none;
+}
+.teams[data-teams-mode="overview"] .teams__mode--overview {
+    display: grid;
+}
+.teams[data-teams-mode="create"] .teams__mode--create {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+.teams[data-teams-mode="edit"] .teams__mode--edit {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+.teams__head-btn {
+    display: none;
+}
+.teams[data-teams-mode="overview"] .teams__head-btn--overview {
+    display: inline-flex;
+}
+.teams[data-teams-mode="create"] .teams__head-btn--create {
+    display: inline-flex;
+}
+.teams[data-teams-mode="edit"] .teams__head-btn--edit {
+    display: inline-flex;
+}
+.teams[data-user-status="member"] [data-team-action="create"] {
+    display: none;
+}
+.teams[data-user-status="captain"] [data-team-action="create"] {
+    display: none;
+}
+.teams__form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--sp-2);
+    align-items: end;
+}
+.teams__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+}
+.teams__field-label {
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--base-graphite-300);
+}
+.teams__form .ai-memory__pin-input {
+    padding: var(--sp-1) var(--sp-2);
+    font-size: var(--fs-xs);
+    min-inline-size: 0;
+    inline-size: 100%;
+    box-sizing: border-box;
+}
+.teams__form-actions {
+    display: flex;
+    gap: var(--sp-2);
+    align-items: end;
+    justify-content: flex-end;
+}
+.teams__card {
+    position: relative;
+    inline-size: fit-content;
+    max-inline-size: 100%;
+    min-inline-size: 14rem;
+    border: var(--border-dim);
+    border-radius: var(--radius-md);
+    background: var(--gradient-surface);
+    padding: var(--sp-2);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-1);
+    transition:
+        box-shadow var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out);
+}
+.teams__card:hover {
+    border-color: var(--base-gold-500);
+}
+.teams__card--pulse {
+    animation: teams-pulse 1.5s var(--ease-out);
+}
+.teams__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-1);
+}
+.teams__rank {
+    font-family: var(--font-heading);
+    color: var(--base-gold-300);
+    font-size: var(--fs-2xs);
+}
+.teams__name {
+    flex: 1 1 auto;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    color: var(--base-cream-100);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-snug);
+}
+.teams__lp {
+    color: var(--base-gold-400);
+    font-size: var(--fs-2xs);
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+}
+.teams__motto {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    font-style: italic;
+}
+@keyframes teams-pulse {
+    0% {
+        box-shadow: none;
+    }
+    40% {
+        box-shadow: var(--shadow-glow-accent);
+    }
+    100% {
+        box-shadow: none;
+    }
+}
+.teams__members {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    align-items: stretch;
+}
+.teams__members .teams__member {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--sp-1);
+    inline-size: auto;
+    flex: 1 1 auto;
+    color: var(--base-cream-100);
+    font-size: var(--fs-2xs);
+    text-decoration: none;
+    padding: var(--sp-0) var(--sp-1);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--dur-fast) var(--ease-out);
+}
+.teams__members .teams__member:hover {
+    background-color: rgb(from var(--base-gold-500) r g b / 0.06);
+}
+.teams__actions {
+    display: flex;
+    align-items: stretch;
+    gap: var(--sp-1);
+    padding-block-start: var(--sp-1);
+    border-block-start: var(--border-dim);
+}
+.teams__action {
+    appearance: none;
+    border: var(--border-dim);
+    background: transparent;
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    padding: var(--sp-0h) var(--sp-1h);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: none;
+    text-align: center;
+    transition: border-color var(--dur-fast) var(--ease-out);
+}
+.teams__action:hover {
+    border-color: var(--base-gold-400);
+}
+.teams__action--danger {
+    color: var(--base-ember-200);
+}
+.teams__action--danger:hover {
+    border-color: var(--base-ember-300);
+}
+.teams__card[data-membership="guest"] .teams__action[data-show-for~="guest"] {
+    display: block;
+    flex: 1 1 0;
+}
+.teams__card[data-membership="member"] .teams__action[data-show-for~="member"] {
+    display: block;
+    flex: 1 1 0;
+}
+.teams__card[data-membership="captain"] .teams__action[data-show-for~="captain"] {
+    display: block;
+    flex: 1 1 0;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@clansocket/realtime",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./protocol.ts",
+      "import": "./protocol.ts"
+    }
+  }
+}

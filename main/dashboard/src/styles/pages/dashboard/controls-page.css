@@ -1,0 +1,7 @@
+.dashboard__controls {
+    grid-area: controls;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}

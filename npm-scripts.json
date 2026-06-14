@@ -1,0 +1,82 @@
+{
+    "runtime": {
+        "start": "concurrently \"tsx main/discord/src/index.ts\" \"tsx main/server/src/index.ts\"",
+        "start:discord": "tsx main/discord/src/index.ts",
+        "start:server": "tsx main/server/src/index.ts",
+        "dev": "node scripts/dev/run-dev-script.mjs",
+        "prod": "npm run build && npm start"
+    },
+    "deploy": {
+        "deploy:live": "node deployment/scripts/deployment/deploy-live.js && npm run nginx:push",
+        "deploy:live:bypass": "node deployment/scripts/deployment/deploy-live.js --skip-verify && npm run nginx:push",
+        "deploy:data": "node deployment/scripts/deployment/deploy-data.js --confirm",
+        "deploy:replace:data": "node deployment/scripts/deployment/deploy-replace-data.js --confirm",
+        "deploy:clear:data": "node deployment/scripts/deployment/deploy-clear-data.js --confirm"
+    },
+    "nginx": {
+        "nginx:push": "node deployment/scripts/nginx/update-nginx.js push",
+        "nginx:pull": "node deployment/scripts/nginx/update-nginx.js pull",
+        "nginx:pull-full": "node deployment/scripts/nginx/update-nginx.js pull-full"
+    },
+    "sync": {
+        "sync:web-routes": "tsx scripts/build-scripts/build-web-routes-script.ts",
+        "sync:db-semantics": "node scripts/build-scripts/build-db-semantics-script.mjs",
+        "sync:table-caveats": "node scripts/build-scripts/build-table-caveats-script.mjs",
+        "sync:static-icons": "node scripts/build-scripts/build-static-icons-script.mjs",
+        "sync:tokens": "node scripts/build-scripts/build-token-corpus-script.mjs"
+    },
+    "db": {
+        "map:db": "node scripts/build-scripts/build-world-map-db-script.mjs",
+        "game-ids:db": "node scripts/build-scripts/build-game-ids-db-script.mjs"
+    },
+    "build": {
+        "build": "npm run sync:web-routes && npm run sync:db-semantics && npm run sync:table-caveats && npm run sync:static-icons && tsc -p main/discord/tsconfig.json && tsc -p main/server/tsconfig.json && tsc -p main/dashboard/tsconfig.json && vite build --config main/dashboard/vite.config.ts && npm run verify:fonts"
+    },
+    "verify": {
+        "verify": "npm run lint:fix && npm run verify:prompts && npm run build",
+        "verify:fonts": "node scripts/build-scripts/verify-fonts-script.mjs",
+        "verify:css": "npm run format && npm run lint:css && npm run lint:css:scopes",
+        "verify:css:fix": "npm run format && npm run lint:css:fix && npm run lint:css:scopes",
+        "verify:prompts": "tsx scripts/audit/audit-prompt-dupes-script.mjs"
+    },
+    "lint": {
+        "lint": "npm run format && eslint --config shared/config/eslint.discord.config.js \"main/discord/src/**/*.ts\" && eslint --config shared/config/eslint.dashboard.config.js \"main/dashboard/src/**/*.ts\" && eslint --config shared/config/eslint.server.config.js \"main/server/src/**/*.ts\" && npm run verify:css && npm run lint:dup && npm run lint:sql",
+        "lint:fix": "npm run sync:tokens && npm run format && eslint --fix --config shared/config/eslint.discord.config.js \"main/discord/src/**/*.ts\" && eslint --fix --config shared/config/eslint.dashboard.config.js \"main/dashboard/src/**/*.ts\" && eslint --fix --config shared/config/eslint.server.config.js \"main/server/src/**/*.ts\" && npm run verify:css:fix && npm run lint:dup && npm run lint:sql:fix",
+        "lint:css": "stylelint --config shared/config/.stylelintrc.json \"main/dashboard/src/styles/**/*.css\"",
+        "lint:css:fix": "npm run format && stylelint --fix --config shared/config/.stylelintrc.json \"main/dashboard/src/styles/**/*.css\"",
+        "lint:css:scopes": "npm run format && eslint --config shared/config/eslint.dashboard.config.js \"main/dashboard/src/styles/**/*.css\"",
+        "lint:dup": "node scripts/audit/audit-cross-file-duplication-script.mjs",
+        "lint:sql": "python -m sqlfluff lint --config shared/config/.sqlfluff main/server/src/database/schemas && node scripts/audit/audit-schema-doctrine-script.mjs",
+        "lint:sql:fix": "python -m sqlfluff fix --config shared/config/.sqlfluff main/server/src/database/schemas && python -m sqlfluff lint --config shared/config/.sqlfluff main/server/src/database/schemas && node scripts/audit/audit-schema-doctrine-script.mjs"
+    },
+    "format": {
+        "format": "prettier --config shared/config/.prettierrc --write \"main/**/*.{js,ts,json,css}\"",
+        "format:check": "prettier --config shared/config/.prettierrc --check \"main/**/*.{js,ts,json,css}\""
+    },
+    "replace": {
+        "replace:aliases": "node scripts/codemod/resolve-css-aliases-script.mjs",
+        "replace:aliases:dry": "node scripts/codemod/resolve-css-aliases-script.mjs --dry",
+        "replace:aliases:reroll": "node scripts/codemod/resolve-css-aliases-script.mjs --reroll"
+    },
+    "bench": {
+        "bench": "tsx main/discord/tests/run-benchmarks.ts",
+        "bench:check": "tsx main/discord/tests/run-benchmarks.ts && tsx main/discord/tests/check-regressions.ts"
+    },
+    "assets": {
+        "assets:optimize": "node assets-optimization/optimize.js",
+        "assets:resize": "node assets-optimization/resize.js",
+        "assets:sync": "node assets-optimization/sync-dimensions.js",
+        "assets:trim-padding": "node assets-optimization/trim-sprite-padding.mjs",
+        "map-tiles:optimize": "node assets-optimization/convert-map-tiles.mjs",
+        "map-stitch:tiles": "node assets-optimization/stitch-map-pyramid.mjs",
+        "map-merge:tiles": "node assets-optimization/merge-plane-underlays.mjs",
+        "map-manifest:tiles": "node assets-optimization/emit-tile-manifest.mjs",
+        "map-pipeline:tiles": "npm run map-tiles:optimize && npm run map:db && npm run map-stitch:tiles && npm run map-merge:tiles && npm run map-manifest:tiles"
+    },
+    "setup": {
+        "setup:ffmpeg": "node assets-optimization/setup-ffmpeg.mjs",
+        "setup:certs": "node scripts/setup/setup-local-ca-script.mjs",
+        "trust:jvm": "node scripts/setup/trust-mkcert-in-jvm-script.mjs",
+        "rotate:tokens": "node scripts/setup/rotate-api-token-script.mjs"
+    }
+}

@@ -1,0 +1,13 @@
+@keyframes fx-highlight-ring-anim {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgb(from var(--base-gold-500) r g b / 0);
+    }
+    50% {
+        box-shadow: var(--shadow-highlight-ring);
+    }
+}
+
+.fx-highlight-ring {
+    animation: fx-highlight-ring-anim 1s ease-in-out 3;
+}

@@ -1,0 +1,15 @@
+.dashboard__header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-sticky);
+    background: var(--gradient-surface-opaque);
+    backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "brand nav controls";
+    align-items: center;
+    gap: var(--sp-1) var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    border-block-end: 0.0625rem solid transparent;
+    border-image: var(--gradient-accent-divider) 1;
+}

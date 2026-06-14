@@ -1,0 +1,25 @@
+.surface-row {
+    display: flex;
+    align-items: start;
+    padding: var(--sp-1) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-2xs);
+    gap: var(--sp-2);
+    min-inline-size: 0;
+}
+.surface-row__primary {
+    flex: 0 0 auto;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+    color: var(--base-gold-300);
+    font-weight: var(--fw-semi);
+}
+.surface-row__meta {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+    color: var(--base-graphite-300);
+    text-align: end;
+}

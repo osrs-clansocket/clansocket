@@ -1,0 +1,54 @@
+.dashboard__login-group {
+    position: relative;
+    display: inline-flex;
+}
+.dashboard__login[hidden] {
+    display: none;
+}
+.dashboard__login:hover {
+    color: var(--base-gold-500);
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+}
+.dashboard__login-popover {
+    position: absolute;
+    inset-block-start: calc(100% + 0.25rem);
+    inset-inline-end: 0;
+    z-index: var(--z-dropdown);
+    background: rgb(from var(--base-graphite-900) r g b / 0.75);
+    backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
+    border: var(--border-med);
+    border-radius: var(--radius-sm);
+    padding: var(--sp-1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+    min-inline-size: 8rem;
+    box-shadow: var(--shadow-elev-3);
+}
+.dashboard__login-popover[hidden] {
+    display: none;
+}
+.dashboard__login-option {
+    background: transparent;
+    border: none;
+    color: var(--base-cream-100);
+    cursor: pointer;
+    padding: var(--sp-1) var(--sp-2);
+    font-size: var(--fs-2xs);
+    text-align: start;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    border-radius: var(--radius-sm);
+    transition:
+        background 0.15s,
+        color 0.15s;
+}
+.dashboard__login-option:hover {
+    background: var(--base-graphite-800);
+    color: var(--base-gold-300);
+}
+.dashboard__login-option-text {
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-tight);
+}

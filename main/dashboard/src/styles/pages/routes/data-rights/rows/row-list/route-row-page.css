@@ -1,0 +1,111 @@
+.route-data-rights__row-scroll-wrap {
+    position: relative;
+    flex: 1;
+    min-block-size: 0;
+    display: flex;
+    flex-direction: column;
+}
+.route-data-rights__row-scroll {
+    flex: 1;
+    overflow-block: auto;
+    overflow-anchor: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-hairline);
+    padding: var(--sp-1);
+    min-block-size: 0;
+}
+.route-data-rights__row-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: transparent;
+    border: var(--bw-hairline) solid transparent;
+    border-inline-start: var(--sp-0) solid transparent;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    contain: layout style paint;
+}
+.route-data-rights__row-item:hover {
+    background: var(--base-graphite-800);
+}
+.route-data-rights__row-item.is-selected {
+    background: rgb(from var(--base-gold-500) r g b / 0.18);
+    border-inline-start-color: var(--base-gold-500);
+}
+.route-data-rights__row-button {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        "asset primary"
+        "asset secondary"
+        "asset meta";
+    column-gap: var(--sp-1);
+    row-gap: var(--sp-hairline);
+    align-items: center;
+    padding: var(--sp-1);
+    background: transparent;
+    border: none;
+    color: var(--base-cream-100);
+    cursor: pointer;
+    text-align: start;
+    box-sizing: border-box;
+    font: inherit;
+}
+.route-data-rights__row-asset {
+    grid-area: asset;
+    inline-size: 2rem;
+    block-size: 2rem;
+    object-fit: contain;
+    align-self: center;
+}
+.route-data-rights__row-asset--empty {
+    display: none;
+}
+.route-data-rights__row-delete {
+    visibility: hidden;
+    align-self: center;
+    margin-inline-end: var(--sp-1);
+    color: var(--base-graphite-300);
+    background: transparent;
+    isolation: isolate;
+}
+.route-data-rights__row-item:hover .route-data-rights__row-delete,
+.route-data-rights__row-delete:focus-visible {
+    visibility: visible;
+}
+.route-data-rights__row-delete:hover {
+    color: var(--base-amber-300);
+    background: rgb(from var(--base-amber-300) r g b / 0.12);
+}
+.route-data-rights__row-primary {
+    grid-area: primary;
+    color: var(--base-gold-300);
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-tight);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.route-data-rights__row-secondary {
+    grid-area: secondary;
+    color: var(--base-graphite-300);
+    font-family: var(--font-body);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.route-data-rights__row-meta {
+    grid-area: meta;
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    letter-spacing: var(--ls-snug);
+}

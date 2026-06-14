@@ -1,0 +1,97 @@
+:root {
+    --shadow-sm: 0 0.0625rem 0.1875rem rgb(0 0 0 / 0.5);
+    --shadow-md: 0 0.25rem 0.75rem rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 0.5rem 2rem rgb(0 0 0 / 0.75);
+    --shadow-glow: 0 0 1.25rem rgb(201 168 76 / 0.12);
+    --shadow-glow-accent: 0 0 1.75rem rgb(201 168 76 / 0.25);
+    --shadow-glow-highlight: 0 0 1.5rem rgb(184 192 204 / 0.18);
+    --shadow-glow-danger: 0 0 1.5rem rgb(139 42 42 / 0.3);
+    --shadow-glow-warn: 0 0 1.5rem rgb(217 156 46 / 0.25);
+    --shadow-elev-1: 0 0.0625rem 0.125rem rgb(0 0 0 / 0.3), 0 0.0625rem 0.0625rem rgb(0 0 0 / 0.2);
+    --shadow-elev-2: 0 0.25rem 0.5rem rgb(0 0 0 / 0.4), 0 0.125rem 0.25rem rgb(0 0 0 / 0.3);
+    --shadow-elev-3: 0 0.75rem 1.5rem rgb(0 0 0 / 0.5), 0 0.375rem 0.75rem rgb(0 0 0 / 0.4);
+    --shadow-elev-4: 0 1.5rem 3rem rgb(0 0 0 / 0.6), 0 0.75rem 1.5rem rgb(0 0 0 / 0.45);
+    --shadow-inset-sm: inset 0 0.0625rem 0.125rem rgb(0 0 0 / 0.3);
+    --shadow-inset-md: inset 0 0.125rem 0.25rem rgb(0 0 0 / 0.4);
+    --shadow-input-base:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.06), inset 0 -0.0625rem 0 rgb(0 0 0/0.3),
+        0 0.125rem 0.5rem rgb(0 0 0/0.25);
+    --shadow-input-hover:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.1), inset 0 -0.0625rem 0 rgb(0 0 0/0.3),
+        0 0.1875rem 0.75rem rgb(0 0 0/0.3);
+    --shadow-input-focus:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.12),
+        0 0 0 0.1875rem rgb(from var(--base-gold-500) r g b/0.22),
+        0 0.25rem 1rem rgb(from var(--base-gold-500) r g b/0.15);
+    --shadow-input-invalid:
+        inset 0 0.0625rem 0 rgb(from var(--base-ember-100) r g b/0.15),
+        0 0 0 0.1875rem rgb(from var(--base-ember-100) r g b/0.18),
+        0 0.25rem 1rem rgb(from var(--base-ember-100) r g b/0.15);
+    --shadow-input-invalid-focus:
+        inset 0 0.0625rem 0 rgb(from var(--base-ember-100) r g b/0.2),
+        0 0 0 0.1875rem rgb(from var(--base-ember-100) r g b/0.3),
+        0 0.25rem 1rem rgb(from var(--base-ember-100) r g b/0.25);
+    --shadow-control-base:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.08), inset 0 -0.0625rem 0 rgb(0 0 0/0.4),
+        0 0.125rem 0.375rem rgb(0 0 0/0.25);
+    --shadow-control-hover:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.12),
+        0 0 0.5rem rgb(from var(--base-gold-500) r g b/0.25), 0 0.125rem 0.5rem rgb(0 0 0/0.3);
+    --shadow-control-focus:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.12),
+        0 0 0 0.1875rem rgb(from var(--base-gold-500) r g b/0.3), 0 0 0.75rem rgb(from var(--base-gold-500) r g b/0.3);
+    --shadow-control-checked:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.2),
+        0 0 0.75rem rgb(from var(--base-gold-500) r g b/0.35), 0 0.125rem 0.5rem rgb(0 0 0/0.35);
+    --shadow-autofill:
+        0 0 0 62.5rem rgb(from var(--base-graphite-900) r g b/0.95) inset,
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.06);
+    --shadow-dialog:
+        0 1rem 3rem rgb(0 0 0/0.7), 0 0 0 0.0625rem rgb(from var(--base-gold-500) r g b/0.1),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.1);
+    --shadow-color-input:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.08), 0 0.125rem 0.375rem rgb(0 0 0/0.25);
+    --shadow-popup:
+        0 0.5rem 1.5rem rgb(0 0 0/0.6), 0 0 0 0.0625rem rgb(from var(--base-gold-500) r g b/0.1),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.1);
+    --shadow-select-focus:
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.15),
+        0 0 0 0.1875rem rgb(from var(--base-gold-500) r g b/0.22),
+        0 0.25rem 1rem rgb(from var(--base-gold-500) r g b/0.18);
+    --shadow-check-invalid: 0 0 0 0.1875rem rgb(from var(--base-ember-100) r g b/0.22);
+    --shadow-confirm:
+        0 1.25rem 3rem rgb(0 0 0/0.7), 0 0 0 0.0625rem rgb(from var(--base-gold-500) r g b/0.1),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.12);
+    --shadow-btn-cancel:
+        0 0.25rem 0.75rem rgb(from var(--base-graphite-500) r g b/0.45),
+        inset 0 0.0625rem 0 rgb(from var(--base-ember-100) r g b/0.35);
+    --shadow-btn-cancel-hover:
+        0 0.375rem 1rem rgb(from var(--base-ember-300) r g b/0.55),
+        inset 0 0.0625rem 0 rgb(from var(--base-ember-100) r g b/0.45);
+    --shadow-btn-confirm:
+        0 0.25rem 0.75rem rgb(from var(--base-gold-500) r g b/0.3),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.4);
+    --shadow-btn-confirm-hover:
+        0 0.375rem 1rem rgb(from var(--base-gold-500) r g b/0.45),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.5);
+    --shadow-ai-bar: 0 -0.25rem 0.875rem rgb(0 0 0/0.55), 0 -0.0625rem 0 rgb(from var(--base-gold-500) r g b/0.08);
+    --shadow-panel-base:
+        0 0.0625rem 0.1875rem rgb(0 0 0/0.5), inset 0 0.0625rem 0 rgb(from var(--base-gold-500) r g b/0.04);
+    --shadow-panel-hover: 0 0.25rem 0.75rem rgb(0 0 0/0.6), 0 0 1.25rem rgb(from var(--base-gold-500) r g b/0.12);
+    --shadow-date-hover: 0 0 0.375rem rgb(from var(--base-gold-500) r g b/0.2);
+    --shadow-auth-card: 0 0.5rem 1.25rem rgb(0 0 0/0.45), inset 0 0.0625rem 0 rgb(from var(--base-gold-500) r g b/0.1);
+    --shadow-auth-btn:
+        0 0.125rem 0.375rem rgb(from var(--base-gold-500) r g b/0.25),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.35);
+    --shadow-auth-btn-hover:
+        0 0.375rem 1rem rgb(from var(--base-gold-500) r g b/0.45),
+        inset 0 0.0625rem 0 rgb(from var(--base-gold-200) r g b/0.5);
+    --shadow-btn-primary-hover: 0 0.25rem 1rem rgb(from var(--base-gold-500) r g b/0.3);
+    --shadow-card-hover: 0 0.25rem 0.75rem rgb(0 0 0/0.6), 0 0 1.75rem rgb(201 168 76/0.25);
+    --shadow-tt: 0 0.5rem 2rem rgb(0 0 0/0.75), 0 0 1.5rem rgb(184 192 204/0.18);
+    --shadow-tt-pop: 0 0.5rem 2rem rgb(0 0 0/0.75), 0 0 1.75rem rgb(201 168 76/0.25);
+    --shadow-clan-combat-glow: 0 0 0.25rem var(--base-cream-100);
+    --shadow-highlight-ring:
+        0 0 0 0.1875rem rgb(from var(--base-gold-500) r g b/0.55), 0 0 1.25rem rgb(from var(--base-gold-500) r g b/0.35);
+    --shadow-error-flash: 0 0 0 var(--sp-0) rgb(from var(--base-ember-300) r g b/0.55);
+}

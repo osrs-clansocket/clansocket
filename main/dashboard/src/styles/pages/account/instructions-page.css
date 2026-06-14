@@ -1,0 +1,6 @@
+.account__instructions {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-300);
+    margin: 0;
+    line-height: var(--lh-snug);
+}

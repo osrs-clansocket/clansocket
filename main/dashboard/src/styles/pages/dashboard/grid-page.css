@@ -1,0 +1,5 @@
+.dashboard__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--sp-2);
+}

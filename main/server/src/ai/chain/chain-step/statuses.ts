@@ -1,0 +1,37 @@
+const DEFAULT_STATUSES = [
+    "Parsing the drop table...",
+    "Noted. Unnoting response...",
+    "Tick-manipulating a reply...",
+    "Prayer flicking through context...",
+    "Spec tabbing the database...",
+    "Splashing on the first attempt...",
+    "Pathing through the render queue...",
+    "Decanting your request into doses...",
+    "Hopping worlds for a free server...",
+    "Grinding the query slayer task...",
+    "Rolling the RDT for your answer...",
+    "Telegrabbing from the cache...",
+    "Venging the last failed parse...",
+    "Safespot found. Ranging the DB...",
+    "Flinching this query one tick at a time...",
+    "Doing a farm run on the tables...",
+    "Boosting +5 for this query...",
+    "Trimming your query for free...",
+    "Dancing for data plox...",
+    "Buying gf for 10k context tokens...",
+    "Following Zezima to the answer...",
+    "Falador massacre on stale cache...",
+    "Connection lost. Reconnecting...",
+    "Sit. Get parsed.",
+    "Nice.",
+    "Gnome child is thinking...",
+    "Flash2:wave: loading response...",
+    "73.",
+    "Woox would walk this query...",
+    "Skull tricked into a chain turn...",
+    "Pulling a Settled and limiting myself...",
+];
+
+export function pickDefaultStatus(): string {
+    return DEFAULT_STATUSES[Math.floor(Math.random() * DEFAULT_STATUSES.length)]!;
+}

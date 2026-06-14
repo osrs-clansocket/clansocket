@@ -1,0 +1,18 @@
+@media (width<=40rem) {
+    .route-data-rights {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .route-data-rights[data-view="tree"] .route-data-rights__list-host,
+    .route-data-rights[data-view="tree"] .route-data-rights__detail-host,
+    .route-data-rights[data-view="list"] .route-data-rights__tree-host,
+    .route-data-rights[data-view="list"] .route-data-rights__detail-host,
+    .route-data-rights[data-view="detail"] .route-data-rights__tree-host,
+    .route-data-rights[data-view="detail"] .route-data-rights__list-host {
+        display: none;
+    }
+    .route-data-rights .route-data-rights__list-host {
+        border-inline-end: none;
+        border-block-end: var(--bw-hairline) solid transparent;
+        border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    }
+}

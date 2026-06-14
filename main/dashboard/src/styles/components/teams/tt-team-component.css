@@ -1,0 +1,42 @@
+.tt-team__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding: var(--sp-2);
+    padding-block-end: var(--sp-1);
+    border-block-end: 0.0625rem solid var(--base-graphite-600);
+}
+.tt-team__title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-1);
+}
+.tt-team__title {
+    flex: 0 0 auto;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    color: var(--base-gold-300);
+}
+.tt-team__rank {
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    color: var(--base-gold-400);
+}
+.tt-team__motto {
+    flex: 0 1 auto;
+    min-inline-size: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: var(--fs-2xs);
+    font-style: italic;
+    color: var(--base-graphite-300);
+}
+.tt-team__vitals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-0h);
+    padding: var(--sp-1) var(--sp-2);
+}

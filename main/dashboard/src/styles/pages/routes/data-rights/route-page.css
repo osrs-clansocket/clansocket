@@ -1,0 +1,23 @@
+.route-data-rights {
+    position: fixed;
+    inset: var(--data-rights-top, var(--nav-height)) 0 var(--data-rights-bottom, 0) 0;
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr) minmax(0, 1.5fr);
+    grid-template-rows: minmax(0, 1fr);
+    box-sizing: border-box;
+    overflow: hidden;
+    user-select: none;
+    z-index: var(--z-base);
+}
+
+.route-data-rights .btn {
+    padding: var(--sp-0) var(--sp-1h);
+    font-size: var(--fs-3xs);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: var(--fw-medium);
+    border-radius: var(--radius-sm);
+    min-block-size: 1.05rem;
+    line-height: var(--lh-flat);
+    box-sizing: border-box;
+}

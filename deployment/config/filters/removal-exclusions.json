@@ -1,0 +1,7 @@
+[
+    "node_modules",
+    "data",
+    "main/server/data",
+    "main/discord/data",
+    ".env"
+]

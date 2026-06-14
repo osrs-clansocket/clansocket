@@ -1,0 +1,8 @@
+# Stylelint scope control.
+#
+# Files listed here have the FULL stylelint pipeline skipped — used for generated CSS only.
+# Patterns resolve relative to CWD via gitignore syntax (the `.stylelintrc.json` `ignoreFiles`
+# array can NOT be used here — stylelint pre-resolves those patterns by prepending the config
+# file's directory, which means patterns there can never escape `shared/config/`).
+main/dashboard/src/styles/generated-icon-colors.css
+main/dashboard/src/styles/auto-gen/**

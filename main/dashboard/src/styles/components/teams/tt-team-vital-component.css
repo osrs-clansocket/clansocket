@@ -1,0 +1,22 @@
+.tt-team-vital {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-1);
+    padding: var(--sp-0) var(--sp-1);
+    background: rgb(0 0 0/0.25);
+    border: var(--border-dim);
+    border-radius: var(--radius-sm);
+}
+.tt-team-vital__label {
+    font-size: var(--fs-3xs);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--base-graphite-300);
+}
+.tt-team-vital__value {
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    color: var(--base-cream-100);
+}

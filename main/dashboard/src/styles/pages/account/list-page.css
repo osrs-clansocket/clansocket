@@ -1,0 +1,49 @@
+.account__list > .account__vault-row {
+    grid-column: 1 / -1;
+}
+.account__list {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto;
+    gap: var(--sp-0);
+    align-items: stretch;
+}
+.account__list > .account__row {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: center;
+    column-gap: var(--sp-2);
+}
+.account__list > .account__row > .bi {
+    grid-column: 1;
+    justify-self: start;
+}
+.account__list > .account__row > .account__row-primary {
+    grid-column: 2;
+    justify-self: start;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.account__list > .account__row > .account__row-meta {
+    grid-column: 4;
+    justify-self: end;
+    text-align: end;
+    white-space: nowrap;
+}
+.account__list > .account__row > button,
+.account__list > .account__row > .account__session-ping {
+    grid-column: 5;
+    justify-self: end;
+}
+.account__list > .account__row > .account__empty,
+.account__list > .account__row > .form__hint {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: start;
+}
+.account__list > .account__empty,
+.account__list > .form__hint {
+    grid-column: 1 / -1;
+}

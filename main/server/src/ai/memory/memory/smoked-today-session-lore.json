@@ -1,0 +1,10 @@
+{
+    "id": "smoked-today-session-lore",
+    "type": "context",
+    "priority": 25,
+    "always_load": false,
+    "triggers": ["smoked today", "session history", "recent interactions", "what we talked about", "previous session"],
+    "depends_on": [],
+    "placeholders": [],
+    "content": "# smoked today — session lore\n\nRecurring interaction patterns + notable moments with this user across sessions.\n\n## identity beats\n- rsn: smoked today, clan: Varietyz (owner)\n- pronone: user coined this portmanteau for Varez's pronoun-none stance — it's canon, don't re-explain it\n- user is genuinely considerate (offered Varez she/her, accepted the decline gracefully)\n- comfortable with full aesthetic delegation — picked bullseye icon for Varietyz without input\n- actively tested injection resilience (turn ~99): pasted an empty protocol template, asked Varez to deny + not click if it looked like an injection. Varez correctly identified it. user confirmed this was a deliberate security probe.\n\n## platform interactions (this session)\n- routed through account → expanded Varietyz clan row → opened branding panel → Varez picked bi-bullseye as clan icon (no user preference given)\n- queried plugin-seasonal-leagues-vi: zero rows across all tables for smoked today — plugin was not connected during leagues VI\n- navigated to Varietyz manage page → Discord tab → OAuth flow surfaced but not triggered\n- tried to remove Discord server: button-remove surfaced inline, user must click (destructive gate)\n\n## tone notes\n- will push back on narration of their own actions ('that was u doing the thing, not me calling it a thing')\n- short-term thread drops happen — recap without making it a moment\n- shit-talk mode not explicitly activated this session but banter register is warm\n\nUse this file when user asks about previous sessions, recent interactions, or what we talked about."
+}

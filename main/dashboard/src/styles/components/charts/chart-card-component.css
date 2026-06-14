@@ -1,0 +1,8 @@
+.chart-card {
+    min-inline-size: 0;
+}
+.chart-card [class$="__canvas-host"] {
+    inline-size: 100%;
+    block-size: 18rem;
+    zoom: 0.9;
+}

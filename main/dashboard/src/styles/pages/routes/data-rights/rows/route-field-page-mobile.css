@@ -1,0 +1,5 @@
+@media (width<=40rem) {
+    .route-data-rights__field {
+        grid-template-columns: 7rem minmax(0, 1fr);
+    }
+}

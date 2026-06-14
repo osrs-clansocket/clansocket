@@ -1,0 +1,10 @@
+backups/
+!backups/.gitkeep
+config/.env.deploy
+node_modules/
+
+# Rendered output from *.template files — do not commit
+nginx/sites-available/*
+!nginx/sites-available/*.template
+!nginx/sites-available/.gitkeep
+scripts/check-deployment.sh

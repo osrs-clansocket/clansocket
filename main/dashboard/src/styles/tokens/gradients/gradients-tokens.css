@@ -1,0 +1,11 @@
+:root {
+    --gradient-surface: linear-gradient(160deg, rgb(21 23 28 / 0.35) 0%, rgb(13 14 16 / 0.45) 100%);
+    --gradient-surface-opaque: linear-gradient(160deg, rgb(21 23 28) 0%, rgb(13 14 16) 100%);
+    --gradient-accent-divider: linear-gradient(90deg, transparent, var(--base-gold-500) 50%, transparent);
+    --gradient-danger-divider: linear-gradient(90deg, transparent, var(--base-ember-300) 50%, transparent);
+    --gradient-highlight: linear-gradient(135deg, var(--base-silver-200) 0%, var(--base-azure-300) 100%);
+    --gradient-highlight-soft: linear-gradient(135deg, rgb(184 192 204 / 0.18) 0%, rgb(106 144 184 / 0.12) 100%);
+    --gradient-ambient-steel: radial-gradient(ellipse at 80% 20%, rgb(106 117 133 / 0.08) 0%, transparent 60%);
+    --gradient-accent-bloom: radial-gradient(ellipse at 20% 30%, rgb(201 168 76 / 0.08) 0%, transparent 55%);
+    --gradient-danger: radial-gradient(ellipse at 20% 30%, rgb(107 31 31 / 0.18) 0%, transparent 55%);
+}

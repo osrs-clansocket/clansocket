@@ -1,0 +1,36 @@
+{
+    "routes": [
+        {
+            "pattern": "/clans/varietyz/manage/audit",
+            "description": "Clan management (manager-only; non-managers are redirected to the clan dashboard)."
+        },
+        {
+            "pattern": "/clans/varietyz/live",
+            "description": "Live clan-positions map. Shows current location of every clan member running the plugin."
+        },
+        {
+            "pattern": "/clans/varietyz",
+            "description": "A clan's dashboard. :slug is the clan's lowercase slug."
+        },
+        {
+            "pattern": "/",
+            "description": "Home — the landing page and clan directory."
+        },
+        {
+            "pattern": "/account",
+            "description": "Your account — clans, RSNs, linked accounts, sign-in devices, vault."
+        },
+        {
+            "pattern": "/login-device",
+            "description": "Device login — sign in by linking this device."
+        },
+        {
+            "pattern": "/recover",
+            "description": "Account recovery — regain access to an account."
+        },
+        {
+            "pattern": "/data-rights",
+            "description": "Your data-rights browser — export or delete your stored data."
+        }
+    ]
+}

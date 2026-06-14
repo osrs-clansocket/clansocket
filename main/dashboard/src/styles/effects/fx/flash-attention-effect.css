@@ -1,0 +1,15 @@
+@keyframes fx-flash-attention-anim {
+    0%,
+    100% {
+        background-color: var(--base-graphite-800);
+    }
+    50% {
+        background-color: rgb(from var(--base-ember-300) r g b / 0.25);
+    }
+}
+
+.fx-flash-attention {
+    outline: 0.125rem solid var(--base-ember-300);
+    outline-offset: 0.0625rem;
+    animation: fx-flash-attention-anim 1.6s ease-in-out 2;
+}

@@ -1,0 +1,5 @@
+@media (width <=28rem) {
+    .dashboard__nav {
+        justify-self: center;
+    }
+}

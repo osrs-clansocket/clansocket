@@ -1,0 +1,5 @@
+@media (width<=30rem) {
+    .list-grid {
+        padding: var(--sp-1);
+    }
+}

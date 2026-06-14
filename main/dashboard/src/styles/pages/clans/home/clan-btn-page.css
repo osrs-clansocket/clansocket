@@ -1,0 +1,5 @@
+.clans-home__btn-row {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+}

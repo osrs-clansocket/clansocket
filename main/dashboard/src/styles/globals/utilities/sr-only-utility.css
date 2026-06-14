@@ -1,0 +1,28 @@
+.sr-only {
+    position: absolute;
+    inline-size: 0.0625rem;
+    block-size: 0.0625rem;
+    padding: 0;
+    margin: calc(-1 * var(--sp-hairline));
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: none;
+}
+.sr-only:focus,
+.sr-only:focus-within {
+    position: fixed;
+    inset-block-start: var(--sp-2);
+    inset-inline-start: var(--sp-2);
+    inline-size: auto;
+    block-size: auto;
+    padding: var(--sp-2) var(--sp-4);
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    z-index: var(--z-toast);
+    background: var(--base-graphite-800);
+    color: var(--base-gold-300);
+    border: var(--sp-hairline) solid var(--base-gold-500);
+    border-radius: var(--radius-sm);
+}

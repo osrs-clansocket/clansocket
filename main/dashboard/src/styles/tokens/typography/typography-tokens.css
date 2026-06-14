@@ -1,0 +1,31 @@
+:root {
+    --font-heading: "Cascadia Code", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+    --font-body: "Fira Code", "Cascadia Code", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+    --font-data: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+    --font-mono: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+    --fs-root: 100%;
+    --fs-mobile-root: 87.5%;
+    --fs-3xs: clamp(0.45rem, 0.4333rem + 0.0556vw, 0.5rem);
+    --fs-2xs: clamp(0.55rem, 0.525rem + 0.0833vw, 0.625rem);
+    --fs-xs: clamp(0.65rem, 0.6167rem + 0.1111vw, 0.75rem);
+    --fs-sm: clamp(0.78rem, 0.7483rem + 0.1056vw, 0.875rem);
+    --fs-base: clamp(0.95rem, 0.9125rem + 0.125vw, 1.0625rem);
+    --fs-md: clamp(1rem, 0.9583rem + 0.1389vw, 1.125rem);
+    --fs-lg: clamp(1.15rem, 1.0333rem + 0.3889vw, 1.5rem);
+    --fs-xl: clamp(1.5rem, 1.3333rem + 0.5556vw, 2rem);
+    --fs-2xl: clamp(1.8rem, 1.4833rem + 1.0556vw, 2.75rem);
+    --fs-3xl: clamp(2.2rem, 1.4333rem + 2.5556vw, 4.5rem);
+    --lh-flat: 1;
+    --lh-tight: 1.15;
+    --lh-snug: 1.3;
+    --lh-normal: 1.6;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semi: 600;
+    --fw-bold: 700;
+    --ls-tight: 0.02em;
+    --ls-snug: 0.04em;
+    --ls-normal: 0.06em;
+    --ls-wide: 0.08em;
+    --ls-wider: 0.1em;
+}

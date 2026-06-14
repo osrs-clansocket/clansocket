@@ -1,0 +1,10 @@
+export const ERROR_CLAN_NOT_FOUND = "clan_not_found";
+export const ERROR_NOT_AUTHENTICATED = "not_authenticated";
+export const ERROR_ACCOUNT_NOT_FOUND = "account_not_found";
+export const ERROR_INVALID_SESSION = "invalid_session";
+export const ERROR_REQUEST_NOT_FOUND = "request_not_found";
+export const ERROR_REQUEST_ALREADY_RESOLVED = "request_already_resolved";
+export const ERROR_GITHUB_OAUTH_NOT_CONFIGURED = "github_oauth_not_configured";
+export const ERROR_DISCORD_OAUTH_NOT_CONFIGURED = "discord_oauth_not_configured";
+export const ERROR_EXPORT_FAILED = "export_failed";
+export const ERROR_COOLDOWN = "cooldown";

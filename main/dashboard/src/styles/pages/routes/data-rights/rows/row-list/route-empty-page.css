@@ -1,0 +1,7 @@
+.route-data-rights__empty {
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-300);
+    padding: var(--sp-2);
+    margin: 0;
+}

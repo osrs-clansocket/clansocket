@@ -1,0 +1,12 @@
+:root {
+    --clr-border-subtle: rgb(232 220 180 / 0.12);
+    --clr-border-medium: rgb(232 220 180 / 0.25);
+    --clr-border-strong: rgb(232 220 180 / 0.45);
+    --clr-border-danger: rgb(179 53 53 / 0.4);
+    --border-dim: 0.0625rem solid var(--clr-border-subtle);
+    --border-med: 0.0625rem solid var(--clr-border-medium);
+    --border-strong: 0.0625rem solid var(--clr-border-strong);
+    --clr-border-warn: rgb(217 156 46 / 0.45);
+    --bw-hairline: 0.0625rem;
+    --border-hairline-active: var(--bw-hairline) solid var(--base-graphite-500);
+}

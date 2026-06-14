@@ -1,0 +1,68 @@
+.account-ai-settings__tip {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.account-ai-settings__tip-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    border-radius: var(--radius-pill);
+    transition: color var(--dur-fast) var(--ease-out);
+}
+
+.account-ai-settings__tip-trigger:hover,
+.account-ai-settings__tip-trigger:focus-visible {
+    color: var(--base-gold-300);
+    outline: none;
+}
+
+.account-ai-settings__tip-pop {
+    display: none;
+    position: absolute;
+    inset-block-start: calc(100% + var(--sp-1));
+    inset-inline-start: 0;
+    z-index: var(--z-popover, 20);
+    inline-size: max-content;
+    max-inline-size: min(calc(var(--sp-24) * 6), 90vi);
+    padding: var(--sp-2);
+    background: var(--base-graphite-1000);
+    border: var(--border-hairline-active);
+    border-color: var(--base-gold-500);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-glow);
+    pointer-events: none;
+}
+
+.account-ai-settings__tip:hover .account-ai-settings__tip-pop,
+.account-ai-settings__tip:focus-within .account-ai-settings__tip-pop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1h);
+}
+
+.account-ai-settings__tip-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+}
+
+.account-ai-settings__tip-key {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    line-height: var(--lh-flat);
+}
+
+.account-ai-settings__tip-val {
+    color: var(--base-cream-100);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-normal);
+}

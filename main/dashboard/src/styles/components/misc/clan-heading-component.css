@@ -1,0 +1,8 @@
+.clan-heading {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    color: var(--base-gold-300);
+    margin: 0;
+    line-height: var(--lh-tight);
+}

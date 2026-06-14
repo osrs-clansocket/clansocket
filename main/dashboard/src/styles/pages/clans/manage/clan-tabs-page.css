@@ -1,0 +1,7 @@
+.clans-manage__tabs {
+    display: flex;
+    gap: var(--sp-1);
+    flex-wrap: wrap;
+    padding: var(--sp-1) var(--sp-3);
+    border-block-end: 0.0625rem solid var(--base-graphite-500);
+}

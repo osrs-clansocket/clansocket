@@ -1,0 +1,6 @@
+.app-public {
+    display: flex;
+    flex-direction: column;
+    block-size: 100dvb;
+    overflow: hidden;
+}

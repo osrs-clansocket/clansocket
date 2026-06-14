@@ -1,0 +1,69 @@
+.account__autocomplete {
+    display: flex;
+    flex-direction: column;
+    max-block-size: calc(var(--sp-16) * 2);
+    overflow-block: auto;
+    background: var(--base-graphite-900);
+    border: var(--border-hairline-active);
+    border-radius: var(--radius-sm);
+    margin-block-start: var(--sp-0);
+}
+.account__autocomplete-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    inline-size: 100%;
+    text-align: start;
+    background: transparent;
+    border: none;
+    color: var(--base-cream-100);
+    padding: var(--sp-1) var(--sp-1);
+    cursor: pointer;
+}
+.account__autocomplete-row:hover {
+    background: var(--base-graphite-500);
+}
+input[type="checkbox"].account__autocomplete-check {
+    flex: 0 0 auto;
+    inline-size: var(--icon-md);
+    block-size: var(--icon-md);
+    pointer-events: none;
+}
+input[type="checkbox"].account__autocomplete-check:checked {
+    background-size: var(--icon-sm), cover;
+}
+.account__autocomplete-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--icon-md);
+    block-size: var(--icon-md);
+    flex: 0 0 auto;
+    color: var(--base-cream-100);
+}
+.account__autocomplete-avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    display: block;
+}
+.account__autocomplete-avatar-glyph {
+    font-size: var(--icon-md);
+    line-height: var(--lh-tight);
+}
+.account__autocomplete-name {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.account__autocomplete-dot {
+    display: inline-block;
+    inline-size: var(--sp-2);
+    block-size: var(--sp-2);
+    border-radius: var(--radius-pill);
+    flex: 0 0 auto;
+    background: var(--clan-accent, transparent);
+    border: var(--border-hairline-active);
+}

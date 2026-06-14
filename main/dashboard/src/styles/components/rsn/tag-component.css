@@ -1,0 +1,33 @@
+.rsn-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+}
+
+.rsn-tag__icon {
+    inline-size: var(--icon-md);
+    block-size: var(--icon-md);
+    object-fit: contain;
+    flex: 0 0 auto;
+    image-rendering: -webkit-optimize-contrast;
+    align-self: center;
+    margin-block-start: calc(var(--opt-icon-lift) * -1);
+}
+
+.rsn-tag__icon--fallback {
+    opacity: var(--opacity-medium);
+}
+
+.rsn-tag--sm .rsn-tag__icon {
+    inline-size: var(--icon-sm);
+    block-size: var(--icon-sm);
+}
+
+.rsn-tag__name {
+    flex: 1 1 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-inline-size: 0;
+}

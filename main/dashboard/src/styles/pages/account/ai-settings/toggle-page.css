@@ -1,0 +1,46 @@
+.account-ai-settings__toggle {
+    display: flex;
+    inline-size: 100%;
+    border: var(--border-hairline-active);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--base-graphite-900);
+}
+
+.account-ai-settings__toggle-opt {
+    all: unset;
+    flex: 1 1 0;
+    min-inline-size: 0;
+    padding: var(--sp-1) var(--sp-2);
+    color: var(--base-graphite-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-tight);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    cursor: pointer;
+    border-inline-start: var(--border-hairline-active);
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+
+.account-ai-settings__toggle-opt:first-child {
+    border-inline-start: none;
+}
+
+.account-ai-settings__toggle-opt:hover {
+    color: var(--base-gold-300);
+    background: var(--base-graphite-800);
+}
+
+.account-ai-settings__toggle-opt--active {
+    color: var(--base-graphite-900);
+    background: var(--base-gold-500);
+}
+
+.account-ai-settings__toggle-opt--active:hover {
+    color: var(--base-graphite-900);
+    background: var(--base-gold-300);
+}

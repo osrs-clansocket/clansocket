@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS plugin_current_state (
+    account_hash TEXT PRIMARY KEY,
+    latest_rsn TEXT NOT NULL,
+    world INTEGER,
+    activity TEXT,
+    login_state TEXT,
+    account_type TEXT,
+    clan_name TEXT,
+    clan_rank TEXT,
+    location_x INTEGER,
+    location_y INTEGER,
+    location_plane INTEGER,
+    location_region_id INTEGER,
+    location_region_name TEXT,
+    energy INTEGER,
+    weight INTEGER,
+    spec INTEGER,
+    hitpoints INTEGER,
+    prayer INTEGER,
+    max_hitpoints INTEGER,
+    max_prayer INTEGER,
+    interacting_kind TEXT,
+    interacting_id INTEGER,
+    interacting_name TEXT,
+    last_damage_dealt_at INTEGER,
+    last_damage_dealt_amount INTEGER,
+    last_damage_dealt_hitsplat_id INTEGER,
+    last_damage_dealt_target_kind TEXT,
+    last_damage_dealt_target_id INTEGER,
+    last_damage_dealt_target_name TEXT,
+    last_damage_taken_at INTEGER,
+    last_damage_taken_amount INTEGER,
+    last_damage_taken_hitsplat_id INTEGER,
+    last_damage_taken_source_kind TEXT,
+    last_damage_taken_source_id INTEGER,
+    last_damage_taken_source_name TEXT,
+    last_menu_action TEXT,
+    last_menu_action_option TEXT,
+    last_menu_action_target_kind TEXT,
+    last_menu_action_target TEXT,
+    last_menu_action_target_id INTEGER,
+    last_menu_action_at INTEGER,
+    last_session_id TEXT,
+    last_seen_in_game INTEGER,
+    first_seen INTEGER NOT NULL,
+    last_seen INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_rsn ON plugin_current_state (latest_rsn);
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_region ON plugin_current_state (location_region_id);
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_interacting ON plugin_current_state (interacting_name);
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_login_state ON plugin_current_state (login_state);
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_last_seen_in_game ON plugin_current_state (last_seen_in_game DESC);
+CREATE INDEX IF NOT EXISTS idx_plugin_current_state_updated_at ON plugin_current_state (updated_at DESC);

@@ -1,0 +1,18 @@
+.clans-clan__manage-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-0) var(--sp-1h);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-flat);
+    min-block-size: 0;
+    min-inline-size: 0;
+    gap: 0;
+    letter-spacing: 0;
+    text-transform: none;
+    border-radius: var(--radius-sm);
+}
+.clans-clan__manage-btn .bi {
+    font-size: var(--icon-sm);
+    line-height: var(--lh-flat);
+}

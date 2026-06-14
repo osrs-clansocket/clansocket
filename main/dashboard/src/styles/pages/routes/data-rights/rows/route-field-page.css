@@ -1,0 +1,45 @@
+.route-data-rights__field {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: var(--sp-2);
+    align-items: baseline;
+    padding: var(--sp-0) 0;
+    border-block-end: var(--bw-hairline) solid rgb(from var(--base-gold-500) r g b / 0.06);
+    flex-shrink: 0;
+}
+.route-data-rights__field-label {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.route-data-rights__field-value {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+    color: var(--base-cream-100);
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-snug);
+}
+.route-data-rights__field-text {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: text;
+}
+.route-data-rights__field-asset {
+    inline-size: 2em;
+    block-size: 2em;
+    flex: 0 0 auto;
+    object-fit: contain;
+}
+.route-data-rights__field-asset--empty {
+    display: none;
+}

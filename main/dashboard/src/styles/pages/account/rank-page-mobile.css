@@ -1,0 +1,12 @@
+@media (width<=40rem) {
+    .account__rank-grid {
+        max-inline-size: 100%;
+    }
+    .account__rank-grid {
+        grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));
+        max-block-size: 13rem;
+    }
+    .account__rank-icon-btn {
+        block-size: 2rem;
+    }
+}

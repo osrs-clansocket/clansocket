@@ -1,0 +1,12 @@
+[
+    "main/discord",
+    "main/server",
+    "dist",
+    "shared",
+    "package.json",
+    "ecosystem.config.cjs",
+    "main/server/data/map/world_map.db",
+    "main/server/data/game_ids.db",
+    "npm-scripts.json",
+    "scripts/run-script.mjs"
+]

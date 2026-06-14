@@ -1,0 +1,17 @@
+.account__codes-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+    max-block-size: 7rem;
+    overflow-block: auto;
+    padding-inline-end: var(--sp-0);
+    scrollbar-width: thin;
+    scrollbar-color: var(--base-graphite-500) transparent;
+}
+.account__codes-scroll::-webkit-scrollbar {
+    inline-size: 0.25rem;
+}
+.account__codes-scroll::-webkit-scrollbar-thumb {
+    background: var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+}

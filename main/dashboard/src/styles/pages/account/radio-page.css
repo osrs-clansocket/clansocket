@@ -1,0 +1,19 @@
+.account__radio {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-0);
+    color: var(--base-cream-100);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-tight);
+    cursor: pointer;
+}
+.account__radio input[type="radio"] {
+    margin: 0;
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+    accent-color: var(--base-gold-500);
+}
+.account__radio-text {
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-tight);
+}

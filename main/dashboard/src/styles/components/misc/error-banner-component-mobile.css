@@ -1,0 +1,16 @@
+@media (width <= 30rem) {
+    .error-banner {
+        gap: var(--sp-1h);
+        padding: var(--sp-2);
+    }
+
+    .error-banner__top {
+        align-items: start;
+        gap: var(--sp-2);
+    }
+
+    .error-banner__logo {
+        inline-size: var(--sp-8);
+        block-size: var(--sp-8);
+    }
+}

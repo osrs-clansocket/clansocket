@@ -1,0 +1,32 @@
+.clans-manage__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-1) var(--sp-3);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--base-graphite-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    letter-spacing: var(--ls-normal);
+    text-transform: uppercase;
+    opacity: var(--opacity-medium);
+    transition:
+        opacity var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+}
+.clans-manage__tab:hover {
+    opacity: 1;
+    color: var(--base-gold-300);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.4);
+}
+.clans-manage__tab--active {
+    opacity: 1;
+    color: var(--base-gold-300);
+    border-color: var(--base-gold-500);
+    box-shadow: var(--shadow-glow);
+}

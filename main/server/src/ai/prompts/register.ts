@@ -1,0 +1,17 @@
+import "./system/doctrine/role-prompt.js";
+import "./system/doctrine/output-schema-prompt.js";
+import "./system/doctrine/profile-mental-model-prompt.js";
+import "./system/doctrine/memory-authoring-prompt.js";
+import "./system/doctrine/context-acquisition-prompt.js";
+import "./system/vocab/vocab-data/index.js";
+import "./system/vocab/vocab-dom-prompt.js";
+import "./system/vocab/vocab-voice-prompt.js";
+import "./system/protocol/chain-protocol-prompt.js";
+import "./system/protocol/chain-protocol-continuous-prompt.js";
+import "./system/protocol/message-voice-prompt.js";
+import "./schemas/dom-reference-prompt.js";
+import "./schemas/action-schema-prompt.js";
+import "./modes/action-prompt.js";
+import "./modes/guide-prompt.js";
+import "./modes/tracker-prompt.js";
+import "./templates/dom-action-feedback-prompt.js";

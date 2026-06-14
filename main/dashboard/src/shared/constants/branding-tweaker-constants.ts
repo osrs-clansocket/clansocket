@@ -1,0 +1,15 @@
+export const TWEAKER_BLOCK_CLASS = "account__branding-tweaker-block";
+export const TWEAKER_BODY_CLASS = "account__branding-tweaker-body";
+export const TWEAKER_STATUS_CLASS = "account__branding-tweaker-status";
+export const TWEAKER_CANVAS_CLASS = "account__branding-tweaker-canvas";
+export const TWEAKER_CANVAS_DRAGGING_CLASS = "account__branding-tweaker-canvas--dragging";
+export const TWEAKER_CANVAS_STACK_CLASS = "account__branding-tweaker-canvas-stack";
+export const TWEAKER_SOURCE_CLASS = "account__branding-tweaker-source";
+export const TWEAKER_CONTROLS_CLASS = "account__branding-tweaker-controls";
+export const TWEAKER_ROW_CLASS = "account__branding-tweaker-row";
+export const TWEAKER_SLIDER_CLASS = "account__branding-tweaker-slider";
+export const TWEAKER_SLIDER_LABEL_CLASS = "account__branding-tweaker-slider-label";
+export const TWEAKER_ACTIONS_CLASS = "account__branding-tweaker-actions";
+export const TWEAKER_ACTIONS_PAIR_CLASS = "account__branding-tweaker-actions-pair";
+export const TWEAKER_ACTION_CLASS = "account__branding-tweaker-action";
+export const TWEAKER_ACTION_UPLOAD_CLASS = "account__branding-tweaker-action--upload";

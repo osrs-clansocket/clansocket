@@ -1,0 +1,7 @@
+.account__identity-bar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-block-end: var(--sp-1);
+    border-block-end: 0.0625rem solid var(--base-graphite-500);
+}

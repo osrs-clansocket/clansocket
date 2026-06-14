@@ -1,0 +1,19 @@
+@keyframes fx-counter-tick-anim {
+    0% {
+        transform: translateY(0.25rem);
+        opacity: 0;
+        color: var(--base-gold-300);
+    }
+    60% {
+        color: var(--base-gold-300);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        color: inherit;
+    }
+}
+
+.fx-counter-tick {
+    animation: fx-counter-tick-anim var(--dur-base) var(--ease-out);
+}

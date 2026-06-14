@@ -1,0 +1,78 @@
+.glass-check__native:user-invalid ~ .glass-check__visual {
+    border-color: var(--base-ember-100);
+    box-shadow: var(--shadow-check-invalid);
+}
+@media (prefers-contrast: more) {
+    .glass-check__visual {
+        border-color: var(--base-gold-500);
+        border-width: var(--sp-0);
+    }
+}
+.glass-check {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    cursor: pointer;
+    user-select: none;
+    inline-size: fit-content;
+}
+.glass-check__native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    inline-size: 0.0625rem;
+    block-size: 0.0625rem;
+    margin: 0;
+}
+.glass-check__visual {
+    display: inline-grid;
+    place-content: center;
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+    border-radius: var(--radius-sm-plus);
+    border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.35);
+    background: linear-gradient(
+        160deg,
+        rgb(from var(--base-graphite-700) r g b / 0.5) 0%,
+        rgb(from var(--base-graphite-900) r g b / 0.7) 100%
+    );
+    backdrop-filter: blur(var(--blur-md)) saturate(1.3);
+    box-shadow: var(--shadow-control-base);
+    transition:
+        border-color var(--dur-fast) var(--ease-out),
+        background var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-fast) var(--ease-out),
+        transform var(--dur-fast) var(--ease-spring);
+}
+.glass-check__mark {
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+    color: var(--base-gold-200);
+    opacity: 0;
+    transform: scale(0.5) rotate(-12deg);
+    transition:
+        opacity var(--dur-base) var(--ease-spring),
+        transform var(--dur-base) var(--ease-spring);
+}
+.glass-check:hover .glass-check__visual {
+    border-color: var(--base-gold-500);
+    transform: scale(1.06);
+    box-shadow: var(--shadow-control-hover);
+}
+.glass-check__native:checked ~ .glass-check__visual {
+    border-color: var(--base-gold-500);
+    background: linear-gradient(
+        160deg,
+        rgb(from var(--base-gold-500) r g b / 0.4) 0%,
+        rgb(from var(--base-graphite-500) r g b / 0.45) 100%
+    );
+    box-shadow: var(--shadow-control-checked);
+}
+.glass-check__native:checked ~ .glass-check__visual .glass-check__mark {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+.glass-check__native:focus-visible ~ .glass-check__visual {
+    outline: var(--sp-0h) solid rgb(from var(--base-gold-500) r g b / 0.3);
+    outline-offset: var(--sp-0h);
+}

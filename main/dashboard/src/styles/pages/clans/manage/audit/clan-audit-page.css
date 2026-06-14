@@ -1,0 +1,394 @@
+.clans-manage__audit {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    flex: 1 1 auto;
+    min-block-size: 0;
+}
+.clans-manage__audit-filters {
+    padding: var(--sp-1) var(--sp-3);
+    border-block-end: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+}
+.clans-manage__audit-integrity {
+    margin-inline-start: auto;
+    padding: var(--sp-0) var(--sp-2);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    border-radius: var(--radius-sm);
+    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.4);
+    cursor: pointer;
+    transition:
+        color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+}
+.clans-manage__audit-integrity--checking {
+    color: var(--base-graphite-300);
+}
+.clans-manage__audit-integrity--ok {
+    color: var(--base-forest-100);
+    border-color: rgb(from var(--base-forest-300) r g b / 0.6);
+}
+.clans-manage__audit-integrity--broken {
+    color: var(--base-ember-100);
+    border-color: var(--base-ember-300);
+    background: rgb(from var(--clr-danger-bg) r g b / 0.5);
+    font-weight: var(--fw-semi);
+}
+.clans-manage__audit-integrity-label {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+}
+.clans-manage__audit-stats-host {
+    padding: var(--sp-1) var(--sp-2);
+    background: var(--base-graphite-900);
+    border-block: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+}
+.clans-manage__audit-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-2);
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+}
+.clans-manage__audit-stats-total {
+    color: var(--base-gold-300);
+    font-weight: var(--fw-semi);
+    font-variant-numeric: tabular-nums;
+}
+.clans-manage__audit-stats-breakdown {
+    color: var(--base-graphite-300);
+    font-variant-numeric: tabular-nums;
+}
+.clans-manage__audit-stats-span {
+    margin-inline-start: auto;
+    color: var(--base-graphite-300);
+    font-variant-numeric: tabular-nums;
+}
+.clans-manage__audit-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+    flex: 1 1 0;
+    min-block-size: 0;
+    overflow-block: auto;
+    padding: var(--sp-1);
+    background: 0;
+    container-type: inline-size;
+    container-name: audit-list;
+}
+.clans-manage__audit-row {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto auto;
+    gap: var(--sp-2);
+    align-items: baseline;
+    padding: var(--sp-1) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-2xs);
+    border-inline-start-width: 0.125rem;
+}
+.clans-manage__audit-row--read {
+    border-inline-start-color: rgb(from var(--base-azure-300) r g b / 0.5);
+}
+.clans-manage__audit-row--write {
+    border-inline-start-color: rgb(from var(--base-gold-500) r g b / 0.6);
+}
+.clans-manage__audit-row--destructive {
+    border-inline-start-color: rgb(from var(--base-ember-300) r g b / 0.7);
+}
+.clans-manage__audit-row--chain {
+    border-inline-start-color: rgb(from var(--base-silver-200) r g b / 0.5);
+}
+.clans-manage__audit-row--system {
+    border-inline-start-color: rgb(from var(--base-graphite-300) r g b / 0.4);
+}
+.clans-manage__audit-icon {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-300);
+    line-height: var(--lh-flat);
+    flex-shrink: 0;
+}
+.clans-manage__audit-row--read .clans-manage__audit-icon {
+    color: var(--base-azure-300);
+}
+.clans-manage__audit-row--write .clans-manage__audit-icon {
+    color: var(--base-gold-300);
+}
+.clans-manage__audit-row--destructive .clans-manage__audit-icon {
+    color: var(--base-ember-100);
+}
+.clans-manage__audit-row--chain .clans-manage__audit-icon {
+    color: var(--base-silver-200);
+}
+.clans-manage__audit-duration {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    font-size: var(--fs-3xs);
+    font-variant-numeric: tabular-nums;
+    opacity: var(--opacity-high);
+    white-space: nowrap;
+}
+.clans-manage__audit-ts {
+    color: var(--base-graphite-300);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.clans-manage__audit-action {
+    color: var(--base-gold-300);
+    font-family: var(--font-data);
+    font-weight: var(--fw-semi);
+    overflow-wrap: anywhere;
+}
+.clans-manage__audit-actor {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    white-space: nowrap;
+}
+.clans-manage__audit-target {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    overflow-wrap: anywhere;
+    text-align: end;
+}
+.clans-manage__audit-integrity {
+    cursor: pointer;
+}
+.clans-manage__audit-row--clustered .clans-manage__audit-action {
+    font-weight: var(--fw-semi);
+}
+.clans-manage__audit-row--expandable {
+    grid-template-columns: auto auto 1fr auto auto auto auto;
+    cursor: pointer;
+}
+.clans-manage__audit-row--expandable:hover {
+    border-color: rgb(from var(--base-gold-500) r g b / 0.4);
+}
+.clans-manage__audit-chevron {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    transition: transform var(--dur-fast) var(--ease-out);
+}
+.clans-manage__audit-row--open .clans-manage__audit-chevron {
+    color: var(--base-gold-300);
+}
+.clans-manage__audit-expansion {
+    grid-column: 1 / -1;
+    margin-block-start: var(--sp-1);
+    padding-block-start: var(--sp-1);
+    border-block-start: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.5);
+}
+.clans-manage__audit-diff-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+}
+.clans-manage__audit-diff-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--sp-2);
+    align-items: baseline;
+    padding: var(--sp-0) var(--sp-1);
+    font-size: var(--fs-3xs);
+}
+.clans-manage__audit-diff-member {
+    color: var(--base-gold-300);
+    font-family: var(--font-data);
+    font-weight: var(--fw-semi);
+    overflow-wrap: anywhere;
+}
+.clans-manage__audit-diff-event {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    white-space: nowrap;
+}
+.clans-manage__audit-diff-empty {
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-300);
+    margin: 0;
+    padding: var(--sp-1) var(--sp-1);
+}
+.clans-manage__audit-ba-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
+    gap: var(--sp-1);
+    align-items: baseline;
+    padding: var(--sp-0) var(--sp-1);
+    font-size: var(--fs-3xs);
+    border-radius: var(--radius-sm);
+}
+.clans-manage__audit-ba-row--changed {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+}
+.clans-manage__audit-ba-field {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-snug);
+    white-space: nowrap;
+}
+.clans-manage__audit-ba-before {
+    color: var(--base-graphite-300);
+    font-family: var(--font-data);
+    text-decoration: line-through;
+    overflow-wrap: anywhere;
+}
+.clans-manage__audit-ba-arrow {
+    color: var(--base-gold-300);
+    font-family: var(--font-data);
+}
+.clans-manage__audit-ba-after {
+    color: var(--base-gold-300);
+    font-family: var(--font-data);
+    font-weight: var(--fw-semi);
+    overflow-wrap: anywhere;
+}
+.clans-manage__audit-raw {
+    padding: var(--sp-1);
+}
+.clans-manage__audit-raw-pre {
+    margin: 0;
+    padding: var(--sp-1);
+    background: var(--base-graphite-900);
+    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-3xs);
+    color: var(--base-silver-200);
+    overflow-inline: auto;
+    white-space: pre;
+}
+.clans-manage__audit-revert {
+    margin-block-start: var(--sp-1);
+    padding-block-start: var(--sp-1);
+    border-block-start: 0.0625rem dashed rgb(from var(--base-graphite-500) r g b / 0.4);
+    display: flex;
+    justify-content: flex-end;
+}
+.clans-manage__audit-revert-btn {
+    font-size: var(--fs-3xs);
+    padding: var(--sp-0) var(--sp-2);
+    color: var(--base-ember-100);
+    border-color: rgb(from var(--base-ember-300) r g b / 0.5);
+}
+.clans-manage__audit-revert-btn:hover {
+    border-color: var(--base-ember-300);
+    background: rgb(from var(--clr-danger-bg) r g b / 0.3);
+}
+.clans-manage__audit-revert-btn:disabled {
+    opacity: var(--opacity-low);
+    cursor: not-allowed;
+}
+.clans-manage__audit-revert-confirmed {
+    display: block;
+    font-size: var(--fs-3xs);
+    color: var(--base-forest-100);
+    padding: var(--sp-1);
+    font-style: italic;
+}
+.clans-manage__audit-row--reverted {
+    opacity: var(--opacity-medium);
+}
+.clans-manage__audit-expansion-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+.clans-manage__audit-empty {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-300);
+    margin: 0;
+    padding: var(--sp-2);
+    text-align: center;
+}
+.clans-manage__audit-row--load-more {
+    display: flex;
+    justify-content: center;
+    padding: var(--sp-1);
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+    border: var(--bw-hairline) dotted var(--base-graphite-500);
+    cursor: pointer;
+    color: var(--base-graphite-300);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+    font-size: var(--fs-3xs);
+    transition:
+        color var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+}
+.clans-manage__audit-row--load-more:hover {
+    color: var(--base-gold-300);
+    background: rgb(from var(--base-graphite-700) r g b / 0.4);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.5);
+}
+.clans-manage__audit-row--load-more:disabled {
+    opacity: var(--opacity-low);
+    cursor: wait;
+}
+.clans-manage__audit-load-more {
+    font-size: var(--fs-3xs);
+    padding: var(--sp-0) var(--sp-3);
+}
+@container audit-list (width <= 32rem) {
+    .clans-manage__audit-row {
+        grid-template-columns: auto auto auto 1fr;
+        grid-template-areas:
+            "icon ts label target"
+            "actor actor actor duration";
+        gap: var(--sp-0) var(--sp-1);
+    }
+    .clans-manage__audit-row--expandable {
+        grid-template-columns: auto auto auto 1fr auto;
+        grid-template-areas:
+            "icon ts label target chev"
+            "actor actor actor duration chev";
+    }
+    .clans-manage__audit-row > .clans-manage__audit-icon {
+        grid-area: icon;
+    }
+    .clans-manage__audit-row > .clans-manage__audit-ts {
+        grid-area: ts;
+    }
+    .clans-manage__audit-row > .clans-manage__audit-action {
+        grid-area: label;
+    }
+    .clans-manage__audit-row > .clans-manage__audit-target {
+        grid-area: target;
+        text-align: end;
+        min-inline-size: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .clans-manage__audit-row > .clans-manage__audit-actor {
+        grid-area: actor;
+        font-style: italic;
+        color: var(--base-graphite-300);
+    }
+    .clans-manage__audit-row > .clans-manage__audit-duration {
+        grid-area: duration;
+        text-align: end;
+        opacity: var(--opacity-medium);
+    }
+    .clans-manage__audit-row > .clans-manage__audit-chevron {
+        grid-area: chev;
+        align-self: center;
+    }
+    .clans-manage__audit-expansion {
+        grid-column: 1 / -1;
+    }
+    .clans-manage__audit-ba-row {
+        grid-template-columns: 1fr;
+    }
+    .clans-manage__audit-ba-arrow {
+        display: none;
+    }
+}

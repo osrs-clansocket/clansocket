@@ -1,0 +1,46 @@
+.account__token-revoke {
+    background: transparent;
+    border: none;
+    color: var(--base-ember-300);
+    cursor: pointer;
+    padding: var(--sp-0) var(--sp-1h);
+    font-size: var(--fs-2xs);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: var(--fw-medium);
+    border-radius: var(--radius-sm);
+}
+.account__token-revoke--neutral {
+    color: var(--base-graphite-300);
+}
+.account__token-revoke--neutral:hover {
+    color: var(--base-gold-300);
+}
+.account__token-revoke:disabled {
+    opacity: var(--opacity-faint);
+    cursor: not-allowed;
+}
+.account__token-slider {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+}
+input[type="range"].account__token-slider::-webkit-slider-thumb {
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+}
+input[type="range"].account__token-slider::-moz-range-thumb {
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+}
+.account__token-plaintext {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--fs-2xs);
+    color: var(--base-cream-100);
+    margin: 0;
+    padding: var(--sp-0) var(--sp-1);
+    background: var(--base-graphite-900);
+    border-radius: var(--radius-sm);
+    line-height: var(--lh-snug);
+    user-select: all;
+    letter-spacing: var(--ls-snug);
+}

@@ -1,0 +1,9 @@
+export const IS_ACTIVE_CLASS = "is-active";
+export const IS_CLICKABLE_CLASS = "is-clickable";
+export const IS_EMPTY_CLASS = "is-empty";
+export const IS_HIDDEN_CLASS = "is-hidden";
+export const IS_VISIBLE_CLASS = "is-visible";
+export const IS_OPEN_CLASS = "is-open";
+export const IS_LOADING_CLASS = "is-loading";
+export const IS_SELECTED_CLASS = "is-selected";
+export const IS_EXPANDED_CLASS = "is-expanded";

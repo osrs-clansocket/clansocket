@@ -1,0 +1,10 @@
+.bg-fx-canvas--particles {
+    mix-blend-mode: screen;
+    opacity: var(--opacity-strong);
+    will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+    .bg-fx-canvas {
+        display: none;
+    }
+}

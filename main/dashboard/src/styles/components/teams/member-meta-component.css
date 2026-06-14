@@ -1,0 +1,8 @@
+.member-meta {
+    display: inline;
+    flex-shrink: 0;
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-300);
+    margin-inline-start: auto;
+    padding-inline-start: var(--sp-2);
+}

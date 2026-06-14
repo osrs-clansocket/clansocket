@@ -1,0 +1,21 @@
+.account-ai-settings__reset-all {
+    padding: var(--sp-1) var(--sp-3);
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    background: transparent;
+    border: var(--border-hairline-active);
+    border-color: var(--base-gold-500);
+    color: var(--base-gold-300);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+
+.account-ai-settings__reset-all:hover {
+    background: var(--base-gold-500);
+    color: var(--base-graphite-900);
+}

@@ -1,0 +1,8 @@
+.route-host {
+    flex: 1 1 0;
+    min-block-size: 0;
+    overflow-block: auto;
+    overscroll-behavior-block: contain;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,8 @@
+.dashboard__brand {
+    grid-area: brand;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-inline-size: 0;
+    justify-self: start;
+}

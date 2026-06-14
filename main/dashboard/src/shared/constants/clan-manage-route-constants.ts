@@ -1,0 +1,10 @@
+export const CLAN_MANAGE_MISSING_CLASS = "clans-manage__missing";
+export const CLAN_MANAGE_TITLE_ROW_CLASS = "clans-manage__title-row";
+export const CLAN_MANAGE_TITLE_CLASS = "clans-manage__title";
+export const CLAN_MANAGE_BACK_CLASS = "clans-manage__back";
+export const CLAN_MANAGE_TABS_CLASS = "clans-manage__tabs";
+export const CLAN_MANAGE_TAB_CLASS = "clans-manage__tab";
+export const CLAN_MANAGE_TAB_ACTIVE_CLASS = "clans-manage__tab--active";
+export const CLAN_MANAGE_BODY_CLASS = "clans-manage__body";
+export const CLAN_MANAGE_DISCORD_CLASS = "clans-manage__discord";
+export const CLAN_MANAGE_DISCORD_INSTALL_LINK_CLASS = "clans-manage__discord-install-link";

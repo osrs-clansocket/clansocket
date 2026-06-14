@@ -1,0 +1,6 @@
+@media (width<=30rem) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+        padding: var(--sp-1);
+    }
+}

@@ -1,0 +1,267 @@
+.clan-map {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    inline-size: 100%;
+    block-size: 100%;
+    min-block-size: 24rem;
+    background: var(--base-graphite-900);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    isolation: isolate;
+    position: relative;
+}
+.clan-map__bg {
+    grid-area: 1 / 1;
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+    pointer-events: none;
+}
+.clan-map__overlay {
+    grid-area: 1 / 1;
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+    cursor: grab;
+    touch-action: none;
+}
+.clan-map__overlay:active {
+    cursor: grabbing;
+}
+.clan-map__controls {
+    position: absolute;
+    inset-block-start: var(--sp-1);
+    inset-inline: var(--sp-1) calc(var(--sp-1) + 5rem + var(--sp-1));
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    pointer-events: none;
+}
+.clan-map__controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    align-items: center;
+}
+.clan-map__chip-row {
+    display: flex;
+    gap: var(--sp-0);
+    pointer-events: auto;
+    background: var(--base-graphite-800);
+    padding: var(--sp-0);
+    border-radius: var(--radius-sm);
+    border: 0.0625rem solid var(--base-graphite-500);
+}
+.clan-map__plane-btn.is-active,
+.clan-map__layers-btn.is-active,
+.clan-map__mode-btn.is-active,
+.clan-map__grid-btn.is-active,
+.clan-map__names-btn.is-active,
+.clan-map__last-known-btn.is-active {
+    background: var(--base-gold-500);
+    color: var(--base-graphite-900);
+}
+.clan-map__names {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: var(--z-raised);
+}
+.clan-map__names.is-hidden {
+    display: none;
+}
+.clan-map__name-card {
+    position: absolute;
+    transform: translate(-50%, calc(-100% - 0.5rem));
+    transform-origin: bottom center;
+    display: flex;
+    align-items: stretch;
+    gap: var(--sp-0);
+    padding: var(--sp-0) var(--sp-0) var(--sp-0) 0;
+    background: var(--base-graphite-800);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    color: var(--base-cream-100);
+    opacity: var(--opacity-low);
+    pointer-events: auto;
+    cursor: default;
+    transition:
+        opacity var(--dur-fast) var(--ease-out),
+        transform var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+    border: 0.0625rem solid transparent;
+    white-space: nowrap;
+}
+.clan-map__name-card:hover,
+.clan-map__name-card.is-hovered {
+    opacity: 1;
+    background: var(--gradient-surface-opaque);
+    backdrop-filter: blur(var(--blur-lg)) saturate(1.3);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.4);
+    box-shadow: var(--shadow-tt-pop);
+    z-index: 1;
+}
+.clan-map__name-card-rail {
+    inline-size: 0.1875rem;
+    align-self: stretch;
+    border-radius: var(--radius-full);
+}
+.clan-map__name-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+    padding-inline: var(--sp-0);
+    padding-block: var(--sp-0);
+}
+.clan-map__name-card-name {
+    font-size: var(--fs-2xs);
+}
+.clan-map__name-card-region {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    display: none;
+}
+.clan-map__name-card:hover .clan-map__name-card-region,
+.clan-map__name-card.is-hovered .clan-map__name-card-region {
+    display: block;
+    color: var(--base-gold-500);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-snug);
+}
+.clan-map__name-card-combat {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    display: none;
+    flex-direction: column;
+    gap: var(--sp-0);
+}
+.clan-map__name-card:hover .clan-map__name-card-combat,
+.clan-map__name-card.is-hovered .clan-map__name-card-combat {
+    display: flex;
+    color: var(--base-cream-100);
+}
+.clan-map__name-card-entry-dmg {
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--fw-semi);
+}
+.clan-map__name-card.has-combat .clan-map__name-card-rail {
+    box-shadow: var(--shadow-clan-combat-glow);
+}
+.clan-map__name-card-vitals {
+    display: none;
+    gap: var(--sp-1);
+    font-size: var(--fs-3xs);
+    color: var(--base-cream-100);
+    font-variant-numeric: tabular-nums;
+}
+.clan-map__name-card:hover .clan-map__name-card-vitals,
+.clan-map__name-card.is-hovered .clan-map__name-card-vitals {
+    display: inline-flex;
+}
+.clan-map__name-card-prayers {
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-0);
+}
+.clan-map__name-card-prayers:empty {
+    display: none;
+}
+.clan-map__name-card:hover .clan-map__name-card-prayers:not(:empty),
+.clan-map__name-card.is-hovered .clan-map__name-card-prayers:not(:empty) {
+    display: flex;
+}
+.clan-map__name-card-prayer-icon {
+    block-size: var(--icon-md);
+    inline-size: auto;
+    display: inline-block;
+}
+.clan-map__plane-count {
+    pointer-events: none;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    padding-inline: var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    padding-block: var(--sp-0);
+}
+.clan-map__hover-readout {
+    pointer-events: none;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    padding: var(--sp-0) var(--sp-1);
+    border-radius: var(--radius-sm);
+    align-self: flex-start;
+    visibility: hidden;
+}
+.clan-map__hover-readout.is-visible {
+    visibility: visible;
+}
+.clan-map__minimap {
+    position: absolute;
+    inset-block-start: var(--sp-1);
+    inset-inline-end: var(--sp-1);
+    inline-size: 5rem;
+}
+.clan-map__minimap-wrap {
+    inline-size: 100%;
+    block-size: 17.4375rem;
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    background: var(--base-graphite-800);
+    overflow: hidden;
+    position: relative;
+    transition:
+        block-size var(--dur-base) var(--ease-out),
+        border-width var(--dur-base) var(--ease-out);
+}
+.clan-map__minimap.is-collapsed .clan-map__minimap-wrap {
+    block-size: 0;
+    border-width: 0;
+}
+.clan-map__minimap-toggle {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: 1;
+    padding-block-start: var(--sp-1);
+    padding-inline-end: var(--sp-1);
+    color: var(--base-gold-500);
+    line-height: var(--lh-flat);
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.clan-map__minimap-toggle:hover {
+    color: var(--base-gold-300);
+}
+.clan-map__minimap-toggle-icon {
+    display: block;
+}
+.clan-map__minimap-bg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    pointer-events: none;
+}
+.clan-map__minimap-overlay {
+    position: absolute;
+    inset: 0;
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    cursor: crosshair;
+    touch-action: none;
+}
+.clan-map__minimap-overlay.is-follow-locked {
+    cursor: default;
+}

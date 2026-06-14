@@ -1,0 +1,22 @@
+.rank-movement {
+    display: block;
+}
+.rank-movement__panel {
+    padding: var(--sp-3);
+}
+.rank-movement__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    margin-block-end: var(--sp-2);
+    flex-wrap: wrap;
+}
+.rank-movement__caption {
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--base-graphite-300);
+}
+.rank-movement__chart-wrap {
+    inline-size: 100%;
+}

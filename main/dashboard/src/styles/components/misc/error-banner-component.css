@@ -1,0 +1,185 @@
+.error-banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    inline-size: 100%;
+    padding: var(--sp-3);
+    background: var(--gradient-surface);
+    color: var(--base-cream-100);
+    font-family: var(--font-body);
+}
+
+.error-banner::before,
+.error-banner::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    block-size: var(--bw-hairline);
+    background: var(--gradient-accent-divider);
+    pointer-events: none;
+}
+
+.error-banner::before {
+    inset-block-start: 0;
+}
+
+.error-banner::after {
+    inset-block-end: 0;
+}
+
+.error-banner__top {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+}
+
+.error-banner__logo {
+    flex: 0 0 auto;
+    inline-size: var(--sp-10);
+    block-size: var(--sp-10);
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    user-select: none;
+}
+
+.error-banner__body {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+}
+
+.error-banner__title {
+    margin: 0;
+    color: var(--base-ember-100);
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-snug);
+}
+
+.error-banner__path {
+    margin: 0;
+    color: var(--base-graphite-300);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-flat);
+    opacity: var(--opacity-high);
+    overflow-wrap: anywhere;
+}
+
+.error-banner__message {
+    margin: 0;
+    color: var(--base-cream-100);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-snug);
+    overflow-wrap: anywhere;
+}
+
+.error-banner__info {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-inline-start: var(--sp-1h);
+    padding-block: var(--sp-0);
+    padding-inline: var(--sp-1);
+    color: var(--base-graphite-300);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-flat);
+    transition: color var(--dur-fast) var(--ease-out);
+}
+
+.error-banner__info:hover {
+    color: var(--base-ember-100);
+}
+
+.error-banner__info:focus-visible {
+    outline: var(--bw-hairline) solid var(--base-ember-100);
+    outline-offset: var(--sp-0);
+}
+
+.error-banner__info.is-active {
+    color: var(--base-ember-100);
+}
+
+.error-banner__action {
+    position: absolute;
+    inset-block-start: var(--sp-1);
+    inset-inline-end: var(--sp-1);
+    z-index: var(--z-popover);
+    padding-block: var(--sp-0);
+    padding-inline: var(--sp-1);
+    color: var(--base-graphite-300);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-flat);
+    transition: color var(--dur-fast) var(--ease-out);
+}
+
+.error-banner__action:hover {
+    color: var(--base-cream-50);
+}
+
+.error-banner__action:focus-visible {
+    outline: var(--bw-hairline) solid var(--base-cream-50);
+    outline-offset: var(--sp-0);
+}
+
+.error-banner__stack-wrapper {
+    position: relative;
+    display: none;
+}
+
+.error-banner.is-expanded .error-banner__stack-wrapper {
+    display: block;
+}
+
+.error-banner__stack-wrapper::before,
+.error-banner__stack-wrapper::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    block-size: var(--bw-hairline);
+    background: var(--gradient-accent-divider);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.error-banner__stack-wrapper::before {
+    inset-block-start: 0;
+}
+
+.error-banner__stack-wrapper::after {
+    inset-block-end: 0;
+}
+
+.error-banner__stack {
+    padding-inline-end: var(--sp-8);
+    font-size: var(--fs-3xs);
+}
+
+.error-banner__copy {
+    position: absolute;
+    inset-block-start: var(--sp-0);
+    inset-inline-end: var(--sp-0);
+    padding-block: var(--sp-0);
+    padding-inline: var(--sp-1);
+    color: var(--base-graphite-300);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-flat);
+    transition: color var(--dur-fast) var(--ease-out);
+}
+
+.error-banner__copy:hover {
+    color: var(--base-gold-300);
+}
+
+.error-banner__copy:focus-visible {
+    outline: var(--bw-hairline) solid var(--base-gold-300);
+    outline-offset: var(--sp-0);
+}
+
+.error-banner__copy.is-copied {
+    color: var(--base-forest-100);
+}

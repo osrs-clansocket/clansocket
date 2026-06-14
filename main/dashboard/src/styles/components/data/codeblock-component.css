@@ -1,0 +1,11 @@
+.codeblock {
+    margin: 0;
+    padding: var(--sp-2);
+    background: rgb(from var(--base-graphite-1000) r g b / 0.7);
+    color: var(--base-cream-100);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-snug);
+    white-space: pre;
+    overflow-inline: auto;
+}

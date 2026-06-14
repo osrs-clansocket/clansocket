@@ -1,0 +1,186 @@
+.account__clan-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0);
+}
+.account__clan-row {
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+.account__clan-row-head {
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-1);
+    text-align: start;
+    text-transform: none;
+    inline-size: 100%;
+    font-size: var(--fs-xs);
+}
+.account__clan-avatar {
+    align-items: center;
+    color: var(--clan-accent, var(--base-gold-300));
+    display: inline-flex;
+    flex-shrink: 0;
+    block-size: 1.25rem;
+    justify-content: center;
+    inline-size: 1.25rem;
+}
+.account__clan-avatar-glyph {
+    font-size: var(--fs-base);
+    line-height: var(--lh-flat);
+}
+.account__clan-avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+    display: block;
+}
+.account__clan-name {
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--base-gold-300);
+    font-weight: var(--fw-semi);
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+.account__clan-name::after {
+    content: "";
+    display: inline-block;
+    inline-size: 0.0625rem;
+    block-size: 0.875rem;
+    background: var(--base-graphite-500);
+    margin-inline-start: var(--sp-1);
+}
+.account__clan-row-head:hover {
+    background: var(--base-graphite-700);
+}
+.account__clan-row-head--static {
+    cursor: default;
+}
+.account__clan-row-head--static:hover {
+    background: transparent;
+}
+.account__clan-row-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+.account__clan-row-info {
+    display: flex;
+    align-items: baseline;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    overflow: hidden;
+}
+.account__clan-row-info-item {
+    white-space: nowrap;
+}
+.account__clan-row-info-item + .account__clan-row-info-item::before {
+    content: "·";
+    margin-inline: var(--sp-1);
+    color: var(--base-graphite-500);
+}
+.account__clan-row-badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-0);
+    padding: var(--sp-0) var(--sp-1);
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    color: var(--base-gold-300);
+    font-size: var(--fs-2xs);
+    line-height: 1;
+}
+.account__clan-row-badge-icon {
+    inline-size: var(--icon-md);
+    block-size: var(--icon-md);
+    object-fit: contain;
+    display: block;
+}
+.account__clan-row-badge-label {
+    white-space: nowrap;
+}
+.account__clan-row-view {
+    flex-shrink: 0;
+    margin-inline-end: var(--sp-1);
+}
+.account__clan-chevron {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    transition: transform 0.18s ease;
+}
+.account__clan-row--open .account__clan-chevron {
+    transform: rotate(180deg);
+}
+.account__clan-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding: var(--sp-2);
+    border-block-start: 0.0625rem solid var(--base-graphite-500);
+    align-items: stretch;
+}
+.account__clan-panel {
+    flex: 1 1 16rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    min-inline-size: 0;
+}
+.account__clan-panel[hidden] {
+    display: none;
+}
+.account__clan-sessions {
+    padding-block-end: var(--sp-1);
+    border-block-end: 0.0625rem solid var(--base-graphite-500);
+}
+.account__clan-footer {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    padding-block-start: var(--sp-1);
+    border-block-start: 0.0625rem solid var(--base-graphite-500);
+}
+.account__clan-footer .btn {
+    inline-size: 100%;
+}
+.account__clan-branding-section {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding-block-start: var(--sp-1);
+    border-block-start: 0.0625rem solid var(--base-graphite-500);
+}
+.account__clan-branding-section[hidden] {
+    display: none;
+}
+.account__clan-details-subtitle {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    margin: 0;
+}
+.account__clan-details-title {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    margin: 0;
+}

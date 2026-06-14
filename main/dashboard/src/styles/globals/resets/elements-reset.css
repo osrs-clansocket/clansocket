@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-block-start: var(--nav-height);
+    text-size-adjust: 100%;
+    font-size: var(--fs-root);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+}
+body {
+    min-block-size: 100dvb;
+    line-height: var(--lh-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-inline: hidden;
+    overscroll-behavior: none;
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-normal);
+    background-color: var(--base-graphite-900);
+    color: var(--base-cream-100);
+}
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+    image-rendering: auto;
+}
+img {
+    content-visibility: auto;
+}
+ul,
+ol {
+    list-style: none;
+}
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    accent-color: var(--base-gold-500);
+}
+:focus-visible {
+    outline: 0.125rem solid var(--base-gold-500);
+    outline-offset: 0.125rem;
+}
+::selection {
+    background-color: var(--base-graphite-500);
+    color: var(--base-cream-100);
+}

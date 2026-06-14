@@ -1,0 +1,14 @@
+.route-data-rights__expand {
+    background: transparent;
+    border: none;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    padding: 0;
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-flat);
+    flex: 0 0 auto;
+    isolation: isolate;
+}
+.route-data-rights__expand:hover {
+    color: var(--base-gold-300);
+}

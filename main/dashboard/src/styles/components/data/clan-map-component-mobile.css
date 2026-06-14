@@ -1,0 +1,9 @@
+@media (width <= 48rem) {
+    .clan-map__minimap {
+        inline-size: 4rem;
+        block-size: 13.9375rem;
+    }
+    .clan-map__controls {
+        inset-inline-end: calc(var(--sp-1) + 4rem + var(--sp-1));
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "@clansocket/server",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "@simplewebauthn/server": "^13.3.0",
+        "@types/yazl": "^3.3.1",
+        "yazl": "^3.3.1"
+    }
+}

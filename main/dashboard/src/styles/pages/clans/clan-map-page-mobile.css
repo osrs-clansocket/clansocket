@@ -1,0 +1,9 @@
+@media (width <= 48rem) {
+    .clans-clan__map-route {
+        grid-template-columns: 100%;
+        grid-template-rows: minmax(0, 1fr) minmax(0, auto);
+    }
+    .clans-clan__map-side {
+        max-block-size: 40dvb;
+    }
+}

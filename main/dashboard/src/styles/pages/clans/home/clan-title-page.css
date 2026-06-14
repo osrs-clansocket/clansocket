@@ -1,0 +1,9 @@
+.clans-home__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semi);
+    color: var(--base-gold-300);
+    letter-spacing: var(--ls-tight);
+    margin: 0;
+    line-height: var(--lh-tight);
+}

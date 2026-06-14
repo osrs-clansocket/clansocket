@@ -1,0 +1,21 @@
+.glass-pane {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+    min-block-size: 0;
+    background: rgb(from var(--base-graphite-900) r g b / 0.55);
+    backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
+    overflow: hidden;
+}
+.glass-pane--divided {
+    border-inline-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(180deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+}
+.glass-pane__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-block-size: 0;
+    min-inline-size: 0;
+    overflow: hidden;
+}

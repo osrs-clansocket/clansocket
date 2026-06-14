@@ -1,0 +1,5 @@
+@media (width<=40rem) {
+    .account__clan-branding-section {
+        min-inline-size: 0;
+    }
+}

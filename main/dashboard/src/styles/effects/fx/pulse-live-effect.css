@@ -1,0 +1,13 @@
+@keyframes fx-pulse-live-anim {
+    0%,
+    100% {
+        opacity: var(--opacity-strong);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.fx-pulse-live {
+    animation: fx-pulse-live-anim 2.4s ease-in-out infinite;
+}

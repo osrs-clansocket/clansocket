@@ -1,0 +1,15 @@
+export const GLASS_PANE_CLASS = "glass-pane";
+export const GLASS_PANE_DIVIDED_CLASS = "glass-pane--divided";
+export const GLASS_PANE_INNER_CLASS = "glass-pane__inner";
+export const GLASS_CODEVIEW_CLASS = "glass-codeview";
+export const GLASS_CODEVIEW_HEADER_CLASS = "glass-codeview__header";
+export const GLASS_CODEVIEW_TITLE_CLASS = "glass-codeview__title";
+export const GLASS_CODEVIEW_SCROLL_CLASS = "glass-codeview__scroll";
+export const GLASS_CODEVIEW_PRE_CLASS = "glass-codeview__pre";
+export const GLASS_CODEVIEW_PRE_BLURRED_CLASS = "glass-codeview__pre--blurred";
+export const GLASS_CODEVIEW_CLOSE_CLASS = "glass-codeview__close";
+export const GLASS_SECRET_TOGGLE_CLASS = "glass-secret__toggle";
+export const GLASS_CONFIRM_OVERLAY_CLASS = "glass-confirm__overlay";
+export const GLASS_CONFIRM_OPEN_CLASS = "glass-confirm--open";
+export const GLASS_CONFIRM_HINT_TEXT_CLASS = "glass-confirm__hint-text";
+export const GLASS_DATE_ICON_CLASS = "glass-date__icon";

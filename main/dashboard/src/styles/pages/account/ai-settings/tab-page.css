@@ -1,0 +1,7 @@
+.account-ai-settings__tab-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-block-start: var(--sp-2);
+    margin-block-start: var(--sp-2);
+    border-block-start: var(--sp-hairline) solid var(--base-graphite-500);
+}

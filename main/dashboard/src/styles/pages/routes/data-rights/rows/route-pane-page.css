@@ -1,0 +1,24 @@
+.route-data-rights__pane-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-2);
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    background: rgb(from var(--base-graphite-800) r g b / 0.65);
+    flex-shrink: 0;
+    min-block-size: 1.8rem;
+    box-sizing: border-box;
+}
+.route-data-rights__pane-title {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    text-transform: lowercase;
+    letter-spacing: var(--ls-snug);
+    flex: 1;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

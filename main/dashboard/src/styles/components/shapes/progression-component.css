@@ -1,0 +1,22 @@
+.progression {
+    display: block;
+}
+.progression__panel {
+    padding: var(--sp-3);
+}
+.progression__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+    margin-block-end: var(--sp-2);
+    flex-wrap: wrap;
+}
+.progression__caption {
+    font-size: var(--fs-2xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-wide);
+    color: var(--base-graphite-300);
+}
+.progression__chart-wrap {
+    inline-size: 100%;
+}

@@ -1,0 +1,6 @@
+{
+    "pages": [
+        { "key": "home", "title": "Home", "icon": "bi-house", "route": "/" },
+        { "key": "account", "title": "Account", "icon": "bi-person-circle", "route": "/account" }
+    ]
+}

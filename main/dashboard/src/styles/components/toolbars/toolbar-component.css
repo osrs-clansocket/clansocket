@@ -1,0 +1,43 @@
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+}
+.toolbar__group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+.toolbar__label {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-normal);
+    margin-inline-end: var(--sp-0);
+}
+.toolbar__chip {
+    padding: var(--sp-0) var(--sp-1);
+    font-size: var(--fs-3xs);
+    line-height: var(--lh-flat);
+    color: var(--base-graphite-300);
+    background: var(--base-graphite-900);
+    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--ls-snug);
+    transition:
+        color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+}
+.toolbar__chip:hover {
+    color: var(--base-gold-300);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.4);
+}
+.toolbar__chip--active {
+    color: var(--base-gold-300);
+    border-color: var(--base-gold-500);
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+}

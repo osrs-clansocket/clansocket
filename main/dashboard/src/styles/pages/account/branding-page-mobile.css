@@ -1,0 +1,66 @@
+@media (width<=40rem) {
+    .account__branding {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-row {
+        gap: var(--sp-1);
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-color-block {
+        flex: 1 1 100%;
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-avatar-block {
+        flex: 1 1 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--sp-2);
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-tweaker-block {
+        flex: 1 1 100%;
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-tweaker-body {
+        flex-wrap: wrap;
+        gap: var(--sp-1);
+    }
+    .account__branding-tweaker-canvas-stack {
+        flex: 0 0 8rem;
+    }
+    .account__branding-tweaker-canvas {
+        max-inline-size: 10rem;
+    }
+    .account__branding-tweaker-controls {
+        flex: 1 1 9rem;
+    }
+    .account__branding-swatches {
+        max-inline-size: 100%;
+    }
+    .account__branding-hex-row {
+        min-inline-size: 0;
+        max-inline-size: 100%;
+    }
+    .account__branding-grid {
+        max-inline-size: 100%;
+    }
+    .account__branding-grid {
+        grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr));
+        gap: var(--sp-0h);
+        max-block-size: 11rem;
+    }
+    .account__branding-icon {
+        block-size: 2.25rem;
+        font-size: var(--fs-base);
+    }
+    .account__branding-swatch {
+        inline-size: 2rem;
+        block-size: 2rem;
+    }
+}

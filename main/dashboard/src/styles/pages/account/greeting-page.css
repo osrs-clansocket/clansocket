@@ -1,0 +1,58 @@
+.account__greeting {
+    display: flex;
+    flex-direction: column;
+}
+.account__greeting-prefix {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    letter-spacing: var(--ls-normal);
+    text-transform: uppercase;
+    line-height: var(--lh-flat);
+}
+.account__greeting-name {
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    line-height: var(--lh-tight);
+}
+.account__greeting-name-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+.account__greeting-edit {
+    background: transparent;
+    border: 0;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    padding: 0;
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-flat);
+    display: inline-flex;
+    align-items: center;
+}
+.account__greeting-edit:hover {
+    color: var(--base-gold-300);
+}
+.account__greeting-edit-row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+.account__greeting-input {
+    background: var(--base-graphite-900);
+    border: 0.0625rem solid var(--base-graphite-500);
+    border-radius: var(--radius-sm);
+    color: var(--base-cream-100);
+    font-family: var(--font-body);
+    font-size: var(--fs-3xs);
+    padding: var(--sp-0) var(--sp-1h);
+    line-height: var(--lh-tight);
+    margin: 0;
+    box-sizing: border-box;
+}
+.account__greeting-input:focus {
+    outline: none;
+    border-color: var(--base-gold-500);
+}
