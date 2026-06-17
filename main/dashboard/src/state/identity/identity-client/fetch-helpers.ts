@@ -21,7 +21,14 @@ export async function okResult<T>(res: Response, parse: (r: Response) => Promise
 
 function buildInit(init: RequestInit): RequestInit {
     const headers = new Headers(init.headers ?? {});
-    if (init.body && !headers.has(HEADER_CONTENT_TYPE)) headers.set(HEADER_CONTENT_TYPE, MIME_JSON);
+    // Only force application/json for STRING bodies. For FormData / Blob /
+    // URLSearchParams / ArrayBuffer, defer to the browser's auto-generated
+    // Content-Type (e.g. `multipart/form-data; boundary=…` for FormData).
+    // Mislabeling a FormData body as JSON makes body-parser try to parse it
+    // and trip its 4mb limit on payloads multer would have accepted.
+    if (init.body && typeof init.body === "string" && !headers.has(HEADER_CONTENT_TYPE)) {
+        headers.set(HEADER_CONTENT_TYPE, MIME_JSON);
+    }
     if (causalCorrelationId !== null && !headers.has("X-Caused-By")) {
         headers.set("X-Caused-By", causalCorrelationId);
     }

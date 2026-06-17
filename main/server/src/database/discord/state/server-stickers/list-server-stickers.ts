@@ -2,7 +2,7 @@ import { getDiscordGuildDb } from "../../database-discord.js";
 import type { ServerStickerRow } from "../types.js";
 
 const LIST_SQL = `
-SELECT sticker_id, guild_id, name, description, tags, format_type, available, image_url
+SELECT sticker_id, guild_id, name, description, tags, format_type, available, image_url, user_id
 FROM discord_server_stickers
 WHERE guild_id = ?
 ORDER BY LOWER(name) ASC
@@ -17,6 +17,7 @@ interface ServerStickerSqlRow {
     format_type: number;
     available: number;
     image_url: string | null;
+    user_id: string | null;
 }
 
 const FLAG_TRUE = 1;
@@ -31,6 +32,7 @@ function toServerStickerRow(r: ServerStickerSqlRow): ServerStickerRow {
         format_type: r.format_type,
         available: r.available === FLAG_TRUE,
         image_url: r.image_url,
+        user_id: r.user_id,
     };
 }
 

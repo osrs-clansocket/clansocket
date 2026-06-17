@@ -1,7 +1,7 @@
 .card {
     background: var(--gradient-surface);
     border: var(--border-dim);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     padding: var(--sp-8);
     transition:
         transform var(--dur-base) var(--ease-out),

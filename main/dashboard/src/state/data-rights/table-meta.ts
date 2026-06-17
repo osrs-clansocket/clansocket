@@ -103,8 +103,8 @@ const TABLE_META: Record<string, TableMeta> = {
     localStorage: entry("localStorage", "hdd-fill", ["key", "type"]),
     sessionStorage: entry("sessionStorage", "hdd-stack", ["key", "type"]),
 
-    plugin_accounts: entry(
-        "plugin accounts",
+    clan_accounts: entry(
+        "clan accounts",
         "person-fill-gear",
         ["latest_rsn", "account_type", "last_seen"],
         ASSET_PLAYER_TYPE,

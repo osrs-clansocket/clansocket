@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS discord_server_emojis (
     available INTEGER NOT NULL DEFAULT 1,
     managed INTEGER NOT NULL DEFAULT 0,
     image_url TEXT,
+    user_id TEXT,
     updated_at INTEGER NOT NULL
 );
 

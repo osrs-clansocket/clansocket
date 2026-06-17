@@ -1,0 +1,18 @@
+.voxlab,
+.voxlab * {
+    box-sizing: border-box;
+}
+.voxlab {
+    background: var(--base-graphite-900);
+    color: var(--base-graphite-100);
+    display: flex;
+    flex-direction: row;
+    /* TODO token: voxlab is a dense editor tool — uses system sans for
+       compactness, distinct from ClanSocket's mono-everywhere content/operator
+       surfaces. Should land in typography-tokens.css as e.g. `--font-ui-dense`
+       once token-gate consult lands. */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    block-size: 100%;
+    margin: 0;
+    overflow: hidden;
+}

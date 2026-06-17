@@ -42,7 +42,7 @@
 .clans-manage__discord-empty-logo {
     inline-size: clamp(2rem, 5vw, 2.75rem);
     block-size: clamp(2rem, 5vw, 2.75rem);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .clans-manage__discord-empty-badge-plus {
@@ -53,7 +53,7 @@
 }
 
 .clans-manage__discord-empty-discord-icon {
-    font-size: var(--fs-2xl);
+    font-size: var(--fs-xl);
     color: var(--base-gold-300);
     line-height: var(--lh-flat);
 }
@@ -91,7 +91,7 @@
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
     border-inline-start: 0.125rem solid var(--base-gold-300);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .clans-manage__discord-empty-info-title {
@@ -156,7 +156,7 @@
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
     border-inline-start: 0.125rem solid var(--base-gold-300);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .clans-manage__discord-empty-step-num {
@@ -185,6 +185,13 @@
         / 14rem 1fr 16rem;
     flex: 1 1 auto;
     min-block-size: 0;
+}
+.clans-manage__discord-frame:has(.clans-manage__auto-hooks) {
+    grid-template:
+        "header header header" auto
+        "rail-left pane-center rail-right" 1fr
+        "footer footer footer" auto
+        / 14rem 1fr 1fr;
 }
 .clans-manage__discord-toolbar-btn {
     display: flex;
@@ -242,7 +249,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--sp-2);
-    padding: var(--sp-2);
     overflow-block: auto;
     min-block-size: 0;
 }
@@ -250,11 +256,12 @@
 .clans-manage__discord-pane-placeholder {
     color: var(--base-graphite-200);
     font-style: italic;
+    font-size: var(--fs-xs);
     margin: 0;
 }
 
 .clans-manage__discord-placeholder-hint {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     color: var(--base-graphite-200);
     font-style: italic;
     margin: 0;
@@ -265,7 +272,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--sp-2);
-    padding: var(--sp-2);
     overflow-block: auto;
     min-block-size: 0;
     border-inline-start: var(--border-dim);
@@ -275,7 +281,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--sp-0);
-    padding-block-end: var(--sp-2);
+    padding: var(--sp-0);
     border-block-end: var(--border-dim);
 }
 .clans-manage__discord-inspector-label-row {
@@ -334,11 +340,13 @@
     flex-direction: column;
     flex: 1 1 auto;
     min-block-size: 0;
+    padding: var(--sp-1);
 }
 .clans-manage__discord-emoji-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
     gap: var(--sp-1);
+
     flex: 1 1 auto;
     min-block-size: 0;
     overflow-block: auto;
@@ -351,13 +359,15 @@
     justify-content: center;
     padding: var(--sp-1);
     border: var(--border-dim);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     aspect-ratio: 1 / 1;
     cursor: pointer;
     background: transparent;
     transition:
         border-color var(--dur-fast) var(--ease-out),
         background var(--dur-fast) var(--ease-out);
+    max-height: 3rem;
+    max-width: 3rem;
 }
 .clans-manage__discord-emoji-tile:hover {
     border-color: rgb(from var(--base-gold-500) r g b / 0.4);
@@ -365,6 +375,15 @@
 .clans-manage__discord-emoji-tile--active {
     border-color: var(--base-gold-500);
     background: rgb(from var(--base-gold-500) r g b / 0.1);
+}
+
+.clans-manage__discord-mode {
+    display: contents;
+}
+
+.slide-panel__footer {
+    display: flex;
+    flex-direction: column;
 }
 
 .clans-manage__discord-channels-empty {
@@ -383,4 +402,471 @@
     color: var(--base-graphite-200);
     font-style: italic;
     font-size: var(--fs-xs);
+}
+
+.clans-manage__discord-byo-bot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+
+.clans-manage__discord-byo-bot--owner-override {
+    border-inline-start: 0.125rem solid var(--base-gold-500);
+    padding-inline-start: var(--sp-2);
+}
+
+.clans-manage__discord-byo-bot-readonly {
+    color: var(--base-graphite-200);
+    font-style: italic;
+    font-size: var(--fs-xs);
+    margin: 0;
+}
+
+.clans-manage__discord-permission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    gap: var(--sp-1);
+}
+
+.clans-manage__discord-permission-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-2);
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+    cursor: pointer;
+    color: var(--base-graphite-200);
+    font-size: var(--fs-3xs);
+    text-align: start;
+    inline-size: 100%;
+    min-inline-size: 0;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__discord-permission-card:hover {
+    background: rgb(from var(--base-graphite-700) r g b / 0.5);
+}
+
+.clans-manage__discord-permission-card--allow {
+    border-color: var(--base-gold-500);
+    background: rgb(from var(--base-gold-500) r g b / 0.12);
+    color: var(--base-gold-300);
+}
+
+.clans-manage__discord-permission-card--deny {
+    border-color: var(--base-ember-300);
+    background: rgb(from var(--base-ember-300) r g b / 0.12);
+    color: var(--base-ember-300);
+}
+
+.clans-manage__discord-permission-card-label {
+    flex: 1;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.clans-manage__discord-permission-card-icon {
+    flex-shrink: 0;
+}
+
+.clans-manage__permission-pane {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-block-size: 0;
+}
+
+.clans-manage__discord .clans-manage__discord-rail-right:has(.clans-manage__permission-accordion) {
+    padding: 0;
+    gap: 0;
+}
+
+.clans-manage__discord .clans-manage__discord-rail-right > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-block-size: 0;
+    block-size: 100%;
+    inline-size: 100%;
+}
+
+.clans-manage__permission-accordion {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    min-block-size: 0;
+    inline-size: 100%;
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+    overflow: hidden;
+}
+
+.clans-manage__discord .clans-manage__permission-accordion.is-open {
+    flex: 1 1 0;
+    min-block-size: 0;
+}
+
+.clans-manage__discord .clans-manage__permission-accordion-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-2);
+    background: rgb(from var(--base-graphite-700) r g b / 0.4);
+    border: none;
+    border-radius: 0;
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xs);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-snug);
+    cursor: pointer;
+    inline-size: 100%;
+    text-align: start;
+}
+
+.clans-manage__permission-accordion-chevron {
+    flex-shrink: 0;
+    transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__permission-accordion.is-open .clans-manage__permission-accordion-chevron {
+    transform: rotate(90deg);
+}
+
+.clans-manage__permission-accordion-body {
+    display: none;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: var(--sp-hairline);
+    padding: var(--sp-1);
+    min-block-size: 0;
+    overflow-block: auto;
+}
+
+.clans-manage__permission-accordion.is-open .clans-manage__permission-accordion-body {
+    display: flex;
+    flex: 1 1 0;
+}
+
+.clans-manage__permission-swatch {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    inline-size: max-content;
+    max-inline-size: 8rem;
+    padding: var(--sp-hairline) var(--sp-1);
+    border: var(--bw-hairline) dotted var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--base-graphite-700) r g b / 0.4);
+    color: var(--base-graphite-200);
+    font-size: var(--fs-3xs);
+    cursor: grab;
+    user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__permission-swatch:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.15);
+    border-color: var(--base-gold-500);
+    color: var(--base-gold-300);
+}
+
+.clans-manage__permission-swatch:active {
+    cursor: grabbing;
+}
+
+.clans-manage__permission-row-slot.is-drop-target {
+    outline: var(--bw-hairline) dashed var(--base-gold-300);
+    outline-offset: var(--sp-0);
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    border-radius: var(--radius-md);
+}
+
+.clans-manage__permission-rows {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-block-size: 0;
+    overflow-block: auto;
+    position: relative;
+}
+
+.clans-manage__permission-rows-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.clans-manage__permission-wires {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+.clans-manage__permission-wire {
+    stroke: var(--base-gold-300);
+    stroke-width: 1;
+    stroke-opacity: 0.7;
+    stroke-linecap: round;
+}
+
+.clans-manage__permission-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-hairline) var(--sp-2);
+}
+
+.clans-manage__permission-row:hover {
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+}
+
+.clans-manage__permission-row-name {
+    flex: 0 0 9rem;
+    color: var(--base-gold-300);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    text-transform: lowercase;
+    letter-spacing: var(--ls-snug);
+    line-height: var(--lh-snug);
+}
+
+.clans-manage__permission-row-arrow {
+    flex-shrink: 0;
+    color: var(--base-graphite-400);
+}
+
+.clans-manage__permission-row-slot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    align-items: center;
+    flex: 1;
+    min-inline-size: 0;
+}
+
+.clans-manage__discord .clans-manage__permission-row-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    padding: 0;
+    border: var(--bw-hairline) dotted var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--base-graphite-300);
+    font-size: var(--fs-3xs);
+    cursor: pointer;
+    transition:
+        color var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__discord .clans-manage__permission-row-add:hover {
+    color: var(--base-gold-300);
+    background: rgb(from var(--base-graphite-700) r g b / 0.5);
+    border-color: var(--base-gold-500);
+}
+
+.clans-manage__permission-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-hairline);
+    padding: 0 var(--sp-1);
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--base-graphite-800) r g b / 0.4);
+    color: var(--base-graphite-200);
+    font-size: var(--fs-3xs);
+    cursor: pointer;
+}
+
+.clans-manage__permission-chip.is-locked {
+    border-style: dashed;
+    border-color: var(--base-graphite-300);
+    background: rgb(from var(--base-graphite-700) r g b / 0.3);
+    color: var(--base-graphite-200);
+    cursor: default;
+}
+
+.clans-manage__permission-na-text {
+    color: var(--base-graphite-300);
+    font-style: italic;
+    font-size: var(--fs-3xs);
+}
+
+.discord-inspector-image-preview {
+    max-inline-size: 8rem;
+    max-block-size: 8rem;
+    inline-size: auto;
+    block-size: auto;
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    object-fit: contain;
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+    display: block;
+}
+
+.clans-manage__channel-pins-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+
+.clans-manage__channel-pin-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-hairline);
+    padding: var(--sp-1);
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+}
+
+.clans-manage__channel-pin-meta {
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-300);
+    font-style: italic;
+}
+
+.clans-manage__channel-pin-content {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-200);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.discord-inspector-perms-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-hairline);
+    max-block-size: 20rem;
+    overflow-block: auto;
+    border: var(--bw-hairline) solid var(--base-graphite-500);
+    border-radius: var(--radius-md);
+    background: rgb(from var(--base-graphite-800) r g b / 0.3);
+    padding: var(--sp-1);
+}
+
+.discord-inspector-perms-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: var(--sp-hairline) var(--sp-1);
+    font-size: var(--fs-3xs);
+    color: var(--base-graphite-200);
+}
+
+.discord-inspector-perms-row-label {
+    flex: 1;
+    min-inline-size: 0;
+}
+
+.discord-inspector-perms-row-state {
+    flex-shrink: 0;
+    color: var(--base-gold-300);
+    font-family: var(--font-data);
+    inline-size: 1.5rem;
+    text-align: center;
+}
+
+.clans-manage__permission-chip--allow {
+    border-color: var(--base-forest-300);
+    background: rgb(from var(--base-forest-300) r g b / 0.12);
+    color: var(--base-forest-300);
+}
+
+.clans-manage__permission-chip--deny {
+    border-color: var(--base-ember-300);
+    background: rgb(from var(--base-ember-300) r g b / 0.12);
+    color: var(--base-ember-300);
+}
+
+.clans-manage__permission-chip--mixed {
+    border-color: var(--base-cream-100);
+    background: rgb(from var(--base-cream-100) r g b / 0.08);
+    color: var(--base-cream-100);
+}
+
+.clans-manage__permission-chip-label {
+    line-height: var(--lh-snug);
+}
+
+.clans-manage__permission-rows.permissions-hovered .clans-manage__permission-chip {
+    opacity: var(--opacity-faint);
+    transition:
+        opacity var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__permission-rows.permissions-hovered .clans-manage__permission-chip.is-related,
+.clans-manage__permission-rows.permissions-hovered .clans-manage__permission-chip:hover {
+    opacity: 1;
+    box-shadow: 0 0 0 var(--bw-hairline) var(--base-gold-300);
+}
+
+.clans-manage__discord .clans-manage__permission-chip-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1rem;
+    block-size: 1rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: inherit;
+    font-size: var(--fs-3xs);
+    opacity: var(--opacity-medium);
+    cursor: pointer;
+    transition:
+        opacity var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+}
+
+.clans-manage__discord .clans-manage__permission-chip-remove:hover {
+    opacity: 1;
+    background: rgb(from var(--base-graphite-700) r g b / 0.5);
+}
+
+.clans-manage__permission-row-block {
+    display: flex;
+    flex-direction: column;
+    border-block-end: var(--bw-hairline) solid var(--base-graphite-700);
+}
+
+.clans-manage__permission-row-block .slide-panel__panel {
+    background: transparent;
+    border: none;
+}
+
+.clans-manage__permission-add-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding-block: var(--sp-1);
+}
+
+.clans-manage__permission-add-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--sp-1);
 }

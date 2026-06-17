@@ -12,5 +12,7 @@ export function extractRoleRow(role: Role): RoleRow {
         position: role.position,
         permissions: role.permissions.bitfield.toString(),
         managed: role.managed,
+        icon_url: role.iconURL() ?? null,
+        unicode_emoji: role.unicodeEmoji ?? null,
     };
 }

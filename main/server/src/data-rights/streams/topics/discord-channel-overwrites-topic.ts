@@ -10,6 +10,7 @@ export function discordChannelOverwritesTopic(clanId: string, guildId: string): 
             { scopeKey, table: "discord_channel_member_overwrites" },
         ],
         query: () => listChannelOverwritesForGuild(clanId, guildId) as unknown as Record<string, unknown>[],
-        keyOf: (row) => `${String(row.kind)}:${String(row.channel_id)}:${row.kind === "role" ? String(row.role_id) : String(row.user_id)}`,
+        keyOf: (row) =>
+            `${String(row.kind)}:${String(row.channel_id)}:${row.kind === "role" ? String(row.role_id) : String(row.user_id)}`,
     };
 }

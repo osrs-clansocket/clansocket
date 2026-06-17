@@ -18,7 +18,7 @@
     display: inline-grid;
     place-content: center;
     padding: var(--sp-1);
-    border-radius: var(--radius-sm-plus);
+    border-radius: var(--radius-md);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.35);
     background: linear-gradient(
         160deg,
@@ -36,9 +36,9 @@
     display: block;
     inline-size: var(--sp-6);
     block-size: var(--sp-3);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-md);
     border: var(--sp-hairline) solid rgb(from var(--base-graphite-200) r g b / 0.4);
-    box-shadow: inset 0 0 0 var(--sp-hairline) rgb(from var(--base-graphite-900) r g b / 0.5);
+    box-shadow: var(--shadow-inset-hairline-ring);
 }
 .glass-color:hover .glass-color__visual {
     border-color: var(--base-gold-500);

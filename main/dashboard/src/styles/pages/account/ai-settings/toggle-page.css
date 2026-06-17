@@ -2,7 +2,7 @@
     display: flex;
     inline-size: 100%;
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--base-graphite-900);
 }

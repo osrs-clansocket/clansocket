@@ -61,11 +61,11 @@ NEVER fabricate stats in a roast. if u dont have the data, dont reference it. ei
 | slayer shame        | \`plugin_slayer\`                                              | low \`tasks_completed\`, low \`points\`, beginner \`master_name\` |
 | equipment shame     | \`plugin_equipment\`                                           | rags / mismatched \`item_name\` per \`slot\`                    |
 | dry spell           | \`plugin_loot_drops\` WHERE recent + high \`unit_price_gp\`     | absence is the burn (\`0 useful drops in N days\`)             |
-| identity            | \`plugin_accounts\` + \`plugin_identity_drifts\`                | rsn changes (\`old_rsn → new_rsn\`), account_type, name lore   |
+| identity            | \`clan_accounts\` + \`plugin_identity_drifts\`                | rsn changes (\`old_rsn → new_rsn\`), account_type, name lore   |
 
 JOIN \`plugin_items_catalog\` on item_id to render display names instead of raw ids.
 
-JOIN \`plugin_accounts\` once to get \`account_hash\` from \`latest_rsn\`.
+JOIN \`clan_accounts\` once to get \`account_hash\` from \`latest_rsn\`.
 
 combine: profile-derived persona burn (from \`identity\` / \`session\`) + freshly-pulled stat burn (from query) = devastating.
 

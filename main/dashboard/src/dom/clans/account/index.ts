@@ -14,6 +14,7 @@ import {
     span,
     type Instance,
 } from "../../factory";
+import { DISPLAY_NAME_MAX_LEN, identityClient } from "../../../state/identity/identity-client/index.js";
 import { identityStore } from "../../../state/identity/stores/identity-store.js";
 import { profileStore } from "../../../state/identity/stores/profile-store.js";
 import { type LiveSession } from "../../../state/identity/profile/profile-client.js";
@@ -64,7 +65,16 @@ export async function renderAccount(): Promise<HTMLElement> {
             title: "Edit display name",
             context: "edit your display name",
             meta: ["action", "account"],
-            onClick: () => openDisplayNameEdit(nameRow.el, accountName.el, editIcon.el),
+            onClick: () =>
+                openDisplayNameEdit({
+                    nameEl: accountName.el,
+                    iconEl: editIcon.el,
+                    maxLength: DISPLAY_NAME_MAX_LEN,
+                    onSave: async (next) => {
+                        const result = await identityClient.updateDisplayName(next);
+                        if (result.ok) await identityStore.refresh();
+                    },
+                }),
         },
         [span({ classes: [BS_ICON_CLASS, BS_ICON_PENCIL_CLASS], context: null, meta: null })],
     );

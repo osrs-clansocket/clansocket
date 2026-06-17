@@ -6,6 +6,7 @@
     "dependencies": {
         "@simplewebauthn/server": "^13.3.0",
         "@types/yazl": "^3.3.1",
+        "@wise-old-man/utils": "^4.0.15",
         "yazl": "^3.3.1"
     }
 }

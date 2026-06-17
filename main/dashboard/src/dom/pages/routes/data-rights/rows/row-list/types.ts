@@ -5,6 +5,7 @@ export interface RowListState {
     table: string;
     from: number | null;
     to: number | null;
+    rsn: string | null;
     rows: Record<string, unknown>[];
     info: BrowseResponse | null;
     selectedIndex: number;
@@ -13,7 +14,7 @@ export interface RowListState {
 }
 
 export interface RowListHandlers {
-    onFilterChange: (from: number | null, to: number | null) => void;
+    onFilterChange: (from: number | null, to: number | null, rsn: string | null) => void;
     onBulkDelete: (from: number, to: number) => void;
     onBack?: () => void;
 }

@@ -3,8 +3,8 @@ import type { RoleRow } from "../types.js";
 
 const DELETE_BY_GUILD_SQL = `DELETE FROM discord_roles WHERE guild_id = ?`;
 const INSERT_SQL = `
-INSERT INTO discord_roles (role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed, updated_at)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO discord_roles (role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed, icon_url, unicode_emoji, updated_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const BOOL_TRUE = 1;
@@ -28,6 +28,8 @@ export function replaceRolesForGuild(clanId: string, guildId: string, roles: rea
                 r.position,
                 r.permissions,
                 r.managed ? BOOL_TRUE : BOOL_FALSE,
+                r.icon_url,
+                r.unicode_emoji,
                 now,
             );
         }

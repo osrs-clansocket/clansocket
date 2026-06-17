@@ -9,6 +9,13 @@
     user-select: none;
     z-index: var(--z-base);
 }
+.route-data-rights--embedded {
+    position: relative;
+    inset: auto;
+    flex: 1 1 auto;
+    min-block-size: 0;
+    z-index: auto;
+}
 
 .route-data-rights .btn {
     padding: var(--sp-0) var(--sp-1h);
@@ -16,7 +23,7 @@
     letter-spacing: 0;
     text-transform: none;
     font-weight: var(--fw-medium);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     min-block-size: 1.05rem;
     line-height: var(--lh-flat);
     box-sizing: border-box;

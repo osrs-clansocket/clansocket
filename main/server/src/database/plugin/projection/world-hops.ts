@@ -52,7 +52,7 @@ export function handleWorldHop(
             dedup,
         );
         conn.prepare(
-            `UPDATE plugin_current_state SET world = ?, last_seen = ?, updated_at = ? WHERE account_hash = ?`,
-        ).run(toWorld, now, now, accountHash);
+            `UPDATE plugin_current_state SET world = $toWorld, last_seen = $now, updated_at = $now WHERE account_hash = $accountHash`,
+        ).run({ toWorld, now, accountHash });
     })();
 }

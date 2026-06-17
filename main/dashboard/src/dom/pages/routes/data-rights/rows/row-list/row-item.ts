@@ -4,12 +4,13 @@ import {
     effect,
     icon,
     image,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
     snapshot,
     span,
     type Instance,
     type ReadSignal,
 } from "../../../../../factory/index.js";
-import { glassConfirm } from "../../../../../forms/glass/modals/glass-confirm.js";
 import { rowSummary } from "../../../../../../state/data-rights/summary.js";
 import { pkKeyOf } from "../../../../../../state/data-rights/page-state/row-helpers.js";
 import { resolveColumnAsset } from "../../../../../../state/data-rights/assets/asset-resolver.js";
@@ -48,7 +49,8 @@ const cellRefs = new WeakMap<HTMLElement, RowCellRefs>();
 const EMPTY_SRC = "";
 
 function liveDeleteButton(key: string, table: string, onDelete: (key: string) => void): Instance {
-    return button(
+    const host = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
+    const btn = button(
         {
             classes: [DR_ROW_DELETE_CLASS],
             ariaLabel: "Delete row",
@@ -58,18 +60,20 @@ function liveDeleteButton(key: string, table: string, onDelete: (key: string) =>
             meta: ["destructive", "data"],
             onClick: async (e) => {
                 e.stopPropagation();
-                const ok = await glassConfirm({
-                    title: "Delete row",
-                    message: `Permanently delete this row from ${table}?`,
-                    confirmLabel: "Delete",
+                const ok = await inlineConfirm(host, {
                     cancelLabel: "Keep",
+                    confirmLabel: "Delete",
                     danger: true,
+                    cancelContext: `keep this row in ${table}`,
+                    confirmContext: `confirm deleting this row from ${table}`,
                 });
                 if (ok) onDelete(key);
             },
         },
         [icon({ name: "trash", context: null, meta: null })],
     );
+    host.addChild(btn);
+    return host;
 }
 
 function resolvePrimaryAsset(table: string, row: Record<string, unknown>): string | null {

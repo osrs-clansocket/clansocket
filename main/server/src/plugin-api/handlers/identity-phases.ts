@@ -10,6 +10,7 @@ import {
 import { isClanManager } from "../../database/clans/access/clan-manager-helpers.js";
 import { findSiteAccountByAccountHash } from "../../database/site/site-account-helpers/index.js";
 import { logPluginError } from "../logger/index.js";
+import { mapWomAccountType } from "../../wom/mappers/wom-account-type-mapper.js";
 import { send } from "../transport/send.js";
 import { isTelemetryAllowedStatus } from "../session/telemetry-gate.js";
 import { enforceAccountCap } from "../session/account-cap.js";
@@ -37,7 +38,7 @@ export function recordIdentityToDb(ctx: DispatchContext, msg: IdentityMsg, clanR
         recordPluginIdentity(clanRow.id, mode, ctx.sessionId, {
             accountHash: msg.accountHash,
             rsn: msg.rsn,
-            accountType: msg.accountType ?? null,
+            accountType: typeof msg.accountType === "string" ? mapWomAccountType(msg.accountType) : null,
             world: msg.world,
             mode,
             activity: msg.activity ?? null,

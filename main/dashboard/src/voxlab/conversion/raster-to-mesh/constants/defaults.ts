@@ -1,0 +1,26 @@
+export const DEFAULT_VOXEL_RESOLUTION = 256;
+export const DEFAULT_EXTRUSION_DEPTH = 0.15;
+export const DEFAULT_SMOOTHING_PASSES = 2;
+export const DEFAULT_TAUBIN_ROUNDS = 6;
+export const DEFAULT_TAUBIN_LAMBDA = 0.5;
+export const DEFAULT_TAUBIN_MU = -0.53;
+export const DEFAULT_CORNER_ANGLE_DEGREES = 5;
+export const DEFAULT_ALPHA_THRESHOLD = 0.5;
+export const DEFAULT_VERTEX_COLOR: readonly [number, number, number] = [1, 1, 1];
+export const DEFAULT_BACK_FACE = true;
+export const DEFAULT_NORMALIZE = true;
+
+export const MIN_VOXEL_RESOLUTION = 16;
+export const MAX_VOXEL_RESOLUTION = 2048;
+export const MIN_EXTRUSION_DEPTH = 0;
+export const MAX_EXTRUSION_DEPTH = 2;
+export const MIN_SMOOTHING_PASSES = 0;
+export const MAX_SMOOTHING_PASSES = 8;
+export const MIN_TAUBIN_ROUNDS = 0;
+export const MAX_TAUBIN_ROUNDS = 20;
+export const MIN_TAUBIN_LAMBDA = 0;
+export const MAX_TAUBIN_LAMBDA = 1;
+export const MIN_TAUBIN_MU = -1;
+export const MAX_TAUBIN_MU = 0;
+export const MIN_CORNER_ANGLE_DEGREES = 0;
+export const MAX_CORNER_ANGLE_DEGREES = 90;

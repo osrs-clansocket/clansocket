@@ -22,8 +22,10 @@ export interface BrowseOpts {
     table: string;
     from?: number;
     to?: number;
+    rsn?: string;
     limit?: number;
     offset?: number;
+    managerView?: boolean;
 }
 
 export async function browse({
@@ -31,10 +33,21 @@ export async function browse({
     table,
     from,
     to,
+    rsn,
     limit = 50,
     offset = 0,
+    managerView,
 }: BrowseOpts): Promise<BrowseResponse | null> {
-    return postJson<BrowseResponse>("/api/data-rights/browse", { scope, table, from, to, limit, offset });
+    return postJson<BrowseResponse>("/api/data-rights/browse", {
+        scope,
+        table,
+        from,
+        to,
+        rsn,
+        limit,
+        offset,
+        managerView: managerView === true ? true : undefined,
+    });
 }
 
 export async function deleteRow(

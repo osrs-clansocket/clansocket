@@ -3,7 +3,7 @@
     gap: var(--sp-hairline);
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-hairline);
 }
 .clans-clan__view-btn {
@@ -15,7 +15,7 @@
     font-size: var(--fs-3xs);
     letter-spacing: var(--ls-snug);
     text-transform: uppercase;
-    border-radius: calc(var(--radius-sm) - 0.125rem);
+    border-radius: calc(var(--radius-md) - 0.125rem);
     transition:
         background 0.12s,
         color 0.12s;

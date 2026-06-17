@@ -1,7 +1,18 @@
-import { anchor, BTN_VARIANT_OUTLINE, button, div, effect, heading, paragraph, snapshot } from "../../../factory";
+import {
+    anchor,
+    BTN_VARIANT_OUTLINE,
+    button,
+    div,
+    effect,
+    heading,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
+    paragraph,
+    snapshot,
+    type Instance,
+} from "../../../factory";
 import { dataRightsClient } from "../../../../state/data-rights/data-rights-client/index.js";
 import { userStatsStore } from "../../../../state/data-rights/stores/user-stats-store.js";
-import { glassConfirm } from "../../../forms/glass/modals/glass-confirm.js";
 import { formatCooldown } from "./format.js";
 import { buildStatsGrid } from "./stats-grid.js";
 import { FORM_FORM_ROW, FORM_FORM_ROW_FILL, FORM_HINT } from "../../../forms/form-classes.js";
@@ -27,14 +38,13 @@ function triggerDownload(blob: Blob, filename: string): void {
     URL.revokeObjectURL(url);
 }
 
-async function confirmLeaveSite(): Promise<boolean> {
-    return glassConfirm({
-        title: "Leave the site",
-        message:
-            "Hard wipe. Goes: ur site profile + login, every clan u own (the whole clan dies — its members + tokens + data with it), ur telemetry / clan chats / sessions across every clan u were ever in, and every clan u manage drops u as manager. U get logged out. Cannot be undone.",
-        confirmLabel: "Leave and wipe everything",
+async function confirmLeaveSite(host: Instance): Promise<boolean> {
+    return inlineConfirm(host, {
         cancelLabel: "Cancel",
+        confirmLabel: "Leave and wipe everything",
         danger: true,
+        cancelContext: "stay logged in and keep your account + data",
+        confirmContext: "confirm wiping all account data and leaving the site",
     });
 }
 
@@ -63,6 +73,7 @@ export function buildDataRightsPanel(): HTMLElement {
             else status.setText(snapshot(result.message ?? `export failed.`));
         },
     });
+    const leaveHost = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
     const leaveBtn = button({
         variant: BTN_VARIANT_OUTLINE,
         compact: true,
@@ -71,7 +82,7 @@ export function buildDataRightsPanel(): HTMLElement {
         context: "permanently delete all your data and leave the site",
         meta: ["destructive", "account"],
         onClick: async () => {
-            const confirmed = await confirmLeaveSite();
+            const confirmed = await confirmLeaveSite(leaveHost);
             if (!confirmed) return;
             leaveBtn.setText("Wiping…");
             leaveBtn.el.disabled = true;
@@ -85,6 +96,7 @@ export function buildDataRightsPanel(): HTMLElement {
             window.location.assign("/");
         },
     });
+    leaveHost.addChild(leaveBtn);
     const browseBtn = button({
         variant: BTN_VARIANT_OUTLINE,
         compact: true,
@@ -101,7 +113,7 @@ export function buildDataRightsPanel(): HTMLElement {
         div({ classes: [ACCOUNT_PANEL_BODY_CLASS], context: null, meta: null }, [stats.el, status]),
         div({ classes: [ACCOUNT_PANEL_FOOTER_CLASS], context: null, meta: null }, [
             div({ classes: [FORM_FORM_ROW, FORM_FORM_ROW_FILL], context: null, meta: null }, [browseBtn, exportBtn]),
-            leaveBtn,
+            leaveHost,
         ]),
     ]);
     let settled = false;

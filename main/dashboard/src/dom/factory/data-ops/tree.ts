@@ -6,7 +6,9 @@ import { span } from "../content-ops/text.js";
 import { div } from "../layout-ops/structural/container.js";
 import { wireDblClick } from "../event-helpers.js";
 import { onceEffect } from "../effect-helpers.js";
+import { INLINE_CONFIRM_HOST_CLASS } from "../layout-ops/inline/inline-confirm.js";
 import type { Instance } from "../core/index.js";
+import { wireDragSource, wireDropTarget, type DragPayload, type DropPosition } from "./tree-dnd.js";
 import {
     IS_ACTIVE_CLASS,
     IS_EMPTY_CLASS,
@@ -40,6 +42,15 @@ interface BaseNode {
     key: string;
     label: string;
     icon?: Instance | null;
+    dragKind?: string;
+    acceptDrops?: ReadonlyArray<string>;
+    onReorder?: (event: ReorderEvent) => void;
+}
+
+export interface ReorderEvent {
+    dragged: DragPayload;
+    targetKey: string;
+    position: DropPosition;
 }
 
 export type OnLabelEdit = (next: string) => Promise<boolean>;
@@ -47,7 +58,7 @@ export type OnLabelEdit = (next: string) => Promise<boolean>;
 export interface TreeLeafAction {
     iconName: string;
     title: string;
-    onClick: () => void;
+    onClick: (host: Instance) => void;
     danger?: boolean;
 }
 
@@ -169,7 +180,7 @@ function buildLeafBody(node: TreeLeaf, labelElements: readonly Instance[]): Inst
     );
 }
 
-function buildLeafAction(action: TreeLeafAction): Instance {
+function buildLeafAction(action: TreeLeafAction, getHost: () => Instance | null): Instance {
     const classes = action.danger ? [TREE_LEAF_ACTION_CLASS, "is-danger"] : [TREE_LEAF_ACTION_CLASS];
     const meta = action.danger ? (["action", "destructive"] as const) : (["action"] as const);
     return button(
@@ -180,7 +191,10 @@ function buildLeafAction(action: TreeLeafAction): Instance {
             ariaLabel: action.title,
             context: action.title,
             meta,
-            onClick: () => action.onClick(),
+            onClick: () => {
+                const host = getHost();
+                if (host !== null) action.onClick(host);
+            },
         },
         [icon({ name: action.iconName, context: null, meta: null }).el],
     );
@@ -203,17 +217,45 @@ function actionsFor(
     return out;
 }
 
+function wireNodeDnd(el: HTMLElement, node: TreeNode, allowInto: boolean): void {
+    if (node.dragKind !== undefined) {
+        wireDragSource(el, { key: node.key, kind: node.dragKind });
+    }
+    if (node.acceptDrops !== undefined && node.onReorder !== undefined) {
+        const onReorder = node.onReorder;
+        const key = node.key;
+        wireDropTarget(el, {
+            accepts: new Set(node.acceptDrops),
+            allowInto,
+            onDrop: (payload, position) => {
+                onReorder({ dragged: payload, targetKey: key, position });
+            },
+        });
+    }
+}
+
+function buildActionsCluster(actions: readonly TreeLeafAction[], containerClass: string): { host: Instance } {
+    let hostRef: Instance | null = null;
+    const container = div(
+        { classes: [containerClass], context: null, meta: null },
+        actions.map((a) => buildLeafAction(a, () => hostRef)),
+    );
+    const host = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null }, [container]);
+    hostRef = host;
+    return { host };
+}
+
 function buildLeaf(node: TreeLeaf): Instance {
     const labelKit = buildLabelOrEditor(node.label, node.onLabelEdit);
     const body = buildLeafBody(node, labelKit.elements);
     const rowChildren: Instance[] = [body];
     const actions = actionsFor(node.label, labelKit.enterEdit, node.actions);
     if (actions.length > 0) {
-        rowChildren.push(
-            div({ classes: [TREE_LEAF_ACTIONS_CLASS], context: null, meta: null }, actions.map(buildLeafAction)),
-        );
+        const { host } = buildActionsCluster(actions, TREE_LEAF_ACTIONS_CLASS);
+        rowChildren.push(host);
     }
     const row = div({ classes: [TREE_LEAF_ROW_CLASS, TREE_LEAF_CLASS], context: null, meta: null }, rowChildren);
+    wireNodeDnd(row.el, node, false);
     node.onMount?.(body);
     return row;
 }
@@ -246,16 +288,13 @@ function buildFolder(node: TreeFolder): Instance {
         folderHeaderChildren(node, labelKit.elements),
     );
     const actions = actionsFor(node.label, labelKit.enterEdit, node.actions);
-    const header: Instance =
-        actions.length > 0
-            ? div({ classes: [TREE_FOLDER_ROW_CLASS], context: null, meta: null }, [
-                  folderBtn,
-                  div(
-                      { classes: [TREE_FOLDER_ACTIONS_CLASS], context: null, meta: null },
-                      actions.map(buildLeafAction),
-                  ),
-              ])
-            : folderBtn;
+    let header: Instance;
+    if (actions.length > 0) {
+        const { host } = buildActionsCluster(actions, TREE_FOLDER_ACTIONS_CLASS);
+        header = div({ classes: [TREE_FOLDER_ROW_CLASS], context: null, meta: null }, [folderBtn, host]);
+    } else {
+        header = folderBtn;
+    }
     const children: Instance[] = [header];
     if (node.isExpanded && node.children.length > 0) {
         const childGroup = div(
@@ -264,6 +303,7 @@ function buildFolder(node: TreeFolder): Instance {
         );
         children.push(childGroup);
     }
+    wireNodeDnd(header.el, node, true);
     return div({ classes: [TREE_NODE_CLASS], context: null, meta: null }, children);
 }
 

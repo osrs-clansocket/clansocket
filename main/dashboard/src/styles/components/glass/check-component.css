@@ -29,7 +29,7 @@
     place-content: center;
     inline-size: 0.875rem;
     block-size: 0.875rem;
-    border-radius: var(--radius-sm-plus);
+    border-radius: var(--radius-md);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.35);
     background: linear-gradient(
         160deg,

@@ -36,6 +36,17 @@ export function extractWhere(p: Payload): SpatialColumns {
     };
 }
 
+const MEMBERS_SUFFIX = " (members)";
+
+export function sanitizeItemName(name: string): string {
+    if (name.length < MEMBERS_SUFFIX.length) return name;
+    const tail = name.slice(name.length - MEMBERS_SUFFIX.length).toLowerCase();
+    if (tail === MEMBERS_SUFFIX) {
+        return name.slice(0, name.length - MEMBERS_SUFFIX.length);
+    }
+    return name;
+}
+
 function toTitleCase(s: string): string {
     if (s.length === 0) return s;
     const lower = s.toLowerCase();

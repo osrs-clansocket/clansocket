@@ -1,0 +1,32 @@
+export { vectorToMesh } from "./vector-to-mesh.js";
+export type {
+    MeshData,
+    MeshMetadata,
+    MeshBounds,
+    Point2D,
+    Polygon,
+    VectorSource,
+    VectorToMeshOptions,
+} from "./types.js";
+export {
+    DEFAULT_BACK_FACE,
+    DEFAULT_BEZIER_TOLERANCE,
+    DEFAULT_CORNER_ANGLE_DEGREES,
+    DEFAULT_EXTRUSION_DEPTH,
+    DEFAULT_NORMALIZE,
+    DEFAULT_SMOOTHING_PASSES,
+    DEFAULT_TAUBIN_LAMBDA,
+    DEFAULT_TAUBIN_MU,
+    DEFAULT_TAUBIN_ROUNDS,
+    DEFAULT_VERTEX_COLOR,
+    MAX_BEZIER_TOLERANCE,
+    MAX_CORNER_ANGLE_DEGREES,
+    MAX_EXTRUSION_DEPTH,
+    MAX_SMOOTHING_PASSES,
+    MAX_TAUBIN_ROUNDS,
+    MIN_BEZIER_TOLERANCE,
+    MIN_CORNER_ANGLE_DEGREES,
+    MIN_EXTRUSION_DEPTH,
+    MIN_SMOOTHING_PASSES,
+    MIN_TAUBIN_ROUNDS,
+} from "./constants/defaults.js";

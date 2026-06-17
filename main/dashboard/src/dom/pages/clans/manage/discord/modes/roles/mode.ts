@@ -3,7 +3,7 @@ import {
     button,
     div,
     icon,
-    panel,
+    inlineConfirm,
     paragraph,
     treeView,
     BTN_VARIANT_BARE,
@@ -21,7 +21,6 @@ import {
 } from "../../../../../../../state/discord/client.js";
 import { selectDiscordItem } from "../../../../../../../state/discord/inspector-selection.js";
 import { identityStore } from "../../../../../../../state/identity/stores/identity-store.js";
-import { glassConfirm } from "../../../../../../forms/glass/modals/glass-confirm.js";
 
 const EMPTY_TEXT = "No roles in this guild yet.";
 const ROLE_ICON = "shield";
@@ -29,6 +28,7 @@ const MANAGED_ICON = "robot";
 const EMPTY_CLASS = "clans-manage__discord-roles-empty";
 const TOOLBAR_CLASS = "clans-manage__discord-channels-toolbar";
 const TOOLBAR_BTN_CLASS = "clans-manage__discord-toolbar-btn";
+const MODE_HOST_CLASS = "clans-manage__discord-mode";
 const CREATE_BTN_TEXT = "+ Create role";
 const NEW_ROLE_NAME = "new role";
 
@@ -54,12 +54,13 @@ function roleRenameHandler(role: DiscordRole, guildId: string): (next: string) =
     };
 }
 
-async function confirmAndDeleteRole(role: DiscordRole, guildId: string): Promise<void> {
-    const ok = await glassConfirm({
-        title: "Delete role",
-        message: `Delete role "${role.name}"? Members keep their data but lose this role.`,
+async function confirmAndDeleteRole(host: Instance, role: DiscordRole, guildId: string): Promise<void> {
+    const ok = await inlineConfirm(host, {
+        cancelLabel: "Cancel",
         confirmLabel: "Delete",
         danger: true,
+        cancelContext: `keep role "${role.name}"`,
+        confirmContext: `confirm deleting role "${role.name}"`,
     });
     if (!ok) return;
     const session = identityStore.session$();
@@ -70,7 +71,7 @@ async function confirmAndDeleteRole(role: DiscordRole, guildId: string): Promise
     });
 }
 
-function leafFor(role: DiscordRole, guildId: string): TreeNode {
+function leafFor(role: DiscordRole, guildId: string, host: Instance): TreeNode {
     return {
         kind: "leaf",
         key: role.role_id,
@@ -85,15 +86,15 @@ function leafFor(role: DiscordRole, guildId: string): TreeNode {
                   {
                       iconName: "trash",
                       title: `Delete ${role.name}`,
-                      onClick: () => void confirmAndDeleteRole(role, guildId),
+                      onClick: () => void confirmAndDeleteRole(host, role, guildId),
                       danger: true,
                   },
               ],
     };
 }
 
-function buildTreeNodes(roles: readonly DiscordRole[], guildId: string): TreeNode[] {
-    return [...roles].sort((a, b) => b.position - a.position).map((r) => leafFor(r, guildId));
+function buildTreeNodes(roles: readonly DiscordRole[], guildId: string, host: Instance): TreeNode[] {
+    return [...roles].sort((a, b) => b.position - a.position).map((r) => leafFor(r, guildId, host));
 }
 
 async function createRoleWithDefaults(guildId: string): Promise<void> {
@@ -136,7 +137,7 @@ export function buildRolesMode(guildId: string): Instance {
             return;
         }
         empty.el.hidden = true;
-        treeHost.setChildren(treeView(buildTreeNodes(latest, guildId)));
+        treeHost.setChildren(treeView(buildTreeNodes(latest, guildId, treeHost)));
     }
 
     const feed = createRolesFeed(guildId);
@@ -156,7 +157,11 @@ export function buildRolesMode(guildId: string): Instance {
         },
     );
 
-    const panelInst = panel({ context: null, meta: null }, [buildToolbar(guildId), treeHost, empty]);
-    panelInst.trackDispose({ dispose: () => unsubscribe() });
-    return panelInst;
+    const modeHost = div({ classes: [MODE_HOST_CLASS], context: null, meta: null }, [
+        buildToolbar(guildId),
+        treeHost,
+        empty,
+    ]);
+    modeHost.trackDispose({ dispose: () => unsubscribe() });
+    return modeHost;
 }

@@ -9,6 +9,7 @@ const STATE_IN_FLIGHT = "in_flight";
 const STATE_APPLIED = "applied";
 const STATE_FAILED = "failed";
 const ERROR_CODE_DEFAULT = 0;
+const ATTEMPT_NO_DEFAULT = 1;
 
 interface TransitionBody {
     state: string;
@@ -26,7 +27,8 @@ type StateHandler = (queueId: string, body: TransitionBody) => TransitionResult;
 
 function handleFailed(queueId: string, body: TransitionBody): TransitionResult {
     const errorCode = body.errorCode ?? ERROR_CODE_DEFAULT;
-    markFailed(queueId, errorCode);
+    const attemptNo = body.attemptNo ?? ATTEMPT_NO_DEFAULT;
+    markFailed(queueId, errorCode, attemptNo);
     if (body.attemptNo !== undefined) {
         recordOutboundFailure({
             queueId,

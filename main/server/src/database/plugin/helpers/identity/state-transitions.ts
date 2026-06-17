@@ -9,8 +9,10 @@ const IN_WORLD_LOGIN_STATES_DB: ReadonlySet<string> = new Set(["LOGGED_IN", "LOA
 
 export function recordPluginDisconnect(clanId: string, mode: string, sessionId: string): void {
     getClanPluginDb(clanId, mode)
-        .prepare("UPDATE plugin_sessions SET disconnected_at = ? WHERE session_id = ? AND disconnected_at IS NULL")
-        .run(Date.now(), sessionId);
+        .prepare(
+            "UPDATE plugin_sessions SET disconnected_at = $now WHERE session_id = $sessionId AND disconnected_at IS NULL",
+        )
+        .run({ now: Date.now(), sessionId });
 }
 
 interface SessionMeta {
@@ -34,7 +36,7 @@ export function recordPluginLoginState(
 ): void {
     const conn = getClanPluginDb(clanId, mode);
     const now = Date.now();
-    const rsn = lookupRsnForHash(conn, accountHash);
+    const rsn = lookupRsnForHash(clanId, accountHash);
     const meta = lookupSessionMeta(conn, sessionId);
     conn.transaction(() => {
         if (stateBefore !== loginState) {
@@ -44,10 +46,19 @@ export function recordPluginLoginState(
                     (account_hash, rsn, session_id, session_seq, event_received_at,
                      plugin_version, state_before, state_after,
                      world, x, y, plane, region_id, region_name, area, dedup_hash)
-                 VALUES (?, ?, ?, 0, ?, ?, ?, ?,
-                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, ?)
+                 VALUES ($accountHash, $rsn, $sessionId, 0, $now, $pluginVersion, $stateBefore, $loginState,
+                         NULL, NULL, NULL, NULL, NULL, NULL, NULL, $dedup)
                  ON CONFLICT(dedup_hash) DO NOTHING`,
-            ).run(accountHash, rsn ?? "", sessionId, now, meta.plugin_version, stateBefore, loginState, dedup);
+            ).run({
+                accountHash,
+                rsn: rsn ?? "",
+                sessionId,
+                now,
+                pluginVersion: meta.plugin_version,
+                stateBefore,
+                loginState,
+                dedup,
+            });
         }
         if (!IN_WORLD_LOGIN_STATES_DB.has(loginState)) {
             clearActivePrayers(conn, accountHash, now);
@@ -55,22 +66,22 @@ export function recordPluginLoginState(
         if (loginState === "LOGGED_IN") {
             conn.prepare(
                 `INSERT INTO plugin_current_state (account_hash, latest_rsn, login_state, last_seen_in_game, first_seen, last_seen, updated_at)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)
+                 VALUES ($accountHash, $rsn, $loginState, $now, $now, $now, $now)
                  ON CONFLICT(account_hash) DO UPDATE SET
                     login_state = excluded.login_state,
                     last_seen_in_game = excluded.last_seen_in_game,
                     last_seen = excluded.last_seen,
                     updated_at = excluded.updated_at`,
-            ).run(accountHash, rsn ?? "", loginState, now, now, now, now);
+            ).run({ accountHash, rsn: rsn ?? "", loginState, now });
         } else {
             conn.prepare(
                 `INSERT INTO plugin_current_state (account_hash, latest_rsn, login_state, first_seen, last_seen, updated_at)
-                 VALUES (?, ?, ?, ?, ?, ?)
+                 VALUES ($accountHash, $rsn, $loginState, $now, $now, $now)
                  ON CONFLICT(account_hash) DO UPDATE SET
                     login_state = excluded.login_state,
                     last_seen = excluded.last_seen,
                     updated_at = excluded.updated_at`,
-            ).run(accountHash, rsn ?? "", loginState, now, now, now);
+            ).run({ accountHash, rsn: rsn ?? "", loginState, now });
         }
     })();
 }
@@ -80,8 +91,8 @@ export function touchPluginCurrentState(clanId: string, mode: string, accountHas
     const conn = getClanPluginDb(clanId, mode);
     if (inWorld) {
         conn.prepare(
-            "UPDATE plugin_current_state SET last_seen_in_game = ?, last_seen = ?, updated_at = ? WHERE account_hash = ?",
-        ).run(now, now, now, accountHash);
+            "UPDATE plugin_current_state SET last_seen_in_game = $now, last_seen = $now, updated_at = $now WHERE account_hash = $accountHash",
+        ).run({ now, accountHash });
     } else {
         conn.prepare("UPDATE plugin_current_state SET last_seen = ? WHERE account_hash = ?").run(now, accountHash);
     }

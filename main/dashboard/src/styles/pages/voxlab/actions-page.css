@@ -1,0 +1,77 @@
+.voxlab__actions-panel {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sp-2) var(--sp-2h);
+}
+.voxlab__actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.voxlab__actions-title {
+    color: var(--base-gold-200);
+    font-size: var(--fs-3xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin: var(--sp-2) 0 var(--sp-0h);
+    text-transform: uppercase;
+}
+.voxlab__actions-row {
+    align-items: center;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    display: grid;
+    font-size: var(--fs-xs);
+    grid-template-columns: 1fr auto;
+    margin: 0 calc(var(--sp-2h) * -1);
+    padding: var(--sp-1) var(--sp-2h);
+    inline-size: calc(100% + var(--sp-2h) * 2);
+}
+.voxlab__actions-row:last-child {
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+}
+.voxlab__actions-row-name {
+    color: var(--base-graphite-100);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.voxlab__actions-row-actions {
+    display: flex;
+    gap: var(--sp-0);
+}
+.voxlab__actions-row-btn {
+    background: transparent;
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.3);
+    border-radius: var(--radius-md);
+    color: var(--base-gold-200);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--fs-3xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-normal);
+    padding: var(--sp-0) var(--sp-1h);
+    text-transform: uppercase;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+}
+.voxlab__actions-row-btn:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.55);
+}
+.voxlab__actions-row-btn--danger {
+    color: var(--base-ember-300);
+    border-color: rgb(from var(--base-ember-300) r g b / 0.35);
+}
+.voxlab__actions-row-btn--danger:hover {
+    background: rgb(from var(--base-ember-300) r g b / 0.1);
+    border-color: rgb(from var(--base-ember-300) r g b / 0.6);
+}
+.voxlab__actions-empty {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    padding: var(--sp-4) 0 var(--sp-2);
+    text-align: center;
+}

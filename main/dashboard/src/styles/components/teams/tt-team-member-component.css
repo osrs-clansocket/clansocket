@@ -16,7 +16,7 @@
     block-size: 0.375rem;
     background: rgb(0 0 0/0.4);
     border: var(--border-dim);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 .tt-team-member__bar-fill {

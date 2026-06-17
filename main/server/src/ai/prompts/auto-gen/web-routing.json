@@ -9,6 +9,10 @@
             "description": "Live clan-positions map. Shows current location of every clan member running the plugin."
         },
         {
+            "pattern": "/clans/varietyz/voxlab",
+            "description": "Voxlab — clan logo editor (manager-only; mounts the VoxlabEditor over the clan's current logo)."
+        },
+        {
             "pattern": "/clans/varietyz",
             "description": "A clan's dashboard. :slug is the clan's lowercase slug."
         },
@@ -31,6 +35,18 @@
         {
             "pattern": "/data-rights",
             "description": "Your data-rights browser — export or delete your stored data."
+        },
+        {
+            "pattern": "/privacy",
+            "description": "Privacy Policy — placeholder shell pending legal text."
+        },
+        {
+            "pattern": "/terms",
+            "description": "Terms of Service — placeholder shell pending legal text."
+        },
+        {
+            "pattern": "/voxlab",
+            "description": "Site voxlab — main logo editor (site-owner only)."
         }
     ]
 }

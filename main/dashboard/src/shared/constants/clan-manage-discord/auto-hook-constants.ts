@@ -1,0 +1,47 @@
+export const AUTO_HOOKS_ROOT_CLASS = "clans-manage__auto-hooks";
+export const AUTO_HOOKS_LIST_CLASS = "clans-manage__auto-hooks-list";
+export const AUTO_HOOKS_CARD_CLASS = "clans-manage__auto-hooks-card";
+export const AUTO_HOOKS_CARD_HEADER_CLASS = "clans-manage__auto-hooks-card-header";
+export const AUTO_HOOKS_CARD_BODY_CLASS = "clans-manage__auto-hooks-card-body";
+export const AUTO_HOOKS_CARD_BODY_STACK_CLASS = "clans-manage__auto-hooks-card-body-stack";
+export const AUTO_HOOKS_CARD_ROW_CLASS = "clans-manage__auto-hooks-card-row";
+export const AUTO_HOOKS_CARD_LABEL_CLASS = "clans-manage__auto-hooks-card-label";
+export const AUTO_HOOKS_CARD_DELETE_CLASS = "clans-manage__auto-hooks-card-delete";
+export const AUTO_HOOKS_TOKEN_CHIPS_CLASS = "clans-manage__auto-hooks-token-chips";
+export const AUTO_HOOKS_ACTIONS_CLASS = "clans-manage__auto-hooks-actions";
+export const AUTO_HOOKS_EMBED_TOGGLE_CLASS = "clans-manage__auto-hooks-embed-toggle";
+export const AUTO_HOOKS_EMBED_EDITOR_CLASS = "clans-manage__auto-hooks-embed-editor";
+export const AUTO_HOOKS_OVERRIDES_CLASS = "clans-manage__auto-hooks-overrides";
+export const AUTO_HOOKS_EMOJI_PICKER_CLASS = "clans-manage__auto-hooks-emoji-picker";
+export const AUTO_HOOKS_EMOJI_GRID_CLASS = "clans-manage__auto-hooks-emoji-grid";
+export const AUTO_HOOKS_EMOJI_CELL_CLASS = "clans-manage__auto-hooks-emoji-cell";
+export const AUTO_HOOKS_EMPTY_CLASS = "clans-manage__auto-hooks-empty";
+
+export const AUTO_HOOKS_PREVIEW_ROOT_CLASS = "clans-manage__auto-hooks-preview";
+export const AUTO_HOOKS_PREVIEW_USERNAME_CLASS = "clans-manage__auto-hooks-preview-username";
+export const AUTO_HOOKS_PREVIEW_CONTENT_CLASS = "clans-manage__auto-hooks-preview-content";
+export const AUTO_HOOKS_PREVIEW_EMBED_CLASS = "clans-manage__auto-hooks-preview-embed";
+export const AUTO_HOOKS_PREVIEW_EMBED_BAR_CLASS = "clans-manage__auto-hooks-preview-embed-bar";
+export const AUTO_HOOKS_PREVIEW_EMBED_TITLE_CLASS = "clans-manage__auto-hooks-preview-embed-title";
+export const AUTO_HOOKS_PREVIEW_EMBED_DESC_CLASS = "clans-manage__auto-hooks-preview-embed-desc";
+export const AUTO_HOOKS_PREVIEW_EMBED_FIELDS_CLASS = "clans-manage__auto-hooks-preview-embed-fields";
+export const AUTO_HOOKS_PREVIEW_EMBED_FIELD_CLASS = "clans-manage__auto-hooks-preview-embed-field";
+
+export const EMPTY_LIST_TEXT = "No auto-hooks configured yet. Click 'Add Auto-Hook' to create one.";
+export const NO_WEBHOOKS_TEXT =
+    "No webhooks available. Create a webhook in Discord first; the bot will pick it up automatically.";
+export const ADD_BTN_LABEL = "Add Auto-Hook";
+export const SAVE_BTN_LABEL = "Save";
+export const TEST_BTN_LABEL = "Test send";
+export const DELETE_BTN_LABEL = "Delete";
+export const FORMAT_LABEL = "Format";
+export const EMBED_LABEL = "Use embed";
+export const NAME_LABEL = "Name";
+export const TRIGGER_LABEL = "Trigger";
+export const WEBHOOK_LABEL = "Webhook";
+export const ENABLED_LABEL = "Enabled";
+export const WEBHOOK_USERNAME_OVERRIDE_LABEL = "Webhook name";
+export const WEBHOOK_AVATAR_OVERRIDE_LABEL = "Avatar URL";
+export const OVERRIDES_HEADER_LABEL = "";
+export const WEBHOOK_USERNAME_OVERRIDE_PLACEHOLDER = "Leave blank to use webhook default";
+export const WEBHOOK_AVATAR_OVERRIDE_PLACEHOLDER = "https://... (leave blank for default)";

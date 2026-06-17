@@ -8,12 +8,7 @@ import { openDraftSession } from "../../../../database/discord/drafts/open-sessi
 import { publishSingleOpDraft } from "../../../../database/discord/publish-queue/publish-single.js";
 import { resolveServerByGuildId } from "../../../../database/discord/resolve-server.js";
 import { validateOperation } from "../../../../database/discord/validators/validate-operation.js";
-import {
-    HTTP_BAD_REQUEST,
-    HTTP_FORBIDDEN,
-    HTTP_INTERNAL_ERROR,
-    HTTP_OK,
-} from "../../../../shared/http/http-status.js";
+import { HTTP_BAD_REQUEST, HTTP_FORBIDDEN, HTTP_INTERNAL_ERROR, HTTP_OK } from "../../../../shared/http/http-status.js";
 
 const TARGET_KIND = "discord_guild_settings";
 const OP_KIND_UPDATE = "update";
@@ -57,6 +52,11 @@ router.patch(
                 guildId,
                 ownerSiteAccountId: body.userId,
             });
+            const beforeJson = JSON.stringify({
+                subject: SUBJECT_AFK,
+                afkChannelId: body.beforeAfkChannelId,
+                afkTimeout: body.beforeAfkTimeout,
+            });
             const afterJson = JSON.stringify({
                 subject: SUBJECT_AFK,
                 afkChannelId: body.afkChannelId,
@@ -69,6 +69,7 @@ router.patch(
                 opKind: OP_KIND_UPDATE,
                 targetKind: TARGET_KIND,
                 targetIdOrTemp: guildId,
+                beforeJson,
                 afterJson,
             });
             const queueId = publishSingleOpDraft({ clanId: server.clan_id, guildId, sessionId });

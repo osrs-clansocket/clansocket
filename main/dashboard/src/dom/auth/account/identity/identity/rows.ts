@@ -1,11 +1,20 @@
-import { button, derived, div, effect, rsnTag, span, type Instance } from "../../../../factory/index.js";
+import {
+    button,
+    derived,
+    div,
+    effect,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
+    rsnTag,
+    span,
+    type Instance,
+} from "../../../../factory/index.js";
 import {
     identityClient,
     type PendingRsnRequest,
     type VerifiedRsn,
 } from "../../../../../state/identity/identity-client/index.js";
 import { timeStore } from "../../../../../state/stores/time-store.js";
-import { glassConfirm } from "../../../../forms/glass/modals/glass-confirm.js";
 import { formatRemaining, formatTimeLeft, formatVerifiedDate, setStatus } from "./formatting.js";
 import {
     ACCOUNT_DEVICE_ROW_CLASS,
@@ -57,34 +66,37 @@ function buildVerifiedMeta(r: VerifiedRsn): Instance {
 }
 
 export function buildVerifiedRow(r: VerifiedRsn, refresh: () => void, status: Instance): Instance {
+    const removeHost = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
+    const removeBtn = button({
+        classes: [ACCOUNT_TOKEN_REVOKE_CLASS],
+        text: "Remove",
+        context: "remove this verified RSN from your account",
+        meta: ["destructive", "rsn"],
+        onClick: async () => {
+            const confirmed = await inlineConfirm(removeHost, {
+                cancelLabel: "Cancel",
+                confirmLabel: "Remove",
+                danger: true,
+                cancelContext: `keep '${r.rsn}' linked to your account`,
+                confirmContext: `confirm removing '${r.rsn}' from your account`,
+            });
+            if (!confirmed) return;
+            const result = await identityClient.removeRsnBinding(r.accountHash);
+            if (result.ok) {
+                setStatus(status, "Removed.");
+                refresh();
+            } else {
+                setStatus(status, `Remove failed: ${result.error}`);
+            }
+        },
+    });
+    removeHost.addChild(removeBtn);
     return div({ classes: [ACCOUNT_DEVICE_ROW_CLASS], context: null, meta: null }, [
         span({ classes: [ACCOUNT_ROW_PRIMARY_CLASS], context: null, meta: null }, [
             rsnTag({ rsn: r.rsn, rank: r.rank, context: null, meta: null }),
         ]),
         buildVerifiedMeta(r),
-        button({
-            classes: [ACCOUNT_TOKEN_REVOKE_CLASS],
-            text: "Remove",
-            context: "remove this verified RSN from your account",
-            meta: ["destructive", "rsn"],
-            onClick: async () => {
-                const confirmed = await glassConfirm({
-                    title: "Remove RSN",
-                    message: `Unlink '${r.rsn}' from ur account? Historical data stays on the server but is no longer attributed to u. Someone else can re-claim this RSN via the plugin.`,
-                    confirmLabel: "Remove",
-                    cancelLabel: "Cancel",
-                    danger: true,
-                });
-                if (!confirmed) return;
-                const result = await identityClient.removeRsnBinding(r.accountHash);
-                if (result.ok) {
-                    setStatus(status, "Removed.");
-                    refresh();
-                } else {
-                    setStatus(status, `Remove failed: ${result.error}`);
-                }
-            },
-        }),
+        removeHost,
     ]);
 }
 

@@ -26,7 +26,7 @@
     );
     backdrop-filter: blur(var(--blur-lg)) saturate(1.3);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.35);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-confirm);
     color: var(--base-graphite-300);
     transform: translateY(1rem) scale(0.96);
@@ -61,7 +61,7 @@
     cursor: pointer;
     padding: var(--sp-0) var(--sp-1);
     gap: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: var(--sp-hairline) solid transparent;
     font-size: var(--fs-2xs);
     font-weight: var(--fw-semi);

@@ -34,7 +34,7 @@
     background: var(--base-graphite-1000);
     border: var(--border-hairline-active);
     border-color: var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-glow);
     pointer-events: none;
 }

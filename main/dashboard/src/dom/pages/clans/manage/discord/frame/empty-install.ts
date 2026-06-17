@@ -33,7 +33,7 @@ const DISCORD_ICON_PROVIDER = "ph";
 const PLUS_TEXT = "+";
 
 const HEADLINE_TEXT = "Connect ClanSocket to Discord";
-const LEDE_TEXT = "ClanSocket. Operational platform for OSRS clans.";
+const LEDE_TEXT = "ClanSocket - Live, Open-Source platform for Old School RuneScape clans";
 
 const INFO_1_TITLE = "What it does";
 const INFO_1_BODY =

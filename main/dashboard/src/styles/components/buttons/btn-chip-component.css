@@ -11,11 +11,12 @@
     );
     backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-gold-300);
     font: inherit;
     font-size: var(--fs-2xs);
     text-transform: uppercase;
+    text-decoration: none;
     letter-spacing: var(--ls-normal);
     line-height: var(--lh-flat);
     transition:

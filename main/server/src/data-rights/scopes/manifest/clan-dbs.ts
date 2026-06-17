@@ -1,6 +1,7 @@
 import type { ChildTable, ClanScopedUserTable } from "./types.js";
 
 export const CLAN_DB_USER_TABLES: ClanScopedUserTable[] = [
+    { table: "clan_accounts", column: "account_hash", action: "delete" },
     { table: "clan_rosters", column: "captured_by_account_hash", action: "null" },
     { table: "clan_chats", column: "account_hash", action: "delete" },
     { table: "clan_member_history", column: "account_hash", action: "delete" },

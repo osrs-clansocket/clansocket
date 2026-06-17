@@ -72,6 +72,10 @@ export interface ConsentResolvedPayload extends AuditCommonPayload {
 
 export interface BrandingUpdatedPayload extends AuditCommonPayload, BeforeAfter<BrandingState> {}
 
+export interface SeoUpdatedPayload extends AuditCommonPayload {
+    fields: readonly string[];
+}
+
 export type BrandingCustomization = { ext: string; transform: CustomizeTransform } | { cleared: true };
 
 export interface BrandingCustomizedPayload extends AuditCommonPayload {
@@ -351,4 +355,81 @@ export interface DiscordChannelsDeletePermissionsPayload extends DiscordAuditPay
     overwriteKind: "role" | "member";
     overwriteTargetId: string;
     overwriteTargetName: string;
+}
+
+export interface DiscordAutoHookCreatedPayload extends AuditCommonPayload {
+    guildId: string;
+    targetName: string;
+    autoHookId: string;
+    autoHookName: string;
+    triggerType: string;
+    webhookId: string;
+}
+
+export interface DiscordAutoHookUpdatedPayload extends AuditCommonPayload {
+    guildId: string;
+    targetName: string;
+    autoHookId: string;
+    autoHookName: string;
+}
+
+export interface DiscordAutoHookDeletedPayload extends AuditCommonPayload {
+    guildId: string;
+    targetName: string;
+    autoHookId: string;
+}
+
+export interface DiscordAutoHookToggledPayload extends AuditCommonPayload {
+    guildId: string;
+    targetName: string;
+    autoHookId: string;
+    enabled: boolean;
+}
+
+export interface DiscordWebhookTokenRevokedPayload extends AuditCommonPayload {
+    guildId: string;
+    targetName: string;
+    webhookId: string;
+}
+
+export interface VaultWomReadPayload extends VaultAuditPayloadBase {
+    hit?: boolean;
+    reason?: string;
+}
+
+export interface VaultWomWritePayload extends VaultAuditPayloadBase {
+    entry_type?: string;
+    reason?: string;
+}
+
+export interface VaultWomDeletePayload extends VaultAuditPayloadBase {}
+
+export interface VaultWomVerifyPayload extends VaultAuditPayloadBase {
+    status?: string;
+}
+
+export interface WomLinkLinkerReassignedPayload extends AuditCommonPayload {
+    previous_linker: string;
+    new_linker: string;
+    by_owner: string;
+}
+
+export interface WomRsnChangedPayload extends AuditCommonPayload {
+    from: string;
+    to: string;
+    accountHashType?: "real" | "placeholder";
+    womChangeId?: number;
+}
+
+export interface WomBackfillCompletedPayload extends AuditCommonPayload {
+    rowsInserted: number;
+    rowsUpdated: number;
+    rowsSkipped: number;
+    msElapsed: number;
+}
+
+export interface WomBackfillFailedPayload extends AuditCommonPayload {
+    reason: string;
+    lastErrorCode?: number;
+    msElapsed: number;
 }

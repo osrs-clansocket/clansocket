@@ -40,11 +40,13 @@ export interface LiveRowListConfig {
     table: string;
     from: number | null;
     to: number | null;
+    rsn: string | null;
     limit: number;
     selectedKey: ReadSignal<string | null>;
     handlers: RowListHandlers;
     onSelectKey: (key: string) => void;
     onDeleteKey: (key: string) => void;
+    managerView?: boolean;
 }
 
 export interface LiveRowListHandle {
@@ -73,8 +75,10 @@ export async function buildLiveRowList(config: LiveRowListConfig): Promise<LiveR
               table: config.table,
               from: config.from ?? undefined,
               to: config.to ?? undefined,
+              rsn: config.rsn ?? undefined,
               limit: config.limit,
               offset: 0,
+              managerView: config.managerView,
           });
     if (!info) return null;
     const ctx: DataRowCtx = {
@@ -100,8 +104,10 @@ export async function buildLiveRowList(config: LiveRowListConfig): Promise<LiveR
                   table: config.table,
                   from: config.from ?? undefined,
                   to: config.to ?? undefined,
+                  rsn: config.rsn ?? undefined,
                   limit: config.limit,
                   offset: 0,
+                  managerView: config.managerView === true ? "true" : undefined,
               }),
     });
     const view: LiveViewHandle = liveView<Record<string, unknown>>({
@@ -127,8 +133,10 @@ export async function buildLiveRowList(config: LiveRowListConfig): Promise<LiveR
                   table: config.table,
                   from: config.from ?? undefined,
                   to: config.to ?? undefined,
+                  rsn: config.rsn ?? undefined,
                   limit: config.limit,
                   offset,
+                  managerView: config.managerView,
               });
         loadingMore = false;
         if (page) {
@@ -197,6 +205,7 @@ export async function buildLiveRowList(config: LiveRowListConfig): Promise<LiveR
         table: config.table,
         from: config.from,
         to: config.to,
+        rsn: config.rsn,
         rows: [],
         info,
         selectedIndex: -1,

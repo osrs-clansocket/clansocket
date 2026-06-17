@@ -1,0 +1,96 @@
+.voxlab__shell {
+    background: transparent;
+    border: 0;
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    overflow: hidden;
+}
+.voxlab__shell:last-child {
+    border-block-end: 0;
+}
+.voxlab__shell-toolbar {
+    align-items: center;
+    background: rgb(from var(--base-gold-500) r g b / 0.06);
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    display: flex;
+    gap: var(--sp-1);
+    padding: var(--sp-0h) var(--sp-1h);
+    transition: background var(--dur-fast) var(--ease-out);
+}
+.voxlab__shell-toolbar:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+}
+.voxlab__shell[data-side="right"] .voxlab__shell-toolbar,
+.voxlab__shell[data-side="right"] .voxlab__shell-actions {
+    flex-direction: row-reverse;
+}
+.voxlab__shell-title {
+    color: var(--base-gold-200);
+    flex: 1;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    text-align: center;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.voxlab__shell-actions {
+    align-items: center;
+    display: flex;
+    gap: var(--sp-0);
+    flex: 0 0 auto;
+}
+.voxlab__shell-btn {
+    align-items: center;
+    background: transparent;
+    border: 0.0625rem solid transparent;
+    border-radius: var(--radius-md);
+    color: var(--base-gold-200);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    block-size: var(--sp-4);
+    justify-content: center;
+    line-height: var(--lh-flat);
+    min-inline-size: var(--sp-4);
+    padding: 0 var(--sp-0h);
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+.voxlab__shell-btn:hover:not(:disabled),
+.voxlab__shell-btn:focus-visible:not(:disabled) {
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.35);
+    outline: none;
+}
+.voxlab__shell-btn:disabled {
+    color: rgb(from var(--base-gold-500) r g b / 0.25);
+    cursor: not-allowed;
+}
+.voxlab__shell-body {
+    padding: var(--sp-1h) var(--sp-2h);
+    transition: opacity var(--dur-fast) var(--ease-out);
+}
+.voxlab__shell[data-collapsed="true"] .voxlab__shell-body {
+    display: none;
+}
+.voxlab__shell-body > .voxlab__sidebar-panel,
+.voxlab__shell-body > .voxlab__footer-section {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+}
+.voxlab__shell-body > .voxlab__sidebar-panel > .voxlab__sidebar-panel-heading,
+.voxlab__shell-body > .voxlab__footer-section > .voxlab__footer-section-heading,
+.voxlab__shell-body > .voxlab__sidebar-export-panel > h2,
+.voxlab__shell-body > .voxlab__sidebar-export-panel > .voxlab__sidebar-panel-heading {
+    display: none;
+}

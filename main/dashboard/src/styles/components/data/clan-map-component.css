@@ -7,7 +7,7 @@
     min-block-size: 24rem;
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden;
     isolation: isolate;
     position: relative;
@@ -51,7 +51,7 @@
     pointer-events: auto;
     background: var(--base-graphite-800);
     padding: var(--sp-0);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 0.0625rem solid var(--base-graphite-500);
 }
 .clan-map__plane-btn.is-active,
@@ -82,7 +82,7 @@
     gap: var(--sp-0);
     padding: var(--sp-0) var(--sp-0) var(--sp-0) 0;
     background: var(--base-graphite-800);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-3xs);
     line-height: var(--lh-flat);
     color: var(--base-cream-100);
@@ -188,7 +188,7 @@
     padding-inline: var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding-block: var(--sp-0);
 }
 .clan-map__hover-readout {
@@ -198,7 +198,7 @@
     background: var(--base-graphite-800);
     border: 0.0625rem solid var(--base-graphite-500);
     padding: var(--sp-0) var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     align-self: flex-start;
     visibility: hidden;
 }
@@ -215,7 +215,7 @@
     inline-size: 100%;
     block-size: 17.4375rem;
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background: var(--base-graphite-800);
     overflow: hidden;
     position: relative;

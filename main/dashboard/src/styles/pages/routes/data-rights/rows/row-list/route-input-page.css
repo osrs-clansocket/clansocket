@@ -2,7 +2,7 @@ input.route-data-rights__input {
     appearance: none;
     background: var(--base-graphite-900);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-data);
     font-size: var(--fs-3xs);

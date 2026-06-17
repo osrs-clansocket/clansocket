@@ -1,5 +1,6 @@
 import { createInstance } from "../../dom/factory";
 import { errorBanner } from "../../dom/factory/data-ops/error-banner.js";
+import { applyRouteSeo } from "../../dom/factory/seo-ops/apply-seo.js";
 import { ERROR_BANNER_ACTION_HOME } from "../../shared/constants/error-banner-constants.js";
 import { events } from "../events";
 import { ROUTE_ENTER_BACKWARD, ROUTE_ENTER_FORWARD, type Route } from "./types.js";
@@ -11,6 +12,7 @@ export { AppRoutes } from "./types.js";
 export {
     clanSlugFromManagePath,
     clanSlugFromPath,
+    manageSubTabFromPath,
     manageTabFromPath,
     matchClanManagePath,
     matchClanPath,
@@ -27,9 +29,11 @@ function isMounted(): boolean {
 }
 
 function findRoute(path: string): Route | undefined {
+    const queryAt = path.indexOf("?");
+    const pathname = queryAt === -1 ? path : path.slice(0, queryAt);
     return (
-        routes.find((r) => r.path === path) ??
-        routes.find((r) => r.match !== undefined && r.match(path)) ??
+        routes.find((r) => r.path === pathname) ??
+        routes.find((r) => r.match !== undefined && r.match(pathname)) ??
         routes.find((r) => r.path === "/")
     );
 }
@@ -82,6 +86,7 @@ export const router = {
         const prevRoute = currentPath === "" ? undefined : findRoute(currentPath);
         currentPath = path;
         events.emit("route:change", path);
+        applyRouteSeo(path, route.seo).catch(() => undefined);
         if (prevRoute !== undefined && prevRoute === route && prevRoute.match === undefined) return;
         const root = createInstance(rootEl!);
         const enterClass = nextDirection === "backward" ? ROUTE_ENTER_BACKWARD : ROUTE_ENTER_FORWARD;

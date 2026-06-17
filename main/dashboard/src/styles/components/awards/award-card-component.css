@@ -1,7 +1,7 @@
 .award-card {
     background: var(--gradient-surface);
     border: var(--sp-hairline) solid rgb(from var(--base-graphite-500) r g b / 0.2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-2);
     display: flex;
     flex-direction: column;

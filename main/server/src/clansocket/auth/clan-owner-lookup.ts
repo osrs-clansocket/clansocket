@@ -7,9 +7,9 @@ interface OwnerRow {
 
 export function getClanOwnerSiteAccountId(clanId: string): string | null {
     const db = getDb(DB_NAMES.APP);
-    const row = db
-        .prepare("SELECT owner_site_account_id FROM clansocket_clans WHERE id = ?")
-        .get(clanId) as OwnerRow | undefined;
+    const row = db.prepare("SELECT owner_site_account_id FROM clansocket_clans WHERE id = ?").get(clanId) as
+        | OwnerRow
+        | undefined;
     return row?.owner_site_account_id ?? null;
 }
 

@@ -2,7 +2,7 @@ import { getDiscordGuildDb } from "../../database-discord.js";
 import type { ServerEmojiRow } from "../types.js";
 
 const LIST_SQL = `
-SELECT emoji_id, guild_id, name, role_ids_json, animated, available, managed, image_url
+SELECT emoji_id, guild_id, name, role_ids_json, animated, available, managed, image_url, user_id
 FROM discord_server_emojis
 WHERE guild_id = ?
 ORDER BY LOWER(name) ASC
@@ -17,6 +17,7 @@ interface ServerEmojiSqlRow {
     available: number;
     managed: number;
     image_url: string | null;
+    user_id: string | null;
 }
 
 const FLAG_TRUE = 1;
@@ -41,6 +42,7 @@ function toServerEmojiRow(r: ServerEmojiSqlRow): ServerEmojiRow {
         available: r.available === FLAG_TRUE,
         managed: r.managed === FLAG_TRUE,
         image_url: r.image_url,
+        user_id: r.user_id,
     };
 }
 

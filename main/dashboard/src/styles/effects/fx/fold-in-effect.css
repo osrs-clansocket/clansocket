@@ -1,0 +1,39 @@
+@keyframes fx-fold-in-anim {
+    0%,
+    22% {
+        clip-path: none;
+        opacity: 0;
+    }
+    26% {
+        clip-path: polygon(0 12%, 100% 12%, 100% 22%, 0 22%);
+        opacity: var(--opacity-low);
+    }
+    34% {
+        clip-path: polygon(0 34%, 100% 34%, 100% 44%, 0 44%);
+        opacity: var(--opacity-medium);
+    }
+    42% {
+        clip-path: polygon(0 60%, 100% 60%, 100% 68%, 0 68%);
+        opacity: var(--opacity-medium);
+    }
+    50% {
+        clip-path: polygon(0 2%, 100% 2%, 100% 10%, 0 10%);
+        opacity: var(--opacity-high);
+    }
+    58% {
+        clip-path: polygon(0 76%, 100% 76%, 100% 90%, 0 90%);
+        opacity: var(--opacity-high);
+    }
+    70% {
+        clip-path: none;
+        opacity: var(--opacity-strong);
+    }
+    100% {
+        clip-path: none;
+        opacity: 1;
+    }
+}
+
+.fx-fold-in {
+    animation: fx-fold-in-anim 900ms steps(1, end) forwards;
+}

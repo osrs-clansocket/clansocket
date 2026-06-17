@@ -53,7 +53,6 @@ export const PLUGIN_SATURATED: readonly SaturatedColumn[] = [
         rsnColumn: "rsn",
         hashColumn: "account_hash",
     })),
-    { table: "plugin_accounts", rsnColumn: "latest_rsn", hashColumn: "account_hash" },
     { table: "plugin_current_state", rsnColumn: "latest_rsn", hashColumn: "account_hash" },
 ];
 
@@ -63,6 +62,7 @@ export const CLANSOCKET_SATURATED: readonly SaturatedColumn[] = [
 ];
 
 export const CLAN_SATURATED: readonly SaturatedColumn[] = [
+    { table: "clan_accounts", rsnColumn: "latest_rsn", hashColumn: "account_hash" },
     { table: "clan_chats", rsnColumn: "rsn", hashColumn: "account_hash" },
     { table: "clan_member_history", rsnColumn: "rsn", hashColumn: "account_hash" },
     { table: "clan_rosters", rsnColumn: "captured_by_rsn", hashColumn: "captured_by_account_hash" },

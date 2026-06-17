@@ -2,6 +2,7 @@ import {
     EVENT_BATCH,
     EVENT_CHAT,
     EVENT_CLAIM_CONSENT_RESPONSE,
+    EVENT_CLAN_CONFIG_REQUEST,
     EVENT_CLAN_ROSTER,
     EVENT_CLAN_TITLES_SNAPSHOT,
     EVENT_COMBAT_ACHIEVEMENTS_CATALOG,
@@ -22,6 +23,7 @@ import type { PluginSocket, PluginSocketState } from "../session/socket-state.js
 import type { PluginClientMessage } from "../types/index.js";
 import { handleClaimConsentResponse } from "../consent/claim-finalize/index.js";
 import { handleRsnVerifyResponse } from "../consent/rsn-verify.js";
+import { handleClanConfigRequest } from "./clan-config.js";
 import { handleChat } from "./telemetry/chat.js";
 import { handleClanTitlesSnapshot } from "./telemetry/clan-titles.js";
 import { handleIdentity } from "./identity.js";
@@ -55,6 +57,7 @@ const handlers = new Map<string, Handler>([
     [EVENT_CHAT, handleChat as Handler],
     [EVENT_CLAN_TITLES_SNAPSHOT, handleClanTitlesSnapshot as Handler],
     [EVENT_COMBAT_ACHIEVEMENTS_CATALOG, handleCombatAchievementsCatalog as Handler],
+    [EVENT_CLAN_CONFIG_REQUEST, handleClanConfigRequest as Handler],
     ...STANDARD_TELEMETRY_EVENTS.map((t) => [t, handleStandardTelemetry as Handler] as const),
 ]);
 

@@ -2,7 +2,13 @@ import { ERROR_CLAN_NOT_FOUND } from "../../../shared/error-reasons.js";
 import { HTTP_BAD_REQUEST, HTTP_NOT_FOUND } from "../../../shared/http/http-status.js";
 import logger from "@clansocket/logger";
 import { Router, type Request, type Response } from "express";
-import { getClanBySlug, getClanDb, getRosterPluginPresence, listClanTitleLadder } from "../../../database/index.js";
+import {
+    getClanBySlug,
+    getClanDb,
+    getClanSeoBySlug,
+    getRosterPluginPresence,
+    listClanTitleLadder,
+} from "../../../database/index.js";
 import { canonicalRsn } from "../../../database/site/rsn/canonicalize.js";
 import { projectPublicClan, type PublicClanMember, type PublicClanRoster } from "../../projectors/public-projector.js";
 
@@ -74,6 +80,22 @@ router.get("/:slug/clan-titles", (req: Request, res: Response) => {
         return;
     }
     res.json({ entries: listClanTitleLadder(clan.id) });
+});
+
+const PUBLIC_FLAG_TRUE = 1;
+
+router.get("/:slug/seo", (req: Request, res: Response) => {
+    const slug = String(req.params.slug ?? "").toLowerCase();
+    const row = getClanSeoBySlug(slug);
+    if (row === null || row.is_public !== PUBLIC_FLAG_TRUE) {
+        res.status(HTTP_NOT_FOUND).json({ error: "clan_not_public" });
+        return;
+    }
+    res.json({
+        title: row.seo_title ?? row.display_name,
+        description: row.seo_description ?? `${row.display_name} on ClanSocket.`,
+        image: row.seo_image ?? undefined,
+    });
 });
 
 export default router;

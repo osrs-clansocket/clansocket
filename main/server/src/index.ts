@@ -23,6 +23,8 @@ import { loadClanVaultMasterKey } from "./crypto/clan-vault-master-key-loader.js
 import { initializeDatabase, closeDatabase } from "./database/index.js";
 import { seedDefaultBotIdentity } from "./database/discord/seed-default.js";
 import { registerByoBotVaultEntry } from "./discord/byo-bot/registrars/byo-bot-vault-registrar.js";
+import { registerWomVaultEntry } from "./wom/registrars/wom-vault-registrar.js";
+import womRouter from "./wom/routes/index.js";
 import { runAiBootCleanup } from "./ai/lifecycle/boot-cleanup.js";
 import aiChatRouter from "./ai/routes/chat/index.js";
 import aiMemoryRouter from "./ai/routes/memory-routes.js";
@@ -30,6 +32,7 @@ import aiPersonaRouter from "./ai/routes/persona-routes.js";
 import siteAuthRouter from "./auth/site-routes/index.js";
 import clansRouter from "./clans/routes/index.js";
 import clansManageRouter from "./clans/manage-routes/index.js";
+import sitemapRouter from "./seo/routes/sitemap.js";
 import dataRightsRouter from "./data-rights/routes/index.js";
 import discordRouter from "./discord/routes/index.js";
 import { mapApiRouter } from "./map-assets/index.js";
@@ -39,6 +42,7 @@ import passkeyRouter from "./auth/passkey/handlers/index.js";
 import { auditContext, readCausedByHeader } from "./shared/audit-context.js";
 import { randomUUID } from "node:crypto";
 import { attachPluginApi, detachPluginApi, runPluginBootCleanup, pluginMetricsRouter } from "./plugin-api/index.js";
+import siteRouter from "./site/routes/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SERVER_ROOT = path.join(__dirname, "..");
@@ -100,10 +104,13 @@ app.use("/api/clans", clansManageRouter);
 app.use("/api/clans", clansRouter);
 app.use("/api/data-rights", dataRightsRouter);
 app.use("/api/discord", discordRouter);
+app.use("/api/wom", womRouter);
 app.use("/api/me/notifications", notificationsRouter);
 app.use("/api/me/legacy-rsns", legacyRsnRouter);
 app.use("/api/clansocket", pluginMetricsRouter);
 app.use("/api/map", mapApiRouter);
+app.use("/api/site", siteRouter);
+app.use(sitemapRouter);
 
 const MIME_BY_EXT: Record<string, string> = {
     ".js": "application/javascript",
@@ -154,6 +161,7 @@ async function start(): Promise<void> {
         );
     }
     registerByoBotVaultEntry();
+    registerWomVaultEntry();
     const seeded = seedDefaultBotIdentity();
     if (seeded) logger.info("seeded clansocket-default discord bot identity from env");
     const behindProxy = process.env.BEHIND_PROXY === "1";

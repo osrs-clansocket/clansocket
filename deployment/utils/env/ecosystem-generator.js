@@ -19,7 +19,7 @@ export class EcosystemGenerator {
             );
         }
 
-        const serverEnv = { ...this.buildEnvObject(env), PORT: backendPort, BEHIND_PROXY: "1" };
+        const serverEnv = { ...this.buildEnvObject(env), PORT: backendPort };
 
         const config = {
             apps: [
@@ -71,6 +71,7 @@ export class EcosystemGenerator {
         return {
             NODE_ENV: "production",
             ...env,
+            BEHIND_PROXY: "1",
         };
     }
 

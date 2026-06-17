@@ -26,6 +26,8 @@ export {
     countClans,
 } from "./clans/clan-app-helpers.js";
 export type { ClanRow, ClanStatus, ProvisionClanArgs } from "./clans/clan-app-helpers.js";
+export { getClanSeoBySlug, getClanSeoById, listPublicClanSlugs, updateClanSeo } from "./clans/clan-seo-helpers.js";
+export type { ClanSeoRow, ClanSeoPatch } from "./clans/clan-seo-helpers.js";
 export {
     recordClanRoster,
     isMemberInClanRoster,
@@ -81,6 +83,20 @@ export {
 export { resolveClanPosture, resolveLiveClanPosture } from "./clans/access/clan-access-helpers.js";
 export type { ClanPosture } from "./clans/access/clan-access-helpers.js";
 export type { ClanManagerRow, ClanManagerRole, ClanManagerGrantedVia } from "./clans/access/clan-manager-helpers.js";
+export {
+    getGlobalPreset,
+    setGlobalPreset,
+    deleteGlobalPreset,
+} from "./clans/access/clan-plugin-preset-helpers/global.js";
+export type { GlobalPresetRecord } from "./clans/access/clan-plugin-preset-helpers/global.js";
+export {
+    getOverride,
+    listOverrides,
+    setOverride,
+    deleteOverride,
+} from "./clans/access/clan-plugin-preset-helpers/override.js";
+export type { OverrideRecord } from "./clans/access/clan-plugin-preset-helpers/override.js";
+export { effectivePresetForMember } from "./clans/access/clan-plugin-preset-helpers/effective.js";
 export {
     createManagerRequest,
     getManagerRequestById,

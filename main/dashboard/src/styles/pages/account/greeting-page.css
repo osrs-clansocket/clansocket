@@ -43,7 +43,7 @@
 .account__greeting-input {
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-body);
     font-size: var(--fs-3xs);

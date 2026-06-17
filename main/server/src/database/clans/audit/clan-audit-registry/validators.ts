@@ -49,6 +49,7 @@ const PAYLOAD_VALIDATORS: Record<string, PayloadValidator> = {
     [ClanAuditActions.ManagerRequestDenied]: requireRequestResolved,
     [ClanAuditActions.BrandingUpdated]: (p) => isPlainObject(p.after) && (p.before === null || isPlainObject(p.before)),
     [ClanAuditActions.BrandingCustomized]: (p) => isPlainObject(p.customized),
+    [ClanAuditActions.SeoUpdated]: (p) => Array.isArray(p.fields),
     [ClanAuditActions.WhitelistAdded]: requireStrings("kind", "value"),
     [ClanAuditActions.WhitelistRemoved]: alwaysTrue,
     [ReadActions.ReadManagers]: requireCount,
@@ -130,9 +131,15 @@ const PAYLOAD_VALIDATORS: Record<string, PayloadValidator> = {
     [ClanAuditActions.DiscordGuildSettingsSetName]: (p) =>
         isString(p.guildId) && isString(p.targetName) && isString(p.beforeName) && isString(p.afterName),
     [ClanAuditActions.DiscordGuildSettingsSetIcon]: (p) =>
-        isString(p.guildId) && isString(p.targetName) && isStringOrNull(p.beforeIconUrl) && isStringOrNull(p.afterIconUrl),
+        isString(p.guildId) &&
+        isString(p.targetName) &&
+        isStringOrNull(p.beforeIconUrl) &&
+        isStringOrNull(p.afterIconUrl),
     [ClanAuditActions.DiscordGuildSettingsSetBanner]: (p) =>
-        isString(p.guildId) && isString(p.targetName) && isStringOrNull(p.beforeBannerUrl) && isStringOrNull(p.afterBannerUrl),
+        isString(p.guildId) &&
+        isString(p.targetName) &&
+        isStringOrNull(p.beforeBannerUrl) &&
+        isStringOrNull(p.afterBannerUrl),
     [ClanAuditActions.DiscordGuildSettingsSetDescription]: (p) =>
         isString(p.guildId) &&
         isString(p.targetName) &&
@@ -143,8 +150,7 @@ const PAYLOAD_VALIDATORS: Record<string, PayloadValidator> = {
         isString(p.targetName) &&
         isStringOrNull(p.beforeChannelId) &&
         isStringOrNull(p.afterChannelId),
-    [ClanAuditActions.DiscordGuildSettingsSetAfk]: (p) =>
-        isString(p.guildId) && isString(p.targetName),
+    [ClanAuditActions.DiscordGuildSettingsSetAfk]: (p) => isString(p.guildId) && isString(p.targetName),
     [ClanAuditActions.DiscordGuildSettingsSetWelcomeScreen]: (p) =>
         isString(p.guildId) && isString(p.targetName) && typeof p.enabled === "boolean",
     [ClanAuditActions.DiscordGuildSettingsSetVerificationLevel]: (p) =>
@@ -155,6 +161,30 @@ const PAYLOAD_VALIDATORS: Record<string, PayloadValidator> = {
         (p.overwriteKind === "role" || p.overwriteKind === "member") &&
         isString(p.overwriteTargetId) &&
         isString(p.overwriteTargetName),
+    [ClanAuditActions.DiscordAutoHookCreated]: (p) =>
+        isString(p.guildId) &&
+        isString(p.targetName) &&
+        isString(p.autoHookId) &&
+        isString(p.autoHookName) &&
+        isString(p.triggerType) &&
+        isString(p.webhookId),
+    [ClanAuditActions.DiscordAutoHookUpdated]: (p) =>
+        isString(p.guildId) && isString(p.targetName) && isString(p.autoHookId) && isString(p.autoHookName),
+    [ClanAuditActions.DiscordAutoHookDeleted]: (p) =>
+        isString(p.guildId) && isString(p.targetName) && isString(p.autoHookId),
+    [ClanAuditActions.DiscordAutoHookToggled]: (p) =>
+        isString(p.guildId) && isString(p.targetName) && isString(p.autoHookId) && typeof p.enabled === "boolean",
+    [ClanAuditActions.DiscordWebhookTokenRevoked]: (p) =>
+        isString(p.guildId) && isString(p.targetName) && isString(p.webhookId),
+    [ClanAuditActions.VaultWomRead]: requireVaultEntryKey,
+    [ClanAuditActions.VaultWomWrite]: requireVaultEntryKey,
+    [ClanAuditActions.VaultWomDelete]: requireVaultEntryKey,
+    [ClanAuditActions.VaultWomVerify]: requireVaultEntryKey,
+    [ClanAuditActions.WomLinkLinkerReassigned]: requireStrings("previous_linker", "new_linker", "by_owner"),
+    [ClanAuditActions.WomRsnChanged]: requireStrings("from", "to"),
+    [ClanAuditActions.WomBackfillCompleted]: (p) =>
+        isNumber(p.rowsInserted) && isNumber(p.rowsUpdated) && isNumber(p.rowsSkipped) && isNumber(p.msElapsed),
+    [ClanAuditActions.WomBackfillFailed]: (p) => isString(p.reason) && isNumber(p.msElapsed),
 };
 
 export function validatePayload(action: string, payload: unknown): boolean {

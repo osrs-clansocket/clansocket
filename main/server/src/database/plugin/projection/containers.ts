@@ -1,7 +1,7 @@
 import type Database from "better-sqlite3";
 import type { EventEnvelopeCols } from "./envelope.js";
 import { rowDedupHash } from "./envelope.js";
-import { extractWhere, type Payload } from "./helpers.js";
+import { extractWhere, sanitizeItemName, type Payload } from "./helpers.js";
 import { upsertItemsCatalog } from "./items-catalog.js";
 
 interface ContainerItem {
@@ -50,7 +50,7 @@ const EQUIPMENT_SLOTS: Record<number, string> = {
 };
 
 function itemName(item: ContainerItem): string {
-    return typeof item.name === "string" ? item.name : "";
+    return typeof item.name === "string" ? sanitizeItemName(item.name) : "";
 }
 
 function itemPrice(item: ContainerItem): number | null {
@@ -88,7 +88,7 @@ function snapshotInventory(
 ): void {
     const upsert = conn.prepare(
         `INSERT INTO plugin_inventory (account_hash, rsn, container_kind, slot, item_id, item_name, qty, unit_price_gp, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $containerKind, $slot, $itemId, $itemName, $qty, $price, $now, $now, $now)
          ON CONFLICT (account_hash, container_kind, slot) DO UPDATE SET
             rsn = excluded.rsn,
             item_id = excluded.item_id,
@@ -108,7 +108,17 @@ function snapshotInventory(
         const slot = typeof it.slot === "number" ? it.slot : -1;
         if (slot < 0) continue;
         keptSlots.push(slot);
-        upsert.run(accountHash, rsn ?? "", containerKind, slot, it.id, itemName(it), qty, itemPrice(it), now, now, now);
+        upsert.run({
+            accountHash,
+            rsn: rsn ?? "",
+            containerKind,
+            slot,
+            itemId: it.id,
+            itemName: itemName(it),
+            qty,
+            price: itemPrice(it),
+            now,
+        });
     }
     deleteMissingInvSlots(conn, accountHash, containerKind, keptSlots);
 }
@@ -143,7 +153,7 @@ function snapshotEquipment(
 ): void {
     const upsert = conn.prepare(
         `INSERT INTO plugin_equipment (account_hash, rsn, slot, item_id, item_name, qty, unit_price_gp, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $slotName, $itemId, $itemName, $qty, $price, $now, $now, $now)
          ON CONFLICT (account_hash, slot) DO UPDATE SET
             rsn = excluded.rsn,
             item_id = excluded.item_id,
@@ -163,7 +173,16 @@ function snapshotEquipment(
         const slotName = typeof it.slot === "number" ? EQUIPMENT_SLOTS[it.slot] : undefined;
         if (!slotName) continue;
         keptSlots.push(slotName);
-        upsert.run(accountHash, rsn ?? "", slotName, it.id, itemName(it), qty, itemPrice(it), now, now, now);
+        upsert.run({
+            accountHash,
+            rsn: rsn ?? "",
+            slotName,
+            itemId: it.id,
+            itemName: itemName(it),
+            qty,
+            price: itemPrice(it),
+            now,
+        });
     }
     if (keptSlots.length === 0) {
         conn.prepare(`DELETE FROM plugin_equipment WHERE account_hash = ?`).run(accountHash);
@@ -188,7 +207,7 @@ function snapshotSeedVault(
     const agg = aggregateById(items);
     const upsert = conn.prepare(
         `INSERT INTO plugin_seed_vault (account_hash, rsn, item_id, item_name, qty, unit_price_gp, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $itemId, $itemName, $qty, $price, $now, $now, $now)
          ON CONFLICT (account_hash, item_id) DO UPDATE SET
             rsn = excluded.rsn,
             item_name = excluded.item_name,
@@ -200,7 +219,15 @@ function snapshotSeedVault(
                 THEN excluded.updated_at ELSE updated_at END`,
     );
     for (const [id, e] of agg) {
-        upsert.run(accountHash, rsn ?? "", id, e.name, e.qty, e.price, now, now, now);
+        upsert.run({
+            accountHash,
+            rsn: rsn ?? "",
+            itemId: id,
+            itemName: e.name,
+            qty: e.qty,
+            price: e.price,
+            now,
+        });
     }
     const ids = [...agg.keys()];
     if (ids.length === 0) {
@@ -224,16 +251,16 @@ export function handleContainer(
     now: number,
     _envelope: EventEnvelopeCols,
 ): void {
-    const containerId = typeof payload.containerId === "string" ? payload.containerId : null;
+    const containerLabel = typeof payload.containerLabel === "string" ? payload.containerLabel : null;
     const items: ContainerItem[] = Array.isArray(payload.items) ? payload.items : [];
-    if (containerId === null) return;
+    if (containerLabel === null) return;
     conn.transaction(() => {
         upsertItemsCatalog(conn, items, now);
-        if (containerId === INVENTORY) {
+        if (containerLabel === INVENTORY) {
             snapshotInventory(conn, accountHash, rsn, KIND_MAIN, items, now);
-        } else if (containerId === EQUIPMENT) {
+        } else if (containerLabel === EQUIPMENT) {
             snapshotEquipment(conn, accountHash, rsn, items, now);
-        } else if (containerId === SEED_VAULT) {
+        } else if (containerLabel === SEED_VAULT) {
             snapshotSeedVault(conn, accountHash, rsn, items, now);
         }
     })();
@@ -408,14 +435,14 @@ export function handleContainerDelta(
     now: number,
     envelope: EventEnvelopeCols,
 ): void {
-    const containerId = typeof payload.containerId === "string" ? payload.containerId : null;
+    const containerLabel = typeof payload.containerLabel === "string" ? payload.containerLabel : null;
     const changes: ContainerItem[] = Array.isArray(payload.changes) ? payload.changes : [];
     const cause = payload.cause;
-    if (containerId === null || changes.length === 0) return;
+    if (containerLabel === null || changes.length === 0) return;
     const where = extractWhere(payload);
     upsertItemsCatalog(conn, changes, now);
 
-    if (containerId === INVENTORY) {
+    if (containerLabel === INVENTORY) {
         const insert = conn.prepare(INVENTORY_CHANGE_SQL);
         conn.transaction(() => {
             for (const c of changes) {
@@ -423,14 +450,14 @@ export function handleContainerDelta(
                     insertInventoryChange(insert, accountHash, rsn, KIND_MAIN, envelope, where, c, cause);
             }
         })();
-    } else if (containerId === EQUIPMENT) {
+    } else if (containerLabel === EQUIPMENT) {
         const insert = conn.prepare(EQUIPMENT_CHANGE_SQL);
         conn.transaction(() => {
             for (const c of changes) {
                 if (isLiveChange(c)) insertEquipmentChange(insert, accountHash, rsn, envelope, where, c);
             }
         })();
-    } else if (containerId === SEED_VAULT) {
+    } else if (containerLabel === SEED_VAULT) {
         const insert = conn.prepare(SEED_VAULT_CHANGE_SQL);
         conn.transaction(() => {
             for (const c of changes) {

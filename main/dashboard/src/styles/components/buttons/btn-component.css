@@ -58,7 +58,7 @@
     letter-spacing: 0;
     text-transform: none;
     font-weight: var(--fw-medium);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 @media (pointer: coarse) {
     .btn--compact {

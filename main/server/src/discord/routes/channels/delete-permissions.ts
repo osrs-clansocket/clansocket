@@ -8,12 +8,7 @@ import { openDraftSession } from "../../../database/discord/drafts/open-session.
 import { publishSingleOpDraft } from "../../../database/discord/publish-queue/publish-single.js";
 import { resolveServerByGuildId } from "../../../database/discord/resolve-server.js";
 import { validateOperation } from "../../../database/discord/validators/validate-operation.js";
-import {
-    HTTP_BAD_REQUEST,
-    HTTP_FORBIDDEN,
-    HTTP_INTERNAL_ERROR,
-    HTTP_OK,
-} from "../../../shared/http/http-status.js";
+import { HTTP_BAD_REQUEST, HTTP_FORBIDDEN, HTTP_INTERNAL_ERROR, HTTP_OK } from "../../../shared/http/http-status.js";
 
 const TARGET_KIND = "discord_channel";
 const OP_KIND_UPDATE = "update";
@@ -88,7 +83,9 @@ router.delete(
             });
             res.status(HTTP_OK).json({ sessionId, changeId, queueId });
         } catch (err) {
-            logger.error(`[discord] channels delete-permissions failed for ${guildId}/${channelId}: ${(err as Error).message}`);
+            logger.error(
+                `[discord] channels delete-permissions failed for ${guildId}/${channelId}: ${(err as Error).message}`,
+            );
             res.status(HTTP_INTERNAL_ERROR).json({ error: "delete_permissions_failed" });
         }
     }),

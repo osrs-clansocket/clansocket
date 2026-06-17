@@ -19,6 +19,7 @@ const RUNTIME_CONVENTION = "JS runtime/library convention string, not a domain v
 const SHARED_HELPER_USAGE = "intentional consumption of shared helper API — call shape repeats by design across all consumers";
 const GENERIC_JS_IDIOM = "generic JS conditional idiom — AST shape too coarse to imply semantic dup; investigated partner sites confirm unrelated subsystems";
 const PROMPT_API_SHAPE = "prompt-module API shape — every *-prompt.ts declares the same registerDynamic metadata fields by design; the shape IS the registration contract";
+const ROUTE_SEO_SHAPE = "route seo declaration — every defineRoute() carries the same { title, description, hidden? } key set by design; the shape IS the seo contract that lvi/route-requires-seo enforces";
 
 module.exports = {
     literal: {
@@ -86,6 +87,9 @@ module.exports = {
 
         "always_load,depends_on,id,placeholders,priority,triggers,type": PROMPT_API_SHAPE,
         "always_load,auto_load_schemas,depends_on,id,placeholders,priority,triggers,type": PROMPT_API_SHAPE,
+
+        "description,hidden,title": ROUTE_SEO_SHAPE,
+        "description,title": ROUTE_SEO_SHAPE,
     },
     behavioral: {
     },

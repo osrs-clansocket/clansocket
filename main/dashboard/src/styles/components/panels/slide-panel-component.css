@@ -5,15 +5,40 @@
     position: relative;
     z-index: var(--z-dropdown);
 }
+.slide-panel--banner {
+    inline-size: auto;
+}
+.slide-panel__panel[data-slide-panel-align] {
+    flex-basis: calc(100% + var(--slide-panel-banner-bleed, 0) * 2);
+    inline-size: calc(100% + var(--slide-panel-banner-bleed, 0) * 2);
+    margin-inline: calc(0 - var(--slide-panel-banner-bleed, 0));
+}
+.slide-panel__panel[data-slide-panel-align].slide-panel__panel--open {
+    border-block: var(--bw-hairline) solid transparent;
+    border-inline: none;
+    border-image: var(--gradient-accent-divider) 1;
+}
+.slide-panel__panel[data-slide-panel-align="start"] > * > :first-child {
+    justify-self: start;
+    text-align: start;
+}
+.slide-panel__panel[data-slide-panel-align="center"] > * > :first-child {
+    justify-self: center;
+    text-align: center;
+}
+.slide-panel__panel[data-slide-panel-align="end"] > * > :first-child {
+    justify-self: end;
+    text-align: end;
+}
 .slide-panel__panel {
     display: grid;
     grid-template-rows: 0fr;
-    inline-size: 100%;
-    background: rgb(from var(--base-graphite-800) r g b / 0.6);
-    border-inline: var(--bw-hairline) dotted var(--base-graphite-500);
-    border-block-end: var(--bw-hairline) dotted var(--base-graphite-500);
     transition: grid-template-rows var(--dur-base) var(--ease-out);
     z-index: var(--z-dropdown);
+}
+.slide-panel__panel:not(:empty) {
+    background: rgb(from var(--base-graphite-800) r g b / 0.6);
+    border-inline: var(--bw-hairline) dotted var(--base-graphite-500);
 }
 .slide-panel__panel--open {
     grid-template-rows: 1fr;
@@ -28,4 +53,20 @@
 .slide-panel__panel--open > * {
     padding-block: var(--sp-2);
     overflow: visible;
+}
+
+.slide-panel .slide-panel__panel .btn {
+    display: flex;
+    border-radius: 0;
+    inline-size: 100%;
+}
+.slide-panel .slide-panel__panel[data-slide-panel-align] .btn {
+    inline-size: auto;
+    border-radius: var(--radius-md);
+}
+
+.slide-panel__panel .clans-manage__discord-create-actions {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--sp-1);
 }

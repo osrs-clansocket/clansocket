@@ -1,15 +1,18 @@
 import type { ClanClientMessage } from "./client-clan.js";
+import type { ClanConfigRequestMsg, PluginPresetSchema } from "./client-config.js";
 import type { CompletionsClientMessage } from "./client-completions.js";
 import type { HandshakeClientMessage } from "./client-handshake.js";
 import type { TelemetryClientMessage } from "./client-telemetry.js";
 
 export type { PluginLoginState } from "./shared.js";
+export type { PluginPresetSchema, ClanConfigRequestMsg } from "./client-config.js";
 
 export type PluginClientMessage =
     | HandshakeClientMessage
     | ClanClientMessage
     | TelemetryClientMessage
     | CompletionsClientMessage
+    | ClanConfigRequestMsg
     | { type: "batch"; seq: number; tick: number; events: PluginClientMessage[] };
 
 export type PluginServerMessage =
@@ -36,4 +39,5 @@ export type PluginServerMessage =
       }
     | { type: "claim_consent_cancelled"; requestId: number }
     | { type: "broadcast"; message: string }
+    | { type: "clan_config_push"; payload: PluginPresetSchema }
     | { type: "error"; reason: string };

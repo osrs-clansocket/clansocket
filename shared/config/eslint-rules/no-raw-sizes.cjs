@@ -125,7 +125,7 @@ module.exports = {
         docs: {
             description:
                 "Disallow raw size literals on token-gated CSS properties. Sizes must use var(--fs-*|--sp-*|--ls-*|--radius-*|--z-*|--opacity-*|--blur-*|--shadow-*) tokens. If no close neighbor exists in tokens.css, add a new tier there — never inline a raw value in a component.",
-            url: "https://github.com/banesLab/ClanSocket/blob/main/CLAUDE.md",
+            url: "https://github.com/osrs-clansocket/clansocket/blob/main/CLAUDE.md",
         },
         schema: [],
         messages: {

@@ -6,6 +6,7 @@ import { getClanBySlug } from "../../../database/index.js";
 import { HTTP_FORBIDDEN, HTTP_NOT_FOUND, HTTP_OK } from "../../../shared/http/http-status.js";
 
 const IDENTITIES_TABLE = "discord_bot_identities";
+const SERVERS_TABLE = "discord_servers";
 
 const router: Router = Router();
 
@@ -30,7 +31,7 @@ router.get("/:slug/stream", (req: Request, res: Response) => {
     res.write(`event: ready\ndata: ${JSON.stringify({ slug })}\n\n`);
     const unsubscribe = subscribeDbWrites((event) => {
         if (event.scopeKey !== SCOPE_DISCORD_BOT) return;
-        if (event.table !== IDENTITIES_TABLE) return;
+        if (event.table !== IDENTITIES_TABLE && event.table !== SERVERS_TABLE) return;
         res.write(`event: byo-bot\ndata: ${JSON.stringify({ slug })}\n\n`);
     });
     req.on("close", () => unsubscribe());

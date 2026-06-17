@@ -27,6 +27,7 @@ const noRawEffect = require("./eslint-rules/no-raw-effect.cjs");
 const noRawReactive = require("./eslint-rules/no-raw-reactive.cjs");
 const noRawAnimation = require("./eslint-rules/no-raw-animation.cjs");
 const noImperativeRoute = require("./eslint-rules/no-imperative-route.cjs");
+const noModal = require("./eslint-rules/no-modal.cjs");
 const requireRsnTag = require("./eslint-rules/require-rsn-tag.cjs");
 const noRawSizes = require("./eslint-rules/no-raw-sizes.cjs");
 const noWhereSelector = require("./eslint-rules/no-where-selector.cjs");
@@ -51,6 +52,7 @@ const lviNoEmpty = require("./eslint-rules/no-empty.cjs");
 const lviNoMagicNumbers = require("./eslint-rules/no-magic-numbers.cjs");
 const lviNoWarningComments = require("./eslint-rules/no-warning-comments.cjs");
 const routeCssImport = require("./eslint-rules/route-css-import.cjs");
+const routeRequiresSeo = require("./eslint-rules/route-requires-seo.cjs");
 const noLeakShape = require("./eslint-rules/no-leak-shape.cjs");
 const noEnvFallback = require("./eslint-rules/no-env-fallback.cjs");
 
@@ -87,6 +89,7 @@ export default tseslint.config(
           "no-raw-reactive": noRawReactive,
           "no-raw-animation": noRawAnimation,
           "no-imperative-route": noImperativeRoute,
+          "no-modal": noModal,
           "require-rsn-tag": requireRsnTag,
           "no-raw-read": noRawRead,
           "no-undefined-column": noUndefinedColumn,
@@ -107,6 +110,7 @@ export default tseslint.config(
           "no-magic-numbers": lviNoMagicNumbers,
           "no-warning-comments": lviNoWarningComments,
           "route-css-import": routeCssImport,
+          "route-requires-seo": routeRequiresSeo,
           "no-leak-shape": noLeakShape,
           "no-env-fallback": noEnvFallback,
         },
@@ -134,6 +138,7 @@ export default tseslint.config(
       "lvi/no-raw-reactive": "error",
       "lvi/no-raw-animation": "error",
       "lvi/no-imperative-route": "error",
+      "lvi/no-modal": "error",
       "lvi/require-rsn-tag": "error",
       "lvi/no-raw-read": "error",
       "lvi/no-undefined-column": "error",
@@ -154,6 +159,7 @@ export default tseslint.config(
       "lvi/no-empty": "error",
       "lvi/no-warning-comments": ["error", { terms: ["todo", "fixme", "hack", "workaround", "stopship", "xxx"] }],
       "lvi/route-css-import": "error",
+      "lvi/route-requires-seo": "error",
       "lvi/no-leak-shape": "error",
       "lvi/no-env-fallback": "error",
 

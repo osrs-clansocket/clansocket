@@ -16,7 +16,7 @@
     letter-spacing: var(--ls-tight);
     padding: 0 var(--sp-1);
     margin-inline-end: var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background: rgb(from var(--base-gold-500) r g b / 0.18);
     color: var(--base-gold-300);
     vertical-align: middle;
@@ -30,7 +30,7 @@
     font-variant-numeric: tabular-nums;
     font-size: var(--fs-2xs);
     padding: 0 var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     white-space: nowrap;
 }
 .account__session-ping--good {

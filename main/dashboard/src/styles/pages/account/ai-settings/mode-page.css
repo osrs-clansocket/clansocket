@@ -6,7 +6,7 @@
     padding: var(--sp-2);
     background: var(--base-graphite-900);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     transition: border-color var(--dur-fast) var(--ease-out);
 }
 

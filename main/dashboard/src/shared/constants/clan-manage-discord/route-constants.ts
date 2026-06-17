@@ -2,6 +2,7 @@ export const BTN_CLASS = "btn";
 export const BTN_PRIMARY_CLASS = "btn--primary";
 export const BTN_OUTLINE_CLASS = "btn--outline";
 export const BTN_COMPACT_CLASS = "btn--compact";
+export const BTN_CHIP_CLASS = "btn-chip";
 export const PANEL_LABEL_CLASS = "panel__label";
 
 export const DISCORD_ROOT_CLASS = "clans-manage__discord";

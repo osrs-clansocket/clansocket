@@ -15,7 +15,7 @@
     padding: var(--sp-1) var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid rgb(from var(--rank-accent, var(--base-graphite-500)) r g b / 0.5);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
 }
 .clans-clan__roster-rank-icon {
@@ -45,7 +45,7 @@
     margin: 0;
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-2);
 }
 .clans-clan__roster-toolbar {
@@ -83,7 +83,7 @@
     padding: var(--sp-2) var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid rgb(from var(--rank-accent, var(--base-graphite-500)) r g b / 0.5);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     text-align: center;
 }
 .clans-clan__roster-rank-icon--lg {

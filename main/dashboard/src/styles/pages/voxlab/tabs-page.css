@@ -1,0 +1,45 @@
+.voxlab__tabs {
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    display: flex;
+    flex-flow: row wrap;
+    inline-size: 100%;
+}
+.voxlab__tabs-btn {
+    background: transparent;
+    border: 0;
+    border-block-end: 0.125rem solid transparent;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    flex: 1 1 var(--sp-16);
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin: 0;
+    padding: var(--sp-1h) var(--sp-2);
+    text-transform: uppercase;
+    transition:
+        color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+}
+.voxlab__tabs-btn:hover,
+.voxlab__tabs-btn:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.06);
+    color: var(--base-gold-200);
+    outline: none;
+}
+.voxlab__tabs-btn[data-active="true"] {
+    border-block-end-color: var(--base-gold-200);
+    color: var(--base-gold-200);
+}
+.voxlab__tabs-btn[data-active="true"]:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+}
+.voxlab__tabs-host {
+    display: none;
+}
+.voxlab__tabs-host[data-active="true"] {
+    display: block;
+}

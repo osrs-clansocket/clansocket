@@ -1,0 +1,112 @@
+.voxlab__sidebar {
+    background: var(--base-graphite-800);
+    border-inline-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(180deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    display: flex;
+    flex-direction: column;
+    max-inline-size: var(--tt-width);
+    overflow-block: auto;
+    padding: 0;
+    scrollbar-width: none;
+    inline-size: var(--tt-width);
+}
+.voxlab__sidebar::-webkit-scrollbar {
+    inline-size: 0;
+    block-size: 0;
+}
+.voxlab__sidebar h1 {
+    color: var(--base-gold-200);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+.voxlab__sidebar-publish-btn {
+    background-color: rgb(from var(--base-gold-500) r g b / 0.14);
+    border: 0;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    color: var(--base-gold-200);
+    cursor: pointer;
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    padding: var(--sp-1h) var(--sp-2h);
+    text-transform: uppercase;
+    transition:
+        background-color var(--dur-base) var(--ease-out),
+        color var(--dur-base) var(--ease-out),
+        opacity var(--dur-base) var(--ease-out);
+    inline-size: 100%;
+}
+.voxlab__sidebar-publish-btn:hover:not(:disabled),
+.voxlab__sidebar-publish-btn:focus-visible:not(:disabled) {
+    background-color: rgb(from var(--base-gold-500) r g b / 0.22);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.75);
+    outline: none;
+}
+.voxlab__sidebar-publish-btn:disabled {
+    cursor: not-allowed;
+    opacity: var(--opacity-faint);
+}
+.voxlab__sidebar-panel {
+    background: transparent;
+    border: 0;
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    padding: var(--sp-1h) var(--sp-2h);
+}
+.voxlab__sidebar-panel:last-of-type {
+    border-block-end: 0;
+}
+.voxlab__sidebar-panel-heading {
+    color: var(--base-gold-200);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin: 0 0 var(--sp-1) 0;
+    text-transform: uppercase;
+}
+.voxlab__sidebar-panel-action-row {
+    align-items: center;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    display: grid;
+    font-size: var(--fs-xs);
+    grid-template-columns: 1fr auto;
+    margin: 0 calc(var(--sp-2h) * -1);
+    padding: var(--sp-1) var(--sp-2h);
+    inline-size: calc(100% + var(--sp-2h) * 2);
+}
+.voxlab__sidebar-footer {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-normal);
+    margin-block-start: auto;
+    opacity: var(--opacity-medium);
+    padding: var(--sp-1h) var(--sp-2h);
+    text-align: center;
+}
+.voxlab__sidebar-export-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+.voxlab__sidebar-export-panel > h2 {
+    margin: 0;
+}
+.voxlab__sidebar-export-panel > .voxlab__control {
+    margin-block-end: 0;
+}
+.voxlab__sidebar-stat-label {
+    color: var(--base-graphite-300);
+}
+.voxlab__sidebar-stat-value {
+    color: var(--base-graphite-100);
+}

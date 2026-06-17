@@ -4,8 +4,8 @@ import type { ServerStickerRow } from "../types.js";
 const UPSERT_SQL = `
 INSERT INTO discord_server_stickers (
     sticker_id, guild_id, name, description, tags,
-    format_type, available, image_url, updated_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    format_type, available, image_url, user_id, updated_at
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(sticker_id) DO UPDATE SET
     guild_id = excluded.guild_id,
     name = excluded.name,
@@ -14,6 +14,7 @@ ON CONFLICT(sticker_id) DO UPDATE SET
     format_type = excluded.format_type,
     available = excluded.available,
     image_url = excluded.image_url,
+    user_id = excluded.user_id,
     updated_at = excluded.updated_at
 `;
 
@@ -31,6 +32,7 @@ export function upsertServerSticker(clanId: string, guildId: string, row: Server
         row.format_type,
         row.available ? FLAG_TRUE : FLAG_FALSE,
         row.image_url,
+        row.user_id,
         Date.now(),
     );
 }

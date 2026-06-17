@@ -1,4 +1,4 @@
-import { clansClient } from "../../../../../state/clans/clans-client/index.js";
+import { clansClient, type ClanIconKind } from "../../../../../state/clans/clans-client/index.js";
 import type { BrandingController } from "./index.js";
 
 const BYTES_PER_KB = 1024;
@@ -61,7 +61,7 @@ export async function revertTweaks(ctrl: BrandingController): Promise<void> {
 
 export async function persistBranding(
     ctrl: BrandingController,
-    kind: "builtin" | "image" | null,
+    kind: ClanIconKind | null,
     value: string | null,
 ): Promise<void> {
     const update = await clansClient.updateClanBranding(ctrl.clan.slug, {

@@ -58,7 +58,7 @@
     color: var(--base-graphite-500);
     background: var(--base-graphite-900);
     padding: var(--sp-0h) var(--sp-1h);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .ai-bar__ctx-close {
     color: var(--base-graphite-300);
@@ -101,7 +101,7 @@
     font-size: var(--fs-xs);
     line-height: var(--lh-snug);
     padding: var(--sp-1h) var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     max-inline-size: 85%;
     overflow-wrap: break-word;
 }
@@ -164,7 +164,7 @@
 .ai-bar__msg--ai code {
     background: var(--base-graphite-900);
     padding: var(--sp-hairline) var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-family: var(--font-mono);
     font-size: var(--fs-sm);
     font-feature-settings: "calt" 1;
@@ -172,7 +172,7 @@
 .ai-bar__msg--ai pre {
     background: var(--base-graphite-900);
     padding: var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow-inline: auto;
     margin: var(--sp-1) 0;
 }
@@ -225,7 +225,7 @@
     margin: var(--sp-1) 0 0;
     background: var(--base-graphite-900);
     padding: var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: auto;
     font-size: var(--fs-xs);
     max-block-size: 20vb;
@@ -245,7 +245,7 @@
     flex: 1;
     background: var(--base-graphite-800);
     border: var(--sp-hairline) solid var(--base-graphite-600);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-size: var(--fs-xs);
     padding: var(--sp-1h) var(--sp-2);
@@ -279,7 +279,7 @@
 .ai-bar .ai-bar__send {
     background: linear-gradient(135deg, var(--base-gold-500), var(--base-gold-400));
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-graphite-900);
     cursor: pointer;
     padding: var(--sp-1h) var(--sp-2);
@@ -410,7 +410,7 @@
     color: var(--base-cream-100);
     background: var(--base-graphite-900);
     padding: var(--sp-1h) var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     white-space: pre-wrap;
     word-break: break-all;
     max-block-size: 10rem;
@@ -441,7 +441,7 @@
     text-transform: uppercase;
     letter-spacing: var(--ls-tight);
     padding: 0 var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     flex-shrink: 0;
     min-inline-size: 2.75rem;
     text-align: center;
@@ -501,7 +501,7 @@
     color: var(--base-cream-100);
     background: var(--base-graphite-900);
     padding: var(--sp-1h) var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     white-space: pre-wrap;
     word-break: break-all;
     max-block-size: 12rem;
@@ -528,7 +528,7 @@
     font-size: var(--fs-2xs);
     font-family: var(--font-mono);
     background: var(--base-graphite-900);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: var(--sp-hairline) solid var(--base-graphite-600);
     margin: var(--sp-0) 0 0;
     max-block-size: 14rem;
@@ -747,7 +747,7 @@
     padding: var(--sp-0h) var(--sp-1h);
     background: linear-gradient(135deg, var(--base-gold-500), var(--base-gold-300));
     border: var(--sp-hairline) solid var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-graphite-900);
     font-weight: var(--fw-medium);
     font-size: var(--fs-3xs);
@@ -782,7 +782,7 @@
     appearance: none;
     background: transparent;
     border: var(--sp-hairline) dashed var(--clr-border-subtle);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: inherit;
     cursor: pointer;
     font: inherit;
@@ -808,7 +808,7 @@
     padding: var(--sp-0h) var(--sp-2);
     background: transparent;
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-graphite-300);
     font-size: var(--fs-2xs);
     font-weight: var(--fw-medium);

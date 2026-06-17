@@ -19,10 +19,10 @@ export function runPluginBootCleanup(): void {
             const connectionsClosed = db
                 .prepare(
                     `UPDATE plugin_connection_status
-                     SET ws_connected = 0, disconnected_at = ?, latency_ms = NULL, updated_at = ?
+                     SET ws_connected = 0, disconnected_at = $now, latency_ms = NULL, updated_at = $now
                      WHERE ws_connected = 1`,
                 )
-                .run(now, now);
+                .run({ now });
             const statesCleared = db
                 .prepare(
                     `UPDATE plugin_current_state

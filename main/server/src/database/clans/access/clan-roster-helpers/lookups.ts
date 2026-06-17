@@ -2,6 +2,7 @@ import { DB_NAMES, getClanDb, getDb } from "../../../core/database.js";
 import { exists } from "../../../core/db-helpers.js";
 
 const NBSP = "\u00a0";
+const WOM_PLACEHOLDER_HASH_PREFIX = "wom:";
 
 export function normalizeRsn(s: string): string {
     return s.split(NBSP).join(" ").toLowerCase().trim();
@@ -14,6 +15,7 @@ export function verifiedHashByNormalizedName(): Map<string, string> {
     }[];
     const map = new Map<string, string>();
     for (const row of rows) {
+        if (row.account_hash.startsWith(WOM_PLACEHOLDER_HASH_PREFIX)) continue;
         const key = normalizeRsn(row.rsn);
         if (!map.has(key)) map.set(key, row.account_hash);
     }

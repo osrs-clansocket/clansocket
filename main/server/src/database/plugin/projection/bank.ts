@@ -1,7 +1,7 @@
 import type Database from "better-sqlite3";
 import type { EventEnvelopeCols } from "./envelope.js";
 import { rowDedupHash } from "./envelope.js";
-import { extractWhere, type Payload } from "./helpers.js";
+import { extractWhere, sanitizeItemName, type Payload } from "./helpers.js";
 import { upsertItemsCatalog } from "./items-catalog.js";
 
 interface BankItem {
@@ -21,13 +21,13 @@ function upsertBankItem(
     now: number,
 ): void {
     if (typeof item.id !== "number") return;
-    const itemName = typeof item.name === "string" ? item.name : "";
+    const itemName = typeof item.name === "string" ? sanitizeItemName(item.name) : "";
     const price = typeof item.price === "number" && item.price > 0 ? item.price : null;
     const slot = typeof item.slot === "number" && item.slot >= 0 ? item.slot : null;
     const bankTab = typeof item.bankTab === "number" ? item.bankTab : null;
     conn.prepare(
         `INSERT INTO plugin_bank (account_hash, rsn, item_id, item_name, qty, unit_price_gp, slot, bank_tab, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $itemId, $itemName, $qty, $price, $slot, $bankTab, $now, $now, $now)
          ON CONFLICT (account_hash, item_id) DO UPDATE SET
             rsn = excluded.rsn,
             item_name = excluded.item_name,
@@ -45,7 +45,7 @@ function upsertBankItem(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", item.id, itemName, item.qty, price, slot, bankTab, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", itemId: item.id, itemName, qty: item.qty, price, slot, bankTab, now });
 }
 
 function reconcileBank(conn: Database.Database, accountHash: string, keepIds: number[]): void {
@@ -116,7 +116,7 @@ export function handleBankClose(
         upsertBankItems(conn, accountHash, rsn, items, now);
         for (const c of changes) {
             if (typeof c.id !== "number" || typeof c.qty !== "number" || c.qty === 0) continue;
-            const itemName = typeof c.name === "string" ? c.name : "";
+            const itemName = typeof c.name === "string" ? sanitizeItemName(c.name) : "";
             const price = typeof c.price === "number" && c.price > 0 ? c.price : null;
             const dedup = rowDedupHash(
                 accountHash,

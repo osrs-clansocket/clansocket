@@ -80,6 +80,10 @@ function summarizeAction(args: DeleteRowRequest, result: DeleteRowResponse): str
 
 export function handleDelete(req: Request, res: Response, siteAccountId: string): void {
     const body = (req.body ?? {}) as Record<string, unknown>;
+    if (body.managerView === true) {
+        res.status(HTTP_BAD_REQUEST).json({ error: "manager_view_is_read_only" });
+        return;
+    }
     const scope = parseScope(body.scope);
     if (!scope) {
         res.status(HTTP_BAD_REQUEST).json({ error: "bad_scope" });

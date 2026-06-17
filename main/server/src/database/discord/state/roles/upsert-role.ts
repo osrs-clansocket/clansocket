@@ -2,8 +2,8 @@ import { getDiscordGuildDb } from "../../database-discord.js";
 import type { RoleRow } from "../types.js";
 
 const UPSERT_SQL = `
-INSERT INTO discord_roles (role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed, updated_at)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO discord_roles (role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed, icon_url, unicode_emoji, updated_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(role_id) DO UPDATE SET
     guild_id = excluded.guild_id,
     name = excluded.name,
@@ -13,6 +13,8 @@ ON CONFLICT(role_id) DO UPDATE SET
     position = excluded.position,
     permissions = excluded.permissions,
     managed = excluded.managed,
+    icon_url = excluded.icon_url,
+    unicode_emoji = excluded.unicode_emoji,
     updated_at = excluded.updated_at
 `;
 
@@ -31,6 +33,8 @@ export function upsertRole(clanId: string, guildId: string, row: RoleRow): void 
         row.position,
         row.permissions,
         row.managed ? BOOL_TRUE : BOOL_FALSE,
+        row.icon_url,
+        row.unicode_emoji,
         Date.now(),
     );
 }

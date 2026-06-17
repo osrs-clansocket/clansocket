@@ -6,7 +6,7 @@
     padding: var(--sp-0) var(--sp-1h);
     font-size: var(--fs-md);
     line-height: var(--lh-flat);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     transition:
         color 0.15s,
         background 0.15s;

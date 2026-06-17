@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS plugin_npc_kc (
     source_id INTEGER NOT NULL,
     source_name TEXT NOT NULL,
     kc INTEGER NOT NULL,
+    kc_source TEXT,
+    kc_updated_at INTEGER,
     first_seen INTEGER NOT NULL,
     last_seen INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,

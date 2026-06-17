@@ -1,12 +1,14 @@
 .clans-manage__audit {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-1);
+
     flex: 1 1 auto;
     min-block-size: 0;
 }
 .clans-manage__audit-filters {
     padding: var(--sp-1) var(--sp-3);
+
+    --slide-panel-banner-bleed: var(--sp-3);
     border-block-end: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
 }
 .clans-manage__audit-integrity {
@@ -14,7 +16,7 @@
     padding: var(--sp-0) var(--sp-2);
     font-size: var(--fs-3xs);
     line-height: var(--lh-flat);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.4);
     cursor: pointer;
     transition:
@@ -89,7 +91,7 @@
     padding: var(--sp-1) var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
     border-inline-start-width: 0.125rem;
 }
@@ -221,7 +223,7 @@
     align-items: baseline;
     padding: var(--sp-0) var(--sp-1);
     font-size: var(--fs-3xs);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .clans-manage__audit-ba-row--changed {
     background: rgb(from var(--base-gold-500) r g b / 0.08);
@@ -257,7 +259,7 @@
     padding: var(--sp-1);
     background: var(--base-graphite-900);
     border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-family: var(--font-mono);
     font-size: var(--fs-3xs);
     color: var(--base-silver-200);

@@ -8,6 +8,7 @@ import type { Actor } from "../../../clan-vault/shared/vault-types.js";
 import { isClanManager } from "../../../database/clans/access/clan-manager-helpers.js";
 import { getByoBotIdentityForClan } from "../../../database/discord/byo/get-byo-bot-identity.js";
 import { upsertByoBotIdentity } from "../../../database/discord/byo/upsert-byo-bot-identity.js";
+import { updateServerBot } from "../../../database/discord/servers/update-server-bot.js";
 import { getClanBySlug } from "../../../database/index.js";
 import {
     HTTP_BAD_REQUEST,
@@ -22,6 +23,13 @@ import { verifyDiscordBotCredentials } from "../../byo-bot/verifiers/byo-token-v
 const ENTRY_KEY_DISCORD_BOT = "discord-bot";
 const ENTRY_TYPE_DISCORD_BOT = "discord-bot";
 const DEFAULT_INTENTS_BITFIELD = 1;
+
+function readGuildIdFromBody(body: unknown): string | null {
+    if (typeof body !== "object" || body === null) return null;
+    const value = (body as { guild_id?: unknown }).guild_id;
+    if (typeof value !== "string" || value.length === 0) return null;
+    return value;
+}
 
 const router: Router = Router();
 
@@ -82,6 +90,17 @@ router.post(
                 publicKey: payload.public_key,
             });
             await recordVerify(clan.id, ENTRY_KEY_DISCORD_BOT, "ok", actor);
+            // Optional per-guild routing bind: if the dashboard sent a guild_id
+            // alongside the credentials, flip that guild's discord_servers row
+            // to route through the BYO bot. The UPDATE is scoped to (clan_id,
+            // guild_id) so passing a guild from a different clan is a silent
+            // no-op (0 rows affected).
+            let boundGuildId: string | null = null;
+            const requestedGuildId = readGuildIdFromBody(req.body);
+            if (requestedGuildId !== null) {
+                const bound = updateServerBot(clan.id, requestedGuildId, botId, verifyResult.public_metadata.username);
+                if (bound) boundGuildId = requestedGuildId;
+            }
             res.json({
                 ok: true,
                 linked: {
@@ -89,6 +108,7 @@ router.post(
                     username: verifyResult.public_metadata.username,
                     application_id: verifyResult.public_metadata.application_id,
                 },
+                bound_guild_id: boundGuildId,
             });
         } catch (err) {
             logger.error(`[discord-byo] link failed slug=${slug}: ${(err as Error).message}`);

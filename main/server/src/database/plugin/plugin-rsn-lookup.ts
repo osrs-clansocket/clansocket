@@ -1,10 +1,9 @@
-import type Database from "better-sqlite3";
-import { DB_NAMES, getDb } from "../core/database.js";
+import { DB_NAMES, getClanDb, getDb } from "../core/database.js";
 
-export function lookupRsnForHash(conn: Database.Database, accountHash: string): string | null {
-    const row = conn.prepare("SELECT latest_rsn FROM plugin_accounts WHERE account_hash = ?").get(accountHash) as
-        | { latest_rsn: string }
-        | undefined;
+export function lookupRsnForHash(clanId: string, accountHash: string): string | null {
+    const row = getClanDb(clanId)
+        .prepare("SELECT latest_rsn FROM clan_accounts WHERE account_hash = ?")
+        .get(accountHash) as { latest_rsn: string } | undefined;
     return row?.latest_rsn ?? null;
 }
 

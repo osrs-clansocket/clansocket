@@ -1,4 +1,4 @@
-import { DB_NAMES, getClanPluginDb, getDb, listClanPluginModes } from "../../../../core/database.js";
+import { DB_NAMES, getClanDb, getDb } from "../../../../core/database.js";
 
 export function resolveActorDisplays(clanId: string, siteAccountIds: readonly string[]): Map<string, string> {
     const out = new Map<string, string>();
@@ -37,20 +37,15 @@ export function resolveActorDisplays(clanId: string, siteAccountIds: readonly st
     if (allHashes.size > 0) {
         const hashList = Array.from(allHashes);
         const hashPlaceholders = hashList.map(() => "?").join(",");
-        for (const mode of listClanPluginModes(clanId)) {
-            const pluginDb = getClanPluginDb(clanId, mode);
-            const rows = pluginDb
-                .prepare(
-                    `SELECT account_hash, latest_rsn, last_seen
-                     FROM plugin_accounts WHERE account_hash IN (${hashPlaceholders})`,
-                )
-                .all(...hashList) as Array<{ account_hash: string; latest_rsn: string; last_seen: number }>;
-            for (const row of rows) {
-                const prior = rsnByHash.get(row.account_hash);
-                if (!prior || row.last_seen > prior.lastSeen) {
-                    rsnByHash.set(row.account_hash, { rsn: row.latest_rsn, lastSeen: row.last_seen });
-                }
-            }
+        const clanDb = getClanDb(clanId);
+        const rows = clanDb
+            .prepare(
+                `SELECT account_hash, latest_rsn, last_seen
+                 FROM clan_accounts WHERE account_hash IN (${hashPlaceholders})`,
+            )
+            .all(...hashList) as Array<{ account_hash: string; latest_rsn: string; last_seen: number }>;
+        for (const row of rows) {
+            rsnByHash.set(row.account_hash, { rsn: row.latest_rsn, lastSeen: row.last_seen });
         }
     }
 

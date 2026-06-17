@@ -17,6 +17,7 @@ import { publishSlashCommands } from "../publishers/slash-publisher.js";
 import { noServers } from "../shared/no-servers.js";
 import type { BotIdentity, BotState } from "../shared/types/bot-types.js";
 import { syncChannelsAndRolesForAllGuilds } from "../state-sync/ready-sync.js";
+import { startBotsWatcher } from "../watchers/bots-watcher.js";
 
 async function publishSlashForAllGuilds(identity: BotIdentity): Promise<void> {
     const servers = await loadBotServers(identity.bot_id);
@@ -72,6 +73,48 @@ class BotRegistry extends BaseRegistry<string, BotState> {
         }
         logger.info(`BotRegistry initialized with ${this.size()} bot(s)`);
     }
+
+    private async spawnNewBots(fresh: readonly BotIdentity[]): Promise<number> {
+        let spawned = 0;
+        for (const identity of fresh) {
+            if (this.has(identity.bot_id)) continue;
+            try {
+                const state = await startBot(identity);
+                this.register(identity.bot_id, state);
+                spawned++;
+                logger.info(`Hot-spawned new bot ${identity.bot_id}`);
+            } catch (err) {
+                logger.warn(`Hot-spawn failed for ${identity.bot_id}: ${(err as Error).message}`);
+            }
+        }
+        return spawned;
+    }
+
+    private async tearDownRemovedBots(freshIds: ReadonlySet<string>): Promise<number> {
+        let removed = 0;
+        for (const [botId, state] of this.entries) {
+            if (freshIds.has(botId)) continue;
+            try {
+                await state.client.destroy();
+            } catch (err) {
+                logger.warn(`Bot ${botId} destroy failed: ${(err as Error).message}`);
+            }
+            this.unregister(botId);
+            removed++;
+            logger.info(`Tore down removed bot ${botId}`);
+        }
+        return removed;
+    }
+
+    async reconcile(): Promise<void> {
+        const fresh = await loadBots();
+        const freshIds = new Set(fresh.map((b) => b.bot_id));
+        const spawned = await this.spawnNewBots(fresh);
+        const removed = await this.tearDownRemovedBots(freshIds);
+        if (spawned > 0 || removed > 0) {
+            logger.info(`BotRegistry reconciled: +${spawned} -${removed} (size=${this.size()})`);
+        }
+    }
 }
 
 export const botRegistry = new BotRegistry();
@@ -79,4 +122,6 @@ export const botRegistry = new BotRegistry();
 export async function initBotRegistry(): Promise<void> {
     registerAllPublishHandlers();
     await botRegistry.load();
+    startBotsWatcher();
+    logger.info("BotRegistry watcher started -- bot identities now hot-reload on insert/invalidate");
 }

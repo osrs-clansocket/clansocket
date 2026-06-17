@@ -23,7 +23,7 @@ const PAGE_COLLECTIONS = {
     clans: { singular: "clan", bemPrefix: "clans" },
     routes: { singular: "route", bemPrefix: "route" },
 };
-const SINGLE_PAGE_FOLDERS = new Set(["dashboard", "account"]);
+const SINGLE_PAGE_FOLDERS = new Set(["dashboard", "account", "voxlab"]);
 
 const TOKEN_CONCERN_PREFIXES = {
     "base-colors": ["--base-"],

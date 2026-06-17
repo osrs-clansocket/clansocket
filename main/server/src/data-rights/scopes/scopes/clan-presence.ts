@@ -8,7 +8,7 @@ export function userHasPluginRows(clanId: string, mode: string, hashes: readonly
     if (hashes.length === 0) return false;
     const placeholder = hashes.map(() => "?").join(",");
     const row = getClanPluginDb(clanId, mode)
-        .prepare(`SELECT 1 FROM plugin_accounts WHERE account_hash IN (${placeholder}) LIMIT 1`)
+        .prepare(`SELECT 1 FROM plugin_sessions WHERE account_hash IN (${placeholder}) LIMIT 1`)
         .get(...hashes);
     return Boolean(row);
 }

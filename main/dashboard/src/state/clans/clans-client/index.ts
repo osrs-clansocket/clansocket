@@ -1,4 +1,14 @@
-import { checkClanManagerStatus, getClan, listClanTitles, listManaged, removeClan, searchClans } from "./clan.js";
+import {
+    checkClanManagerStatus,
+    fetchClanSeo,
+    fetchManageClanSeo,
+    getClan,
+    listClanTitles,
+    listManaged,
+    removeClan,
+    searchClans,
+    updateClanSeo,
+} from "./clan.js";
 import { clearClanIconCustomization, customizeClanIcon, updateClanBranding, uploadClanIcon } from "./branding.js";
 import {
     listClanAudit,
@@ -21,6 +31,9 @@ import { addWhitelistRank, listWhitelist, revokeWhitelistEntry } from "./whiteli
 export const clansClient = {
     listManaged,
     getClan,
+    fetchClanSeo,
+    fetchManageClanSeo,
+    updateClanSeo,
     checkClanManagerStatus,
     searchClans,
     listClanTitles,
@@ -49,6 +62,8 @@ export const clansClient = {
 export type { ClanIconKind, IconTransform, BrandingUpdate, UploadResult, CustomizeResult } from "./branding.js";
 export type {
     ManagedClan,
+    ManageClanSeo,
+    ManageClanSeoPatch,
     ClanRosterMember,
     ClanSummary,
     ClanSearchHit,

@@ -25,14 +25,14 @@
     block-size: var(--sp-0);
     background: var(--base-graphite-500);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .account-ai-settings__range-slider::-moz-range-track {
     block-size: var(--sp-0);
     background: var(--base-graphite-500);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .account-ai-settings__range-slider::-webkit-slider-thumb {

@@ -1,4 +1,4 @@
-export type ActorKind = "user" | "ai";
+export type ActorKind = "user" | "ai" | "system";
 
 export interface ClanAuditEntry {
     id: number;

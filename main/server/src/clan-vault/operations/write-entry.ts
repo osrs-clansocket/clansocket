@@ -9,7 +9,7 @@ const NOW = (): number => Date.now();
 
 const UPSERT_SQL = `INSERT INTO vault_entries
     (entry_key, entry_type, schema_version, iv_b64, ciphertext_b64, set_by, set_at, updated_at)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+VALUES ($entryKey, $entryType, $schemaVersion, $iv, $b64, $setBy, $now, $now)
 ON CONFLICT(entry_key) DO UPDATE SET
     entry_type = excluded.entry_type,
     schema_version = excluded.schema_version,
@@ -33,7 +33,10 @@ export async function writeVaultEntry<T>(
         return { ok: false, reason: "unknown-entry-type" };
     }
     if (!validate(payload)) {
-        recordVaultAudit(clanId, registered.auditActions.write, entry_key, actor, { reason: "schema-violation", entry_type });
+        recordVaultAudit(clanId, registered.auditActions.write, entry_key, actor, {
+            reason: "schema-violation",
+            entry_type,
+        });
         return { ok: false, reason: "schema-violation" };
     }
     const setBy = actorAttribution(actor);
@@ -44,7 +47,15 @@ export async function writeVaultEntry<T>(
     const { b64, iv } = encryptToken(plaintext, getClanVaultMasterKey());
     const db = getClanVaultDb(clanId);
     const now = NOW();
-    db.prepare(UPSERT_SQL).run(entry_key, entry_type, registered.schema_version, iv, b64, setBy, now, now);
+    db.prepare(UPSERT_SQL).run({
+        entryKey: entry_key,
+        entryType: entry_type,
+        schemaVersion: registered.schema_version,
+        iv,
+        b64,
+        setBy,
+        now,
+    });
     recordVaultAudit(clanId, registered.auditActions.write, entry_key, actor, { entry_type });
     return { ok: true };
 }

@@ -1,0 +1,14 @@
+.clans-manage__identity {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-block-size: 0;
+    gap: var(--sp-4);
+    padding: var(--sp-4) var(--sp-3);
+    background: var(--gradient-surface);
+    backdrop-filter: blur(var(--blur-md)) saturate(1.3);
+}
+
+.clans-manage__identity > .account__clan-branding-section {
+    flex: 0 0 auto;
+}

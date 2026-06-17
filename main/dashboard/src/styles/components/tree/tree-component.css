@@ -21,7 +21,7 @@
     padding: var(--sp-0) var(--sp-1);
     background: transparent;
     border: var(--bw-hairline) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-50);
     font-family: var(--font-body);
     font-size: var(--fs-2xs);
@@ -76,7 +76,7 @@
     padding: var(--sp-0) var(--sp-1);
     background: transparent;
     border: var(--bw-hairline) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-graphite-200);
     font-size: var(--fs-2xs);
     cursor: pointer;
@@ -175,7 +175,7 @@
     min-inline-size: 0;
     background: transparent;
     border: var(--bw-hairline) solid var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-50);
     font: inherit;
     padding: 0 var(--sp-1);
@@ -184,4 +184,35 @@
 
 .tree__label-input:focus {
     border-color: var(--base-gold-300);
+}
+
+.tree .is-dragging {
+    opacity: var(--opacity-faint);
+}
+
+.tree .is-drop-into {
+    background: rgb(from var(--base-gold-500) r g b / var(--opacity-faint));
+    border-radius: var(--radius-md);
+}
+
+.tree .is-drop-before,
+.tree .is-drop-after {
+    position: relative;
+}
+
+.tree .is-drop-before::before,
+.tree .is-drop-after::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    block-size: var(--sp-hairline);
+    background: var(--base-gold-300);
+}
+
+.tree .is-drop-before::before {
+    inset-block-start: 0;
+}
+
+.tree .is-drop-after::after {
+    inset-block-end: 0;
 }

@@ -2,6 +2,8 @@
 @import "./drop-effect.css";
 @import "./fade-in-effect.css";
 @import "./flash-attention-effect.css";
+@import "./fold-in-effect.css";
+@import "./fold-out-effect.css";
 @import "./highlight-ring-effect.css";
 @import "./pop-effect.css";
 @import "./pulse-live-effect.css";

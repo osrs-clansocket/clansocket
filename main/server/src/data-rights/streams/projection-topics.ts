@@ -16,8 +16,10 @@ registerTopic("browse", (siteAccountId, q) => {
         table,
         from: asFiniteNumber(q.from) ?? undefined,
         to: asFiniteNumber(q.to) ?? undefined,
+        rsn: typeof q.rsn === "string" ? q.rsn : undefined,
         limit: asFiniteNumber(q.limit) ?? undefined,
         offset: asFiniteNumber(q.offset) ?? undefined,
+        managerView: q.managerView === "true" || q.managerView === "1",
     });
 });
 

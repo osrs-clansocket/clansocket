@@ -12,7 +12,7 @@ router.get("/:slug/icon", (req: Request, res: Response) => {
         res.status(HTTP_NOT_FOUND).end();
         return;
     }
-    if (clan.icon_kind !== "image") {
+    if (clan.icon_kind !== "image" && clan.icon_kind !== "voxlab") {
         res.status(HTTP_NOT_FOUND).end();
         return;
     }

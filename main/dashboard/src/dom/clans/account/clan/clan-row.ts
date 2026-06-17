@@ -11,9 +11,8 @@ import {
     span,
     type Instance,
 } from "../../../factory";
-import type { ManagedClan } from "../../../../state/clans/clans-client/index.js";
-import type { LiveSession } from "../../../../state/identity/profile/profile-client.js";
-import { profileStore } from "../../../../state/identity/stores/profile-store.js";
+import type { ClanIconKind, ManagedClan } from "../../../../state/clans/clans-client/index.js";
+import { identificationStore } from "../../../../state/identity/stores/identification-store.js";
 import { rankIconPath } from "../../../../state/icons/rank-icons.js";
 import { AppEvents, events, type ClanBrandingChangedPayload } from "../../../../managers/events";
 import { buildClanDetails } from "./clan-details";
@@ -63,7 +62,7 @@ function writeOpenSlug(slug: string | null): void {
 
 interface ClanAvatarOpts {
     slug: string;
-    iconKind: "builtin" | "image" | null;
+    iconKind: ClanIconKind | null;
     iconValue: string | null;
     color: string | null;
     imageVersion?: number;
@@ -87,11 +86,11 @@ function buildClanAvatar({ slug, iconKind, iconValue, color, imageVersion }: Cla
     return avatar;
 }
 
-function findUserRankInClan(clan: ManagedClan, sessions: LiveSession[]): string {
-    const members = clan.roster?.members ?? [];
-    for (const session of sessions) {
-        const member = members.find((m) => m.name === session.rsn);
-        if (member && member.rank) return member.rank;
+function findUserRank(): string {
+    const id = identificationStore.identification$();
+    if (!id) return UNKNOWN_RANK;
+    for (const v of id.verifiedRsns) {
+        if (v.rank) return v.rank;
     }
     return UNKNOWN_RANK;
 }
@@ -122,7 +121,7 @@ function buildInfo(clan: ManagedClan): Instance {
     return div({ classes: [ACCOUNT_CLAN_ROW_INFO_CLASS], context: null, meta: null }, items);
 }
 
-function buildRankBadge(clan: ManagedClan): Instance {
+function buildRankBadge(): Instance {
     const icon = image({
         src: FALLBACK_RANK_ICON_SRC,
         alt: "Loading rank",
@@ -139,7 +138,7 @@ function buildRankBadge(clan: ManagedClan): Instance {
     });
     const badge = span({ classes: [ACCOUNT_CLAN_ROW_BADGE_CLASS], context: null, meta: null }, [icon, label]);
     const dispose = effect(() => {
-        const rank = findUserRankInClan(clan, profileStore.sessions$());
+        const rank = findUserRank();
         applyRankToBadgeInPlace(icon.el, label.el, rank);
     });
     badge.trackDispose(dispose);
@@ -160,7 +159,7 @@ function buildHeadChildren(clan: ManagedClan, isManager: boolean): Instance[] {
         meta: null,
     });
     const info = buildInfo(clan);
-    const badge = buildRankBadge(clan);
+    const badge = buildRankBadge();
     const children: Instance[] = [avatar, name, info, badge];
     if (isManager) {
         children.push(span({ classes: [ACCOUNT_CLAN_CHEVRON_CLASS], text: "▾", context: null, meta: null }));

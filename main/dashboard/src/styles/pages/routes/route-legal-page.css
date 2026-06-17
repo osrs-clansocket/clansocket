@@ -1,0 +1,36 @@
+.route-legal {
+    inline-size: 100%;
+    max-inline-size: var(--max-width);
+    margin-inline: auto;
+    padding: var(--sp-4) var(--sp-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    align-items: stretch;
+    box-sizing: border-box;
+}
+.route-legal__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--base-gold-300);
+    letter-spacing: var(--ls-tight);
+    margin: 0;
+}
+.route-legal__body {
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    color: var(--base-cream-100);
+    line-height: var(--lh-snug);
+    margin: 0;
+}
+.route-legal__back {
+    align-self: flex-start;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    color: var(--base-graphite-300);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+}
+.route-legal__back:hover {
+    color: var(--base-gold-300);
+}

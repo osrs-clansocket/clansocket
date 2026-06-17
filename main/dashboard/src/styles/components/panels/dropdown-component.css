@@ -7,7 +7,7 @@
     gap: var(--sp-1);
     background: var(--base-graphite-900);
     border: var(--sp-hairline) solid var(--base-graphite-600);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-size: var(--fs-2xs);
     padding: var(--sp-0) var(--sp-2);
@@ -31,7 +31,7 @@
     margin-block-start: var(--sp-0);
     background: var(--base-graphite-900);
     border: var(--sp-hairline) solid var(--base-graphite-600);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     max-block-size: 14rem;
     overflow: auto;
     min-inline-size: 10rem;

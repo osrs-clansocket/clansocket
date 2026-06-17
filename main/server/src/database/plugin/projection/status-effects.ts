@@ -65,7 +65,7 @@ export function handleStatusEffect(
         }
         conn.prepare(
             `INSERT INTO plugin_status_effects (account_hash, rsn, effect, active, first_seen, last_seen, updated_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?)
+             VALUES ($accountHash, $rsn, $effect, $active, $now, $now, $now)
              ON CONFLICT (account_hash, effect) DO UPDATE SET
                 rsn = excluded.rsn,
                 active = excluded.active,
@@ -75,6 +75,6 @@ export function handleStatusEffect(
                     THEN excluded.updated_at
                     ELSE updated_at
                 END`,
-        ).run(accountHash, rsn ?? "", effect, incomingActive, now, now, now);
+        ).run({ accountHash, rsn: rsn ?? "", effect, active: incomingActive, now });
     })();
 }

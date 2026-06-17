@@ -35,9 +35,7 @@ async function applyKick(client: Client, guild: Guild, data: KickState): Promise
 
 async function applyBan(client: Client, guild: Guild, data: BanState): Promise<void> {
     await ensurePermission(client, guild.id, PermissionsBitField.Flags.BanMembers);
-    const deleteMessageSeconds = data.deleteMessageDays === null
-        ? undefined
-        : data.deleteMessageDays * SECONDS_PER_DAY;
+    const deleteMessageSeconds = data.deleteMessageDays === null ? undefined : data.deleteMessageDays * SECONDS_PER_DAY;
     await guild.bans.create(data.targetUserId, {
         reason: data.reason ?? undefined,
         deleteMessageSeconds,

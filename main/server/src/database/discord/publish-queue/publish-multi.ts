@@ -10,7 +10,7 @@ const SELECT_DEPS_SQL = `SELECT change_id, dependency_change_id
       AND change_id IN (SELECT change_id FROM discord_draft_changes WHERE session_id = ?)`;
 const INSERT_QUEUE_SQL = `INSERT INTO discord_draft_publish_queue (
     queue_id, guild_id, session_id, op_id, status, attempt_no, created_at, updated_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+) VALUES ($queueId, $guildId, $sessionId, $opId, $status, $attemptNo, $now, $now)`;
 
 const STATUS_PENDING = "pending";
 const INITIAL_ATTEMPT = 0;
@@ -35,7 +35,15 @@ export function publishMultiOpDraft(input: PublishMultiOpDraftInput): string[] {
     const tx = db.transaction(() => {
         for (const changeId of sortedIds) {
             const queueId = randomUUID();
-            insert.run(queueId, input.guildId, input.sessionId, changeId, STATUS_PENDING, INITIAL_ATTEMPT, now, now);
+            insert.run({
+                queueId,
+                guildId: input.guildId,
+                sessionId: input.sessionId,
+                opId: changeId,
+                status: STATUS_PENDING,
+                attemptNo: INITIAL_ATTEMPT,
+                now,
+            });
             queueIds.push(queueId);
         }
     });

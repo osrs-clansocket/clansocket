@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import { resolve } from "path";
 import fs from "fs";
 import { compression } from "vite-plugin-compression2";
@@ -13,12 +13,14 @@ const httpsOpts =
         ? { key: fs.readFileSync(keyPath), cert: fs.readFileSync(certPath) }
         : true;
 
-if (!process.env.DASHBOARD_PORT) throw new Error("DASHBOARD_PORT env var required");
-if (!process.env.SERVER_PORT) throw new Error("SERVER_PORT env var required");
-const DASHBOARD_PORT = parseInt(process.env.DASHBOARD_PORT, 10);
-const PROXY_TARGET = "https://localhost:" + process.env.SERVER_PORT;
+export default defineConfig(({ mode }) => {
+    const env = loadEnv(mode, resolve(__dirname, "..", ".."), "");
+    if (!env.DASHBOARD_PORT) throw new Error("DASHBOARD_PORT env var required");
+    if (!env.SERVER_PORT) throw new Error("SERVER_PORT env var required");
+    const DASHBOARD_PORT = parseInt(env.DASHBOARD_PORT, 10);
+    const PROXY_TARGET = "https://localhost:" + env.SERVER_PORT;
 
-export default defineConfig(() => ({
+    return {
     root: resolve(__dirname, "..", ".."),
     publicDir: resolve(__dirname, "..", "..", "public"),
     cacheDir: resolve(__dirname, "..", "..", ".cache", "vite-dashboard"),
@@ -113,4 +115,5 @@ export default defineConfig(() => ({
     optimizeDeps: {
         include: ["marked", "prismjs"],
     },
-}));
+    };
+});

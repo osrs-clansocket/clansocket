@@ -49,7 +49,7 @@ export function recordClanRoster(
 
         const upsertMember = db.prepare(
             `INSERT INTO clan_members (member_name, account_hash, rank, joined_at, first_observed_at, last_observed_at)
-             VALUES (?, ?, ?, ?, ?, ?)
+             VALUES ($memberName, $accountHash, $rank, $joinedAt, $now, $now)
              ON CONFLICT(member_name) DO UPDATE SET
                account_hash = excluded.account_hash,
                rank = excluded.rank,
@@ -57,7 +57,13 @@ export function recordClanRoster(
                last_observed_at = excluded.last_observed_at`,
         );
         for (const m of members) {
-            upsertMember.run(m.name, m.accountHash ?? null, m.rank ?? null, m.joinedAt ?? null, now, now);
+            upsertMember.run({
+                memberName: m.name,
+                accountHash: m.accountHash ?? null,
+                rank: m.rank ?? null,
+                joinedAt: m.joinedAt ?? null,
+                now,
+            });
         }
 
         if (previous && previous.fingerprint !== fingerprint) {

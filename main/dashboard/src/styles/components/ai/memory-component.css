@@ -73,7 +73,7 @@
     background: linear-gradient(135deg, var(--base-gold-500), var(--base-gold-400));
     color: var(--base-graphite-900);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-2) var(--sp-3);
     font-weight: var(--fw-semi);
     cursor: pointer;
@@ -102,7 +102,7 @@
     gap: var(--sp-0) var(--sp-2);
     background: var(--base-graphite-800);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-2) var(--sp-2h);
     cursor: pointer;
     text-align: start;
@@ -164,7 +164,7 @@
 .ai-memory__content {
     background: rgb(0 0 0/0.25);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-4);
     overflow-block: auto;
     min-block-size: 0;
@@ -208,7 +208,7 @@
 }
 .ai-memory__btn {
     border: var(--sp-hairline) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-1h) var(--sp-3);
     font-weight: var(--fw-semi);
     cursor: pointer;
@@ -258,7 +258,7 @@
 .ai-memory__pin-dialog {
     background: var(--gradient-surface);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.3);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-4) var(--sp-2h);
     display: flex;
     flex-direction: column;
@@ -274,7 +274,7 @@
 .ai-memory__pin-input {
     background: rgb(0 0 0/0.4);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.25);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     padding: var(--sp-2) var(--sp-3);
     font-size: var(--fs-sm);
@@ -293,7 +293,7 @@
     background: transparent;
     color: var(--base-graphite-300);
     border: var(--sp-hairline) solid rgb(from var(--base-gold-500) r g b / 0.25);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-1h) var(--sp-3);
     cursor: pointer;
     font-size: var(--fs-xs);
@@ -302,7 +302,7 @@
     background: linear-gradient(135deg, var(--base-gold-500), var(--base-gold-400));
     color: var(--base-graphite-900);
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-1h) var(--sp-3);
     font-weight: var(--fw-semi);
     cursor: pointer;
@@ -328,7 +328,7 @@
     padding: var(--sp-1) var(--sp-1);
     font-size: var(--fs-2xs);
     font-weight: var(--fw-medium);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .ai-memory__inline .ai-memory__list-item {
     padding: var(--sp-1) var(--sp-1);
@@ -347,7 +347,7 @@
 }
 .ai-memory__inline .ai-memory__content {
     padding: var(--sp-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     min-inline-size: 0;
     min-block-size: 0;
     overflow: auto;
@@ -370,7 +370,7 @@
 .ai-memory__inline .ai-memory__input {
     font-size: var(--fs-2xs);
     padding: var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background: var(--base-graphite-900);
     border: var(--sp-hairline) solid var(--base-graphite-500);
     color: var(--base-cream-100);
@@ -386,7 +386,7 @@
     font-size: var(--fs-2xs);
     min-block-size: 8rem;
     padding: var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background: var(--base-graphite-900);
     border: var(--sp-hairline) solid var(--base-graphite-500);
     color: var(--base-cream-100);
@@ -408,13 +408,13 @@
     letter-spacing: 0;
     text-transform: none;
     font-weight: var(--fw-medium);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .ai-memory__inline .ai-memory__status {
     font-size: var(--fs-2xs);
     padding: var(--sp-1);
     min-block-size: 1rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .ai-memory__inline .glass-select__trigger {
     font-size: var(--fs-2xs);

@@ -1,6 +1,54 @@
 import type Database from "better-sqlite3";
 import type { PluginIdentityRecord } from "./types.js";
 
+export function upsertClanAccount(
+    clanDb: Database.Database,
+    identity: PluginIdentityRecord,
+    existing: boolean,
+    now: number,
+): void {
+    if (existing) {
+        clanDb
+            .prepare(
+                `UPDATE clan_accounts SET
+                    latest_rsn = ?,
+                    account_type = COALESCE(?, account_type),
+                    account_type_source = CASE WHEN ? IS NOT NULL THEN 'plugin' ELSE account_type_source END,
+                    account_type_updated_at = CASE WHEN ? IS NOT NULL THEN ? ELSE account_type_updated_at END,
+                    last_seen = ?
+                 WHERE account_hash = ?`,
+            )
+            .run(
+                identity.rsn,
+                identity.accountType ?? null,
+                identity.accountType ?? null,
+                identity.accountType ?? null,
+                now,
+                now,
+                identity.accountHash,
+            );
+    } else {
+        clanDb
+            .prepare(
+                `INSERT INTO clan_accounts (
+                    account_hash, first_rsn, latest_rsn,
+                    account_type, account_type_source, account_type_updated_at,
+                    first_seen, last_seen
+                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            )
+            .run(
+                identity.accountHash,
+                identity.rsn,
+                identity.rsn,
+                identity.accountType ?? null,
+                identity.accountType !== undefined && identity.accountType !== null ? "plugin" : null,
+                identity.accountType !== undefined && identity.accountType !== null ? now : null,
+                now,
+                now,
+            );
+    }
+}
+
 export function upsertClanMemberHistory(
     clanDb: Database.Database,
     clanId: string,

@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS discord_members (
     is_bot INTEGER NOT NULL DEFAULT 0,
     role_ids_json TEXT NOT NULL DEFAULT '[]',
     avatar_url TEXT,
+    pending INTEGER NOT NULL DEFAULT 0,
+    flags TEXT NOT NULL DEFAULT '0',
     updated_at INTEGER NOT NULL
 );
 

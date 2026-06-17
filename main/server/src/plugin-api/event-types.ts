@@ -49,3 +49,5 @@ export const EVENT_RSN_VERIFY_RESPONSE = "rsn_verify_response";
 export const EVENT_CLAIM_CONSENT_REQUEST = "claim_consent_request";
 export const EVENT_CLAIM_CONSENT_CANCELLED = "claim_consent_cancelled";
 export const EVENT_CLAIM_CONSENT_RESPONSE = "claim_consent_response";
+export const EVENT_CLAN_CONFIG_REQUEST = "clan_config_request";
+export const EVENT_CLAN_CONFIG_PUSH = "clan_config_push";

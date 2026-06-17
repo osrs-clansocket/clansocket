@@ -13,6 +13,19 @@ dotenv.config({ path: path.join(REPO_ROOT, ".env") });
 if (!process.env.SERVER_PORT) throw new Error("SERVER_PORT env var required");
 const PORT = parseInt(process.env.SERVER_PORT, 10);
 
+function quoteArg(a: string): string {
+    for (let i = 0; i < a.length; i++) {
+        const c = a.charAt(i);
+        if (c === " " || c === "\t") return `"${a}"`;
+    }
+    return a;
+}
+
+function buildServerCommand(serverScript: string): string {
+    const parts = ["npx", "tsx", "--watch", serverScript];
+    return parts.map(quoteArg).join(" ");
+}
+
 async function waitForServer(url: string, maxAttempts = 90): Promise<void> {
     for (let i = 0; i < maxAttempts; i++) {
         try {
@@ -41,7 +54,7 @@ async function main(): Promise<void> {
 
     logger.info("[dev] Starting server...");
     const serverScript = path.join(__dirname, "index.ts");
-    const server = spawn("npx", ["tsx", "--watch", serverScript], {
+    const server = spawn(buildServerCommand(serverScript), {
         stdio: "inherit",
         shell: true,
         cwd: SERVER_ROOT,

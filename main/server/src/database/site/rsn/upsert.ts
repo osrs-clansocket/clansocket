@@ -70,13 +70,13 @@ export function upsertVerifiedRsn(
     db.prepare(
         `INSERT INTO clansocket_account_rsns
             (account_hash, rsn, source, current_rank, first_seen, last_seen, verified_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $source, $rank, $now, $now, $now)
          ON CONFLICT (account_hash, rsn) DO UPDATE SET
             source = excluded.source,
             current_rank = COALESCE(excluded.current_rank, current_rank),
             last_seen = excluded.last_seen,
             verified_at = excluded.verified_at`,
-    ).run(accountHash, rsn, source, rank, now, now, now);
+    ).run({ accountHash, rsn, source, rank, now });
     const rsnChanged = !existing || existing.rsn !== rsn;
     if (rsnChanged) propagateRsnChange(accountHash, rsn);
     pruneStaleAccountRsns(now);

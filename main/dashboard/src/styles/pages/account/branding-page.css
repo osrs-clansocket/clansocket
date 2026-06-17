@@ -9,7 +9,7 @@ input.account__branding-search {
     box-sizing: border-box;
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-body);
     font-size: var(--fs-3xs);
@@ -31,7 +31,7 @@ input.account__branding-search:focus {
     padding: var(--sp-0);
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .account__branding-icon {
     background: transparent;
@@ -156,7 +156,7 @@ input.account__branding-search:focus {
     padding: var(--sp-0);
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     overflow: hidden auto;
     scroll-behavior: smooth;
     cursor: grab;
@@ -170,7 +170,7 @@ input.account__branding-search:focus {
 }
 .account__branding-swatches::-webkit-scrollbar-thumb {
     background: var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .account__branding-swatches::-webkit-scrollbar-track {
     background: transparent;
@@ -188,7 +188,7 @@ input.account__branding-search:focus {
     block-size: var(--sp-6);
     padding: 0;
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition:
         transform 0.12s ease,
@@ -216,7 +216,7 @@ input.account__branding-search:focus {
     flex: 0 0 auto;
     aspect-ratio: 1;
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     display: block;
 }
 input.account__branding-hex {
@@ -224,7 +224,7 @@ input.account__branding-hex {
     min-inline-size: 0;
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-body);
     font-size: var(--fs-3xs);

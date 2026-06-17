@@ -9,7 +9,7 @@ const SLUG_RANDOM_SUFFIX_LEN = 6;
 
 export type ClanStatus = "unclaimed" | "pending" | "active" | "recovery" | "archived";
 
-export type ClanIconKind = "builtin" | "image";
+export type ClanIconKind = "builtin" | "image" | "voxlab";
 
 export interface ClanRow {
     id: string;

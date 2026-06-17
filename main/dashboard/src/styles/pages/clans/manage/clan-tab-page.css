@@ -3,9 +3,9 @@
     align-items: center;
     justify-content: center;
     padding: var(--sp-1) var(--sp-3);
-    background: var(--base-graphite-800);
-    border: 0.0625rem solid rgb(from var(--base-graphite-500) r g b / 0.3);
-    border-radius: var(--radius-sm);
+    background: var(--gradient-surface-opaque);
+    border: 0.0625rem solid rgb(from var(--base-graphite-200) r g b / 0.3);
+    border-radius: var(--radius-md);
     cursor: pointer;
     color: var(--base-graphite-300);
     font-family: var(--font-heading);

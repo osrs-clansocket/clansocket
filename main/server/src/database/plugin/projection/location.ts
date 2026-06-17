@@ -22,9 +22,9 @@ export function handleLocation(
     const regionName = typeof payload.regionName === "string" ? payload.regionName : null;
     conn.prepare(
         `UPDATE plugin_current_state
-            SET location_x = ?, location_y = ?, location_plane = ?,
-                location_region_id = ?, location_region_name = ?,
-                last_seen = ?, updated_at = ?
-            WHERE account_hash = ?`,
-    ).run(x, y, plane, regionId, regionName, now, now, accountHash);
+            SET location_x = $x, location_y = $y, location_plane = $plane,
+                location_region_id = $regionId, location_region_name = $regionName,
+                last_seen = $now, updated_at = $now
+            WHERE account_hash = $accountHash`,
+    ).run({ x, y, plane, regionId, regionName, now, accountHash });
 }

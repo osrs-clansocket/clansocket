@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS discord_server_stickers (
     format_type INTEGER NOT NULL,
     available INTEGER NOT NULL DEFAULT 1,
     image_url TEXT,
+    user_id TEXT,
     updated_at INTEGER NOT NULL
 );
 

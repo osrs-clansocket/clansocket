@@ -12,6 +12,7 @@ export const ClanAuditActions = {
     ManagerRequestDenied: "server:manager.request.denied",
     BrandingUpdated: "server:branding.updated",
     BrandingCustomized: "server:branding.customized",
+    SeoUpdated: "server:seo.updated",
     WhitelistAdded: "server:whitelist.added",
     WhitelistRemoved: "server:whitelist.removed",
     AuthRejected: "server:auth.rejected",
@@ -57,6 +58,19 @@ export const ClanAuditActions = {
     DiscordGuildSettingsSetWelcomeScreen: "discord:guild-settings.set-welcome-screen",
     DiscordGuildSettingsSetVerificationLevel: "discord:guild-settings.set-verification-level",
     DiscordChannelsDeletePermissions: "discord:channels.delete-permissions",
+    DiscordAutoHookCreated: "discord:auto-hooks.create",
+    DiscordAutoHookUpdated: "discord:auto-hooks.update",
+    DiscordAutoHookDeleted: "discord:auto-hooks.delete",
+    DiscordAutoHookToggled: "discord:auto-hooks.toggle",
+    DiscordWebhookTokenRevoked: "discord:webhook-tokens.revoke",
+    VaultWomRead: "vault:wom.read",
+    VaultWomWrite: "vault:wom.write",
+    VaultWomDelete: "vault:wom.delete",
+    VaultWomVerify: "vault:wom.verify",
+    WomLinkLinkerReassigned: "wom:link.linker_reassigned",
+    WomRsnChanged: "wom:rsn.changed",
+    WomBackfillCompleted: "wom:backfill.completed",
+    WomBackfillFailed: "wom:backfill.failed",
 } as const;
 
 export const ClanAuditTargetTypes = {
@@ -78,7 +92,10 @@ export const ClanAuditTargetTypes = {
     DiscordAutoModRule: "discord-automod-rule",
     DiscordThread: "discord-thread",
     DiscordLinkedRoleMetadata: "discord-linked-role-metadata",
+    DiscordAutoHook: "discord-auto-hook",
+    DiscordWebhookToken: "discord-webhook-token",
     VaultEntry: "vault-entry",
+    WomLink: "wom-link",
 } as const;
 
 export type ClanAuditAction = (typeof ClanAuditActions)[keyof typeof ClanAuditActions];

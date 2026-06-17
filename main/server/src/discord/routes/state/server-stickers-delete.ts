@@ -23,7 +23,9 @@ router.delete(
             deleteServerSticker(clanId, guildId, stickerId);
             res.status(HTTP_OK).json({ ok: true });
         } catch (err) {
-            logger.error(`[discord] server sticker delete failed for ${guildId}/${stickerId}: ${(err as Error).message}`);
+            logger.error(
+                `[discord] server sticker delete failed for ${guildId}/${stickerId}: ${(err as Error).message}`,
+            );
             res.status(HTTP_INTERNAL_ERROR).json({ error: "server_sticker_delete_failed" });
         }
     }),

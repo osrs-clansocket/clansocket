@@ -1,6 +1,15 @@
 import type { Instance } from "../../../../factory";
-import { type IconTransform, type ManagedClan } from "../../../../../state/clans/clans-client/index.js";
-import { AppEvents, events, type ClanBrandingChangedPayload } from "../../../../../managers/events";
+import {
+    type ClanIconKind,
+    type IconTransform,
+    type ManagedClan,
+} from "../../../../../state/clans/clans-client/index.js";
+import {
+    AppEvents,
+    events,
+    type ClanBrandingChangedPayload,
+    type ClanTransformChangedPayload,
+} from "../../../../../managers/events";
 import { normalizeHex } from "../../shared/format";
 import { AutosaveManager } from "./autosave-manager.js";
 import { renderClanAvatar } from "./avatar-render.js";
@@ -12,7 +21,7 @@ export { DEFAULT_BRAND_COLOR, IDENTITY_TRANSFORM, type TweakerListeners } from "
 
 export class BrandingController {
     color: string;
-    kind: "builtin" | "image" | null;
+    kind: ClanIconKind | null;
     value: string | null;
     imageVersion: number;
     hasCustomized: boolean;
@@ -43,6 +52,19 @@ export class BrandingController {
         return true;
     }
 
+    isVoxlabEligible(): boolean {
+        // voxlab-kind icons are always re-editable: the page composer loads
+        // the published envelope from /icon-record, so the user can pick up
+        // where they left off without going through raster-to-mesh again.
+        if (this.kind === "voxlab") return true;
+        // image-kind: same tweakable predicate (raster that canvas can load).
+        // A deeper rasterToMeshFeasible() check (running the image through
+        // src/voxlab/conversion/raster-to-mesh/ feasibility sampling) is a
+        // follow-up — the voxlab page itself currently no-ops gracefully
+        // when the loaded image cant be voxelized.
+        return this.isTweakable();
+    }
+
     pristineIconUrl(): string {
         return `/api/clans/${this.clan.slug}/icon?v=${this.imageVersion}&pristine=1`;
     }
@@ -55,6 +77,17 @@ export class BrandingController {
         this.transform = { ...this.transform, ...partial };
         this.hub.fire((s) => s.onTransformChange?.(this.transform));
         this.autosave.schedule();
+        // Live-propagate to other voxlab clan-avatar instances on the page
+        // so header / your-clans / sidebar previews track the tweaker sliders.
+        // Image-kind uses server-side bake-then-reload via runAutosave; voxlab
+        // applies the transform purely via CSS at render sites.
+        if (this.kind === "voxlab") {
+            const payload: ClanTransformChangedPayload = {
+                slug: this.clan.slug,
+                transform: { ...this.transform },
+            };
+            events.emit(AppEvents.CLAN_TRANSFORM_CHANGED, payload);
+        }
     }
 
     resetTransform(): void {
@@ -89,7 +122,7 @@ export class BrandingController {
         return revertTweaks(this);
     }
 
-    persist(kind: "builtin" | "image" | null, value: string | null): Promise<void> {
+    persist(kind: ClanIconKind | null, value: string | null): Promise<void> {
         return persistBranding(this, kind, value);
     }
 

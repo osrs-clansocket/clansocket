@@ -46,7 +46,7 @@ function upsertAchievement(
     conn.prepare(
         `INSERT INTO plugin_combat_achievements
             (account_hash, rsn, task_id, task_name, boss_id, boss_name, tier, task_type, points, completed_at, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $taskId, $taskName, $bossId, $bossName, $tier, $taskType, $points, $completedAt, $now, $now, $now)
          ON CONFLICT (account_hash, task_id) DO UPDATE SET
             rsn = excluded.rsn,
             task_name = excluded.task_name,
@@ -61,9 +61,9 @@ function upsertAchievement(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(
+    ).run({
         accountHash,
-        rsn ?? "",
+        rsn: rsn ?? "",
         taskId,
         taskName,
         bossId,
@@ -73,9 +73,7 @@ function upsertAchievement(
         points,
         completedAt,
         now,
-        now,
-        now,
-    );
+    });
 }
 
 export function handleCombatAchievement(

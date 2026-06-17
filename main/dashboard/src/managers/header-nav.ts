@@ -1,4 +1,4 @@
-import { animateKeyframes, clanAvatarInner, createInstance, derived, effect, snapshot } from "../dom/factory";
+import { clanAvatarInner, createInstance, derived, effect, snapshot } from "../dom/factory";
 import { events } from "./events";
 import { router } from "./router";
 import { clansStore } from "../state/clans/stores/clans-store.js";
@@ -19,9 +19,6 @@ const NAV_TEMPLATE_SELECTOR = "[data-nav-icon-template]";
 const SUBTITLE_SELECTOR = '[data-key="dash-subtitle"]';
 const HOME_PATH = "/";
 const ROUTE_CHANGE = "route:change";
-const MIN_ANIMATE_PX = 0.5;
-const FLIP_DURATION_MS = 300;
-const FLIP_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
 const FALLBACK_ICON = "bi-shield";
 
 export interface NavPage {
@@ -29,7 +26,7 @@ export interface NavPage {
     title: string;
     icon: string;
     route: string;
-    iconKind?: "builtin" | "image";
+    iconKind?: "builtin" | "image" | "voxlab";
     slug?: string;
     imageVersion?: number;
     color?: string | null;
@@ -49,14 +46,20 @@ interface HeaderNavOptions {
 }
 
 function clanToNavPage(c: ManagedClan): NavPage {
-    const isImage = c.iconKind === "image";
+    // Three kinds flow through: image (raster), voxlab (WebGL model), and
+    // builtin (named icon glyph). Voxlab clans route through clanAvatarInner
+    // → clanModelIcon for the live header preview; raster image clans use
+    // the same /icon endpoint via image src; builtin clans render an icon
+    // glyph from the icon-provider registry.
     const builtin = c.iconKind === "builtin" && c.iconValue ? c.iconValue : FALLBACK_ICON;
+    const kind: "image" | "voxlab" | "builtin" =
+        c.iconKind === "image" ? "image" : c.iconKind === "voxlab" ? "voxlab" : "builtin";
     return {
         key: `clan:${c.slug}`,
         title: c.displayName,
-        icon: isImage ? FALLBACK_ICON : builtin,
+        icon: kind === "builtin" ? builtin : FALLBACK_ICON,
         route: `/clans/${c.slug}`,
-        iconKind: isImage ? "image" : "builtin",
+        iconKind: kind,
         slug: c.slug,
         imageVersion: c.iconVersion,
         color: c.color,
@@ -147,7 +150,18 @@ export function mountHeaderNav(options: HeaderNavOptions): void {
     const subtitleEl = options.headerEl.querySelector<HTMLElement>(SUBTITLE_SELECTOR);
     const pages$ = derived(() => {
         const clanPages = options.isAuthed ? clansStore.managed$().map(clanToNavPage) : [];
-        return [...options.staticPages, ...clanPages];
+        const homeIdx = options.staticPages.findIndex((p) => p.key === "home");
+        if (homeIdx === -1) {
+            return [...options.staticPages, ...clanPages];
+        }
+        const home = options.staticPages[homeIdx]!;
+        const others = [
+            ...options.staticPages.slice(0, homeIdx),
+            ...options.staticPages.slice(homeIdx + 1),
+            ...clanPages,
+        ];
+        const middle = Math.floor((others.length + 1) / 2);
+        return [...others.slice(0, middle), home, ...others.slice(middle)];
     });
 
     const entries = new Map<string, IconEntry>();
@@ -158,26 +172,7 @@ export function mountHeaderNav(options: HeaderNavOptions): void {
         const n = icons.length;
         if (n === 0 || idx < 0 || idx >= n) return;
         activeIdx = idx;
-        const centerSlot = Math.floor(n / 2);
-        const beforeLefts: number[] = new Array(n);
-        for (let i = 0; i < n; i += 1) beforeLefts[i] = icons[i]!.el.getBoundingClientRect().left;
-        for (let slot = 0; slot < n; slot += 1) {
-            const pageIdx = (((idx - centerSlot + slot) % n) + n) % n;
-            railInst.addChild(icons[pageIdx]!.el);
-        }
         for (let i = 0; i < n; i += 1) icons[i]!.el.classList.toggle(ICON_ACTIVE, i === idx);
-        const deltas: number[] = new Array(n);
-        for (let i = 0; i < n; i += 1) deltas[i] = beforeLefts[i]! - icons[i]!.el.getBoundingClientRect().left;
-        for (let i = 0; i < n; i += 1) {
-            const entry = icons[i]!;
-            const delta = deltas[i]!;
-            if (Math.abs(delta) < MIN_ANIMATE_PX) continue;
-            animateKeyframes(entry.el, [{ transform: `translateX(${delta}px)` }, { transform: "translateX(0)" }], {
-                duration: FLIP_DURATION_MS,
-                easing: FLIP_EASING,
-                composite: "replace",
-            });
-        }
         if (subtitleEl !== null) createInstance(subtitleEl).setText(snapshot(icons[idx]!.page.title));
     }
 

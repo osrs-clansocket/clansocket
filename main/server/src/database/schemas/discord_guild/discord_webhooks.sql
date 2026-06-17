@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS discord_webhooks (
     application_id TEXT,
     user_id TEXT,
     webhook_type INTEGER NOT NULL,
+    source_guild_id TEXT,
+    source_guild_name TEXT,
+    source_channel_id TEXT,
+    source_channel_name TEXT,
     updated_at INTEGER NOT NULL
 );
 

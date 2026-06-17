@@ -8,12 +8,7 @@ import { openDraftSession } from "../../../database/discord/drafts/open-session.
 import { publishSingleOpDraft } from "../../../database/discord/publish-queue/publish-single.js";
 import { resolveServerByGuildId } from "../../../database/discord/resolve-server.js";
 import { validateOperation } from "../../../database/discord/validators/validate-operation.js";
-import {
-    HTTP_BAD_REQUEST,
-    HTTP_FORBIDDEN,
-    HTTP_INTERNAL_ERROR,
-    HTTP_OK,
-} from "../../../shared/http/http-status.js";
+import { HTTP_BAD_REQUEST, HTTP_FORBIDDEN, HTTP_INTERNAL_ERROR, HTTP_OK } from "../../../shared/http/http-status.js";
 import type { DiscordWebhookState } from "../../../database/clans/audit/clan-audit-registry/index.js";
 
 const TARGET_KIND = "discord_webhook";

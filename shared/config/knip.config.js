@@ -34,7 +34,6 @@ const config = {
 		'jsonc-eslint-parser',
 		'prettier',
 		'knip',
-		'depcheck',
 		'nodemon',
 	],
 

@@ -1,0 +1,80 @@
+.voxlab__footer-panel {
+    background: var(--base-graphite-800);
+    /* footer-panel runs direction: rtl below so the (hidden) scrollbar can
+       sit inline-start without disturbing the content side. In rtl,
+       inline-start points RIGHT — that's where we want the divider hairline. */
+    border-inline-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(180deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    max-inline-size: var(--tt-width);
+    min-inline-size: var(--grid-min);
+    overflow-block: auto;
+    padding: 0;
+    scrollbar-width: none;
+    inline-size: var(--tt-width);
+}
+.voxlab__footer-panel > * {
+    direction: ltr;
+}
+.voxlab__footer-panel::-webkit-scrollbar {
+    inline-size: 0;
+    block-size: 0;
+}
+.voxlab__footer-panel-sections {
+    display: flex;
+    flex-direction: column;
+}
+.voxlab__footer-panel-actions {
+    display: flex;
+    gap: var(--sp-1h);
+    justify-content: center;
+    margin-block-start: auto;
+    padding: var(--sp-1h) var(--sp-2h);
+}
+.voxlab__footer-section {
+    background: transparent;
+    border: 0;
+    border-block-end: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-0h);
+    padding: var(--sp-2) var(--sp-2h);
+}
+.voxlab__footer-section:last-child {
+    border-block-end: 0;
+}
+.voxlab__footer-section-heading {
+    color: var(--base-gold-200);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin: 0 0 var(--sp-0) 0;
+    text-transform: uppercase;
+}
+.voxlab__footer-btn-secondary {
+    background: transparent;
+    border: 0;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    color: var(--base-gold-200);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    margin: 0 calc(var(--sp-2h) * -1);
+    padding: var(--sp-1h) var(--sp-2h);
+    text-transform: uppercase;
+    transition: background-color var(--dur-base) var(--ease-out);
+    inline-size: calc(100% + var(--sp-2h) * 2);
+}
+.voxlab__footer-btn-secondary:hover,
+.voxlab__footer-btn-secondary:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    outline: none;
+}

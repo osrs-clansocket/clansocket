@@ -8,7 +8,7 @@ export const RSN_DISPLACED_CLEANUP_MS = RSN_DISPLACED_CLEANUP_DAYS * MS_PER_DAY;
 export const RSN_DISPLACED_PLACEHOLDER_LEN = 14;
 export const RSN_MAX_LEN = 12;
 
-export type RsnSource = "plugin" | "clan_claim" | "site";
+export type RsnSource = "plugin" | "clan_claim" | "site" | "wom";
 
 export interface AccountRsnRow {
     account_hash: string;

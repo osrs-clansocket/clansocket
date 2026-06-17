@@ -13,6 +13,7 @@ export interface PageState {
     selectedIndex: number;
     from: number | null;
     to: number | null;
+    rsn: string | null;
     offset: number;
     loadingMore: boolean;
     hasMore: boolean;

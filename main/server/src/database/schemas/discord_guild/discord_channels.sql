@@ -15,6 +15,14 @@ CREATE TABLE IF NOT EXISTS discord_channels (
     position INTEGER,
     topic TEXT,
     nsfw INTEGER NOT NULL DEFAULT 0,
+    rate_limit_per_user INTEGER,
+    bitrate INTEGER,
+    user_limit INTEGER,
+    thread_archived INTEGER,
+    thread_locked INTEGER,
+    thread_auto_archive_duration INTEGER,
+    thread_archive_timestamp INTEGER,
+    thread_message_count INTEGER,
     updated_at INTEGER NOT NULL
 );
 

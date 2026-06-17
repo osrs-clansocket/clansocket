@@ -19,7 +19,8 @@ export function writeUrl(state: PageState): void {
     if (state.from !== null) p.set(URL_FROM, String(state.from));
     if (state.to !== null) p.set(URL_TO, String(state.to));
     const q = p.toString();
-    history.replaceState(null, "", q ? `/data-rights?${q}` : "/data-rights");
+    const path = location.pathname;
+    history.replaceState(null, "", q ? `${path}?${q}` : path);
 }
 
 export function readUrl(scopes: ScopeListItem[]): {

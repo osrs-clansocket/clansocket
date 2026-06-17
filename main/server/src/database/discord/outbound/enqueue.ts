@@ -1,5 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { runDiscordBotWrite } from "../db-runners.js";
+import { maybeWarnOnQueueDepth, resetStaleInFlight } from "./queue-health.js";
 
 const STATUS_PENDING = "pending";
 const INITIAL_ATTEMPTS = 0;
@@ -69,5 +70,7 @@ export function enqueueOutboundEvent(input: EnqueueOutboundInput): string {
     const queueId = randomUUID();
     const payloadJson = JSON.stringify(input.payload);
     runDiscordBotWrite(INSERT_SQL, ...buildRowParams(input, queueId, payloadJson, now));
+    resetStaleInFlight();
+    maybeWarnOnQueueDepth();
     return queueId;
 }

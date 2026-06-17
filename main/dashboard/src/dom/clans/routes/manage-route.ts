@@ -8,6 +8,11 @@ defineRoute({
     match: matchClanManagePath,
     description: "Clan management (manager-only; non-managers are redirected to the clan dashboard).",
     example: "/clans/varietyz/manage/audit",
+    seo: {
+        title: "Manage Clan",
+        description: "Clan management tools for clan managers.",
+        hidden: true,
+    },
     guard: async (path) => {
         if (!authState.isAuthed()) return false;
         const slug = clanSlugFromManagePath(path);

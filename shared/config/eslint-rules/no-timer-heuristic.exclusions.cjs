@@ -33,4 +33,12 @@ module.exports = [
         path: "main/server/src/dev.ts",
         reason: "tooling — npm run dev script. polls until the tsx-launched server binds its port. dev-only, never ships to production.",
     },
+    {
+        path: "main/server/src/wom/dispatcher/wom-dispatcher.ts",
+        reason: "event-coalescer — outbound rate-limited HTTPS to api.wiseoldman.net per PAG-WOM-API-RATE-COMPLIANCE. trigger IS each enqueue (or response completion). db is canonical source of truth for scheduled_at / next_attempt_at; setTimeout is the wake-up alarm, db is re-checked on fire to handle drift / cancellations.",
+    },
+    {
+        path: "main/server/src/wom/dispatcher/wom-queue-processor.ts",
+        reason: "event-coalescer — setTimeout wraps each SDK call with a 30s timeout (Promise.race) so a hung api.wiseoldman.net request can't block the per-clan timer indefinitely. trigger IS the SDK call; timeout is bounded per-request, not a polling loop. SDK provides no native abort.",
+    },
 ];

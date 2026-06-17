@@ -1,0 +1,27 @@
+.clans-manage__seo-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    margin-block-start: var(--sp-3);
+}
+
+.clans-manage__seo-label {
+    font-size: var(--fs-2xs);
+    color: var(--base-graphite-200);
+    margin: 0;
+    line-height: var(--lh-snug);
+}
+
+.clans-manage__seo-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-block-start: var(--sp-2);
+}
+
+.clans-manage__seo-toggle-label {
+    font-size: var(--fs-xs);
+    color: var(--base-graphite-100);
+    margin: 0;
+    line-height: var(--lh-snug);
+}

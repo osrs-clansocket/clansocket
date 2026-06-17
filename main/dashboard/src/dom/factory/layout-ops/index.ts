@@ -10,3 +10,5 @@ export { popover } from "./overlay/popover.js";
 export type { PopoverProps, PopoverInstance } from "./overlay/popover.js";
 export { slidePanel } from "./overlay/slide-panel.js";
 export type { SlidePanelProps, SlidePanelInstance } from "./overlay/slide-panel.js";
+export { inlineConfirm, INLINE_CONFIRM_HOST_CLASS } from "./inline/inline-confirm.js";
+export type { InlineConfirmOptions } from "./inline/inline-confirm.js";

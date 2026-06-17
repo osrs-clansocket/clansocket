@@ -1,5 +1,6 @@
 import { getClanPluginDb } from "../../core/database.js";
 import { lookupRsnForHash } from "../plugin-rsn-lookup.js";
+import { dispatchAutoHooksSafe } from "./auto-hook-dispatcher.js";
 import { buildEventEnvelope, type EnvelopeContext } from "./envelope.js";
 import { BUCKET_MS, type Payload } from "./helpers.js";
 import { BUCKET_ROUTES } from "./route-buckets.js";
@@ -21,8 +22,10 @@ export function routePluginEvent(
     batchCtx: BatchEnvelopeCtx,
 ): void {
     const conn = getClanPluginDb(clanId, mode);
-    const rsn = lookupRsnForHash(conn, accountHash);
+    const rsn = lookupRsnForHash(clanId, accountHash);
     const now = Date.now();
+
+    dispatchAutoHooksSafe({ clanId, triggerType: eventType, rsn, payload: payload as object });
 
     const csHandler = CURRENT_STATE_ROUTES[eventType];
     if (csHandler) {

@@ -1,6 +1,9 @@
 import "../../../../../styles/pages/clans/manage/discord/clan-discord-page.css";
-import { div, effect, paragraph, type Instance } from "../../../../factory";
+import { div, effect, paragraph, signal, type Instance } from "../../../../factory";
 import { discordServersStoreFor } from "../../../../../state/discord/servers-store.js";
+import { clearSelectedDiscordItem } from "../../../../../state/discord/selected-item.js";
+import { inspectorOverride$ } from "../../../../../state/discord/inspector-override.js";
+import { clearPreviewState } from "./modes/auto-hooks/preview/preview-state.js";
 import type { DiscordServer } from "../../../../../state/discord/client.js";
 import {
     DISCORD_FRAME_CLASS,
@@ -13,10 +16,10 @@ import { buildHeader } from "./frame/header.js";
 import { buildPaneCenter } from "./frame/pane-center.js";
 import { buildRailLeft } from "./frame/rail-left.js";
 import { buildRailRight } from "./frame/rail-right.js";
-import { type ModeContext, modeContent } from "./mode-registry.js";
+import { modeContent } from "./mode-registry.js";
 
 const LOADING_TEXT = "Loading discord…";
-const DEFAULT_MODE_KEY = "server";
+const DEFAULT_MODE_KEY = "channels";
 
 function buildLoading(): Instance {
     return paragraph({
@@ -27,21 +30,42 @@ function buildLoading(): Instance {
     });
 }
 
-function buildFrame(slug: string, servers: readonly DiscordServer[]): Instance {
-    const primary = servers[0]!;
-    const ctx: ModeContext = { slug, server: primary, servers };
+function resolveServer(servers: readonly DiscordServer[], guildId: string): DiscordServer {
+    return servers.find((s) => s.guild_id === guildId) ?? servers[0]!;
+}
+
+function buildFrame(slug: string, servers: readonly DiscordServer[], subTab: string): Instance {
+    // initialServer captured as a plain variable. Reading selectedGuildId()
+    // during synchronous frame construction would register the signal as a
+    // dep of the outer buildDiscordTab effect and rebuild the whole frame on
+    // every server switch (architectural lesson #1 in SESSION-DECISIONS-2026-06-14.md).
+    const initialServer = servers[0]!;
+    const selectedGuildId = signal<string>(initialServer.guild_id);
     const paneCenter = buildPaneCenter();
-    const labelOverrides = servers.length > 1 ? { server: "Servers" } : undefined;
-    const railLeft = buildRailLeft({
-        initialKey: DEFAULT_MODE_KEY,
-        onSelect: (key: string) => {
-            paneCenter.setMode(modeContent(ctx, key));
+
+    const renderModeFor = (guildId: string): void => {
+        const server = resolveServer(servers, guildId);
+        paneCenter.setMode(modeContent({ slug, server, servers }, subTab));
+    };
+
+    const railLeft = buildRailLeft({ slug, activeKey: subTab });
+
+    const header = buildHeader({
+        slug,
+        servers,
+        activeGuildId: () => selectedGuildId(),
+        onSelect: (guildId: string) => {
+            if (guildId === selectedGuildId()) return;
+            selectedGuildId.set(guildId);
+            clearSelectedDiscordItem();
+            renderModeFor(guildId);
         },
-        labelOverrides,
     });
-    paneCenter.setMode(modeContent(ctx, DEFAULT_MODE_KEY));
+
+    paneCenter.setMode(modeContent({ slug, server: initialServer, servers }, subTab));
+
     return div({ classes: [DISCORD_FRAME_CLASS], context: null, meta: null }, [
-        buildHeader(slug),
+        header,
         railLeft,
         paneCenter.pane,
         buildRailRight(),
@@ -49,7 +73,7 @@ function buildFrame(slug: string, servers: readonly DiscordServer[]): Instance {
     ]);
 }
 
-function renderForState(slug: string, host: Instance, servers: readonly DiscordServer[] | null): void {
+function renderForState(slug: string, host: Instance, servers: readonly DiscordServer[] | null, subTab: string): void {
     if (servers === null) {
         host.setChildren(buildLoading());
         return;
@@ -58,15 +82,18 @@ function renderForState(slug: string, host: Instance, servers: readonly DiscordS
         host.setChildren(buildEmptyInstall(slug));
         return;
     }
-    host.setChildren(buildFrame(slug, servers));
+    host.setChildren(buildFrame(slug, servers, subTab));
 }
 
-function buildDiscordTab(slug: string): HTMLElement {
+function buildDiscordTab(slug: string, subTab?: string | null): HTMLElement {
+    inspectorOverride$.set(null);
+    clearPreviewState();
     const host = div({ classes: [DISCORD_ROOT_CLASS], context: null, meta: null }, [buildLoading()]);
     const store = discordServersStoreFor(slug);
     void store.ensure();
+    const mode = subTab ?? DEFAULT_MODE_KEY;
     effect(() => {
-        renderForState(slug, host, store.servers());
+        renderForState(slug, host, store.servers(), mode);
     });
     return host.el;
 }

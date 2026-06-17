@@ -5,8 +5,8 @@ const UPSERT_SQL = `
 INSERT INTO discord_members (
     user_id, guild_id, name, display_name, nickname,
     joined_at, premium_since, communication_disabled_until,
-    is_boosting, is_bot, role_ids_json, avatar_url, updated_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    is_boosting, is_bot, role_ids_json, avatar_url, pending, flags, updated_at
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(user_id) DO UPDATE SET
     guild_id = excluded.guild_id,
     name = excluded.name,
@@ -19,6 +19,8 @@ ON CONFLICT(user_id) DO UPDATE SET
     is_bot = excluded.is_bot,
     role_ids_json = excluded.role_ids_json,
     avatar_url = excluded.avatar_url,
+    pending = excluded.pending,
+    flags = excluded.flags,
     updated_at = excluded.updated_at
 `;
 
@@ -40,6 +42,8 @@ export function upsertMember(clanId: string, guildId: string, row: MemberRow): v
         row.is_bot ? FLAG_TRUE : FLAG_FALSE,
         JSON.stringify(row.role_ids),
         row.avatar_url,
+        row.pending ? FLAG_TRUE : FLAG_FALSE,
+        row.flags,
         Date.now(),
     );
 }

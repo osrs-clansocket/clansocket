@@ -50,3 +50,30 @@ export function listDiscordEmojiNames(): readonly string[] {
     if (!emojisByName) return [];
     return Array.from(emojisByName.keys()).sort();
 }
+
+export function listDiscordEmojiEntries(): readonly DiscordEmojiEntry[] {
+    if (!emojisByName) return [];
+    return Array.from(emojisByName.values()).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function publicPathOrCdn(entry: DiscordEmojiEntry): string {
+    if (entry.public_path !== null && entry.public_path.length > 0) return entry.public_path;
+    const ext = entry.animated ? "gif" : "webp";
+    return `https://cdn.discordapp.com/emojis/${entry.emoji_id}.${ext}`;
+}
+
+const guildEmojiCache = new Map<string, readonly DiscordEmojiEntry[]>();
+
+export async function listGuildEmojis(guildId: string): Promise<readonly DiscordEmojiEntry[]> {
+    const cached = guildEmojiCache.get(guildId);
+    if (cached !== undefined) return cached;
+    const res = await sameOriginFetch(`/api/discord/emojis/by-guild/${encodeURIComponent(guildId)}`);
+    if (!res.ok) {
+        guildEmojiCache.set(guildId, []);
+        return [];
+    }
+    const body = (await res.json()) as { emojis: DiscordEmojiEntry[] };
+    const sorted = [...body.emojis].sort((a, b) => a.name.localeCompare(b.name));
+    guildEmojiCache.set(guildId, sorted);
+    return sorted;
+}

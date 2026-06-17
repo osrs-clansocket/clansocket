@@ -52,7 +52,7 @@
     padding: var(--sp-0) var(--sp-1);
     border: var(--border-hairline-active);
     border-color: var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 .account-ai-settings__concern-chevron {

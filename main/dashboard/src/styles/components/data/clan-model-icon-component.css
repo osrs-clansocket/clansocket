@@ -1,0 +1,54 @@
+/* Centralized voxlab model icon. Static thumbnail PNG renders immediately;
+ * once the WebGL renderer mounts, the wrap gets `--webgl-active` and the
+ * two children crossfade via clip-path stripe keyframes. If the renderer
+ * never mounts, the static thumbnail stays visible as the fallback.
+ *
+ * Animations operate only on clip-path / opacity / transform — no filter
+ * properties — so the rendered colors stay canonical through the transition.
+ * Consumers size the wrap via their own scope class. */
+.clan-model-icon {
+    aspect-ratio: 1 / 1;
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* The base `display: block` rule has higher specificity than the user-agent
+ * `[hidden] { display: none }` selector, so it'd win and keep the host
+ * visible even when `hidden=""` is set on the element. The compound
+ * class+attribute selector restores the expected hidden behavior so
+ * consumers (e.g. the avatar tweaker toggling between raster and voxlab
+ * canvases) can hide the host via the standard HTML attribute. */
+.clan-model-icon[hidden] {
+    display: none;
+}
+
+.clan-model-icon__image {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
+    inset: 0;
+    object-fit: contain;
+    position: absolute;
+    will-change: clip-path, opacity, transform;
+    z-index: var(--z-raised);
+}
+
+.clan-model-icon__mesh {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: center center;
+    will-change: clip-path, opacity;
+    z-index: var(--z-raised);
+}
+
+.clan-model-icon--webgl-active .clan-model-icon__mesh {
+    pointer-events: auto;
+}

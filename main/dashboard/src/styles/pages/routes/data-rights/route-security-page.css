@@ -5,7 +5,7 @@
     padding: var(--sp-1) var(--sp-2);
     background: rgb(from var(--base-gold-500) r g b / 0.08);
     border-inline-start: var(--sp-0) solid var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     flex-shrink: 0;
 }
 .route-data-rights__security-note-icon {

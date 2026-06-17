@@ -1,8 +1,9 @@
 import { identityClient } from "../../identity/identity-client/index.js";
 import { readJsonOrFallback } from "../../fetch-result.js";
 import { sameOriginFetch } from "../../../shared/helpers/fetch-helper.js";
+import type { PublishPayload } from "../../../managers/voxlab/voxlab-editor.js";
 
-export type ClanIconKind = "builtin" | "image";
+export type ClanIconKind = "builtin" | "image" | "voxlab";
 
 export interface IconTransform {
     scale: number;
@@ -107,6 +108,42 @@ export async function customizeClanIcon(slug: string, transform: IconTransform):
     }
     const body = await readErrorBody<{ error?: string; sourceExt?: string; detail?: string }>(res);
     return (body && mapCustomizeError(body)) ?? { ok: false, reason: "failed" };
+}
+
+export async function publishVoxlab(
+    slug: string,
+    payload: PublishPayload,
+    endpointOverride?: string,
+): Promise<BrandingUpdate | null> {
+    const fd = new FormData();
+    // JSON.stringify of a Float32Array / Uint32Array yields {"0":x,"1":y,...}
+    // (indexed-object format) — typed arrays aren't `Array.isArray(true)`, so
+    // they serialize as plain objects. On re-load `Float32Array.from(thatObj)`
+    // sees no `.length` and returns an empty array, leaving the mesh with
+    // zero vertices. Convert to plain Array before stringify so the JSON
+    // round-trip preserves the geometry as `[x, y, z, …]`.
+    fd.append(
+        "envelope",
+        JSON.stringify({
+            payloadVersion: payload.payloadVersion,
+            mesh: {
+                positions: Array.from(payload.mesh.positions),
+                indices: Array.from(payload.mesh.indices),
+                normals: Array.from(payload.mesh.normals),
+                colors: Array.from(payload.mesh.colors),
+                metadata: payload.mesh.metadata,
+            },
+            snapshot: payload.snapshot,
+            timeline: payload.timeline,
+        }),
+    );
+    fd.append("thumbnail", payload.thumbnailPng, "thumbnail.png");
+    const url = endpointOverride ?? `/api/clans/${encodeURIComponent(slug)}/branding/voxlab-publish`;
+    const res = await identityClient.authedFetch(url, {
+        method: "POST",
+        body: fd,
+    });
+    return readJsonOrFallback<BrandingUpdate | null>(res, null);
 }
 
 export async function clearClanIconCustomization(slug: string): Promise<{ ok: boolean; imageVersion: number }> {

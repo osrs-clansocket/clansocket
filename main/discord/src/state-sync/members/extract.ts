@@ -15,5 +15,7 @@ export function extractMemberRow(member: GuildMember): MemberRow {
         is_bot: member.user.bot,
         role_ids: [...member.roles.cache.keys()],
         avatar_url: member.displayAvatarURL(),
+        pending: member.pending ?? false,
+        flags: member.flags.bitfield.toString(),
     };
 }

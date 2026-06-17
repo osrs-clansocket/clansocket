@@ -5,6 +5,8 @@ import {
     div,
     effect,
     heading,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
     input,
     paragraph,
     span,
@@ -24,7 +26,6 @@ import {
     ACCOUNT_ROW_PRIMARY_CLASS,
     ACCOUNT_TOKEN_REVOKE_CLASS,
 } from "../../../../shared/constants/account-constants.js";
-import { glassConfirm } from "../../../forms/glass/modals/glass-confirm.js";
 import { MS_PER_DAY, MS_PER_HOUR, MS_PER_MINUTE } from "../../../../state/time-units.js";
 import { setStatus } from "../../status-line.js";
 import { FORM_FORM_ROW, FORM_HINT, FORM_INPUT } from "../../../forms/form-classes.js";
@@ -39,36 +40,40 @@ function fmtRelative(ms: number | null | undefined): string {
 }
 
 function buildDeviceRow(d: PasskeyDevice, onRevoked: (msg: string | null) => void): Instance {
+    const revokeHost = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
+    const deviceLabel = d.deviceName ?? "(unnamed)";
+    const revokeBtn = button({
+        classes: [ACCOUNT_TOKEN_REVOKE_CLASS],
+        text: "Revoke",
+        context: "revoke this sign-in device",
+        meta: ["destructive", "device"],
+        onClick: async () => {
+            const confirmed = await inlineConfirm(revokeHost, {
+                cancelLabel: "Cancel",
+                confirmLabel: "Revoke",
+                danger: true,
+                cancelContext: `keep passkey "${deviceLabel}" active`,
+                confirmContext: `confirm revoking passkey "${deviceLabel}"`,
+            });
+            if (!confirmed) return;
+            const res = await passkeyClient.revokeDevice(d.id);
+            if (isPasskeyError(res)) {
+                onRevoked(`revoke failed: ${res.message ?? res.error}`);
+                return;
+            }
+            onRevoked(null);
+        },
+    });
+    revokeHost.addChild(revokeBtn);
     return div({ classes: [ACCOUNT_DEVICE_ROW_CLASS], context: null, meta: null }, [
-        span({ classes: [ACCOUNT_ROW_PRIMARY_CLASS], text: d.deviceName ?? "(unnamed)", context: null, meta: null }),
+        span({ classes: [ACCOUNT_ROW_PRIMARY_CLASS], text: deviceLabel, context: null, meta: null }),
         span({
             classes: [ACCOUNT_ROW_META_CLASS],
             text: `Used ${fmtRelative(d.lastUsedAt)}`,
             context: null,
             meta: null,
         }),
-        button({
-            classes: [ACCOUNT_TOKEN_REVOKE_CLASS],
-            text: "Revoke",
-            context: "revoke this sign-in device",
-            meta: ["destructive", "device"],
-            onClick: async () => {
-                const confirmed = await glassConfirm({
-                    title: "Revoke device",
-                    message: `Remove passkey "${d.deviceName ?? "(unnamed)"}" from ur account? this device wont be able to sign in until u register it again.`,
-                    confirmLabel: "Revoke",
-                    cancelLabel: "Cancel",
-                    danger: true,
-                });
-                if (!confirmed) return;
-                const res = await passkeyClient.revokeDevice(d.id);
-                if (isPasskeyError(res)) {
-                    onRevoked(`revoke failed: ${res.message ?? res.error}`);
-                    return;
-                }
-                onRevoked(null);
-            },
-        }),
+        revokeHost,
     ]);
 }
 

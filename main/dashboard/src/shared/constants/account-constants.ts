@@ -32,6 +32,7 @@ export const ACCOUNT_CLAN_PANEL_CLASS = "account__clan-panel";
 export const ACCOUNT_CLAN_SESSIONS_CLASS = "account__clan-sessions";
 export const ACCOUNT_CLAN_BRANDING_SECTION_CLASS = "account__clan-branding-section";
 export const ACCOUNT_CLAN_FOOTER_CLASS = "account__clan-footer";
+export const ACCOUNT_CLAN_ACTIONS_ROW_CLASS = "account__clan-actions-row";
 export const ACCOUNT_PANEL_BODY_CLASS = "account__panel-body";
 export const ACCOUNT_PANEL_FOOTER_CLASS = "account__panel-footer";
 export const ACCOUNT_CLAN_LIST_CLASS = "account__clan-list";

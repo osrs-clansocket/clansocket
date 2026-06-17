@@ -1,0 +1,56 @@
+{
+    "name": "@clansocket/electron",
+    "version": "1.0.0",
+    "private": true,
+    "description": "ClanSocket desktop shell",
+    "homepage": "https://clansocket.com",
+    "author": {
+        "name": "ClanSocket",
+        "email": "jay@banes-lab.com"
+    },
+    "type": "module",
+    "main": "src/main.js",
+    "build": {
+        "appId": "com.clansocket.electron",
+        "productName": "ClanSocket",
+        "electronVersion": "42.4.0",
+        "asar": true,
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "src/**/*",
+            "icon.ico",
+            "icon.png",
+            "package.json"
+        ],
+        "win": {
+            "icon": "icon.ico",
+            "target": "nsis",
+            "signAndEditExecutable": false
+        },
+        "nsis": {
+            "oneClick": false,
+            "perMachine": false,
+            "allowToChangeInstallationDirectory": true
+        },
+        "linux": {
+            "icon": "icon.png",
+            "target": [
+                "tar.gz"
+            ],
+            "category": "Network",
+            "executableName": "clansocket",
+            "maintainer": "ClanSocket <jay@banes-lab.com>",
+            "artifactName": "${productName}-${version}-linux.${ext}"
+        }
+    },
+    "dependencies": {
+        "@clansocket/logger": "*",
+        "dotenv": "^17.4.2"
+    },
+    "devDependencies": {
+        "electron": "^42.4.0",
+        "electron-builder": "^26.15.3"
+    }
+}

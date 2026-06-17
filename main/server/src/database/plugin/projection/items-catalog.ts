@@ -1,4 +1,5 @@
 import type Database from "better-sqlite3";
+import { sanitizeItemName } from "./helpers.js";
 
 export interface ItemCatalogEntry {
     id?: number;
@@ -22,12 +23,13 @@ export function upsertItemsCatalog(conn: Database.Database, entries: ItemCatalog
     for (const e of entries) {
         const itemId = typeof e.itemId === "number" ? e.itemId : typeof e.id === "number" ? e.id : null;
         if (itemId === null) continue;
-        const itemName =
+        const rawName =
             typeof e.itemName === "string" && e.itemName.length > 0
                 ? e.itemName
                 : typeof e.name === "string" && e.name.length > 0
                   ? e.name
                   : "";
+        const itemName = sanitizeItemName(rawName);
         const price =
             typeof e.price === "number" && e.price > 0
                 ? e.price

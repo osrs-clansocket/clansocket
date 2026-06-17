@@ -4,6 +4,8 @@ import {
     div,
     effect,
     heading,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
     rsnTag,
     snapshot,
     span,
@@ -12,13 +14,11 @@ import {
 import type { LiveSession } from "../../../../state/identity/profile/profile-client.js";
 import { profileStore } from "../../../../state/identity/stores/profile-store.js";
 import { clansClient, type ManagedClan } from "../../../../state/clans/clans-client/index.js";
-import { glassConfirm } from "../../../forms/glass/modals/glass-confirm.js";
-import { buildBrandingControls } from "../branding/branding-controls";
 import { META_CLASS, PRIMARY_CLASS, ROW_CLASS } from "../shared/row-classes";
 import { buildClanManagerRequests } from "./manager-requests";
 import { buildClanWhitelist } from "./whitelist";
 import {
-    ACCOUNT_CLAN_BRANDING_SECTION_CLASS,
+    ACCOUNT_CLAN_ACTIONS_ROW_CLASS,
     ACCOUNT_CLAN_DETAILS_CLASS,
     ACCOUNT_CLAN_DETAILS_SUBTITLE_CLASS,
     ACCOUNT_CLAN_FOOTER_CLASS,
@@ -108,6 +108,23 @@ export function buildClanDetails(clan: ManagedClan): Instance {
         },
     });
 
+    const manageBtn = button({
+        variant: BTN_VARIANT_OUTLINE,
+        compact: true,
+        text: "Manage clan",
+        context: "open this clan's management surface",
+        meta: ["nav", "clan"],
+        onClick: () => {
+            window.location.assign(`/clans/${clan.slug}/manage`);
+        },
+    });
+
+    const actionsRow = div({ classes: [ACCOUNT_CLAN_ACTIONS_ROW_CLASS], context: null, meta: null }, [
+        viewBtn,
+        manageBtn,
+    ]);
+
+    const removeHost = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
     const removeBtn = button({
         variant: BTN_VARIANT_OUTLINE,
         compact: true,
@@ -116,12 +133,12 @@ export function buildClanDetails(clan: ManagedClan): Instance {
         context: "permanently delete this clan and all its data",
         meta: ["destructive", "clan"],
         onClick: async () => {
-            const confirmed = await glassConfirm({
-                title: "Remove clan",
-                message: `Permanently delete "${clan.displayName}"? Removes all telemetry, chat history, manager records, and stored files for this clan. Plugin sessions for this clan get disconnected. Cannot be undone.`,
-                confirmLabel: "Delete forever",
+            const confirmed = await inlineConfirm(removeHost, {
                 cancelLabel: "Cancel",
+                confirmLabel: "Delete forever",
                 danger: true,
+                cancelContext: `keep clan "${clan.displayName}"`,
+                confirmContext: `confirm deleting clan "${clan.displayName}" and all its data`,
             });
             if (!confirmed) return;
             const ok = await clansClient.removeClan(clan.slug);
@@ -132,6 +149,7 @@ export function buildClanDetails(clan: ManagedClan): Instance {
             removeBtn.setText("Remove failed");
         },
     });
+    removeHost.addChild(removeBtn);
 
     const transferBtn = button({
         variant: BTN_VARIANT_OUTLINE,
@@ -156,13 +174,8 @@ export function buildClanDetails(clan: ManagedClan): Instance {
 
     const actionsPanel = div({ classes: [ACCOUNT_CLAN_PANEL_CLASS], context: null, meta: null }, [
         heading("h3", { classes: [ACCOUNT_PANEL_TITLE_CLASS], text: "Actions", context: null, meta: null }),
-        viewBtn,
-        removeBtn,
-    ]);
-
-    const brandingSection = div({ classes: [ACCOUNT_CLAN_BRANDING_SECTION_CLASS], context: null, meta: null }, [
-        heading("h3", { classes: [ACCOUNT_PANEL_TITLE_CLASS], text: "Branding", context: null, meta: null }),
-        buildBrandingControls(clan),
+        actionsRow,
+        removeHost,
     ]);
 
     const whitelistSection = buildClanWhitelist(clan);
@@ -174,7 +187,6 @@ export function buildClanDetails(clan: ManagedClan): Instance {
         actionsPanel,
         whitelistSection,
         requestsSection,
-        brandingSection,
         transferFooter,
     ]);
     const sessionsRenderer = createSessionsRenderer(sessionsPanel);

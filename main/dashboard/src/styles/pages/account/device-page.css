@@ -2,13 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     grid-column: 1 / -1;
-    column-gap: var(--sp-2);
-    row-gap: var(--sp-1);
+    gap: var(--sp-1) var(--sp-2);
     align-items: center;
     padding: var(--sp-1) var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
     container-type: inline-size;
 }

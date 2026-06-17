@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS clansocket_account_rsns (
     account_hash TEXT NOT NULL,
     rsn TEXT NOT NULL,
-    source TEXT NOT NULL CHECK (source IN ('plugin', 'clan_claim', 'site')),
+    source TEXT NOT NULL CHECK (source IN ('plugin', 'clan_claim', 'site', 'wom')),
     current_rank TEXT,
     first_seen INTEGER NOT NULL,
     last_seen INTEGER NOT NULL,

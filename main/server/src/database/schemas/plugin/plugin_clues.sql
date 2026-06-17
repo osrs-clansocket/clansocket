@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS plugin_clues (
     rsn TEXT NOT NULL,
     tier TEXT NOT NULL,
     count INTEGER NOT NULL DEFAULT 0,
+    count_source TEXT,
+    count_updated_at INTEGER,
     first_seen INTEGER NOT NULL,
     last_seen INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,

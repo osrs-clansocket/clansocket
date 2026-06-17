@@ -22,7 +22,7 @@
     background: transparent;
     border: var(--bw-hairline) solid transparent;
     border-inline-start: var(--sp-0) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     flex-shrink: 0;
     contain: layout style paint;
 }
@@ -42,8 +42,7 @@
         "asset primary"
         "asset secondary"
         "asset meta";
-    column-gap: var(--sp-1);
-    row-gap: var(--sp-hairline);
+    gap: var(--sp-hairline) var(--sp-1);
     align-items: center;
     padding: var(--sp-1);
     background: transparent;

@@ -39,7 +39,7 @@ function upsertPrayer(
 ): void {
     conn.prepare(
         `INSERT INTO plugin_prayers (account_hash, rsn, prayer_id, prayer_name, active, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $prayerId, $prayerName, $active, $now, $now, $now)
          ON CONFLICT (account_hash, prayer_id) DO UPDATE SET
             rsn = excluded.rsn,
             prayer_name = excluded.prayer_name,
@@ -50,7 +50,7 @@ function upsertPrayer(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", prayerId, prayerName, active, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", prayerId, prayerName, active, now });
 }
 
 function insertPrayerChange(

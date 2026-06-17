@@ -15,4 +15,5 @@ module.exports = [
     { name: "--data-rights-bottom", reason: "measured ai-bar height set in dom/data-rights/chrome-offsets.ts:8 (setDynProp)" },
     { name: "--ai-history-h", reason: "persisted resize height set in dom/ai/panel/layout/resize-storage.ts:6 (CSS_VAR)" },
     { name: "--ai-bar-h", reason: "measured ai-bar height set in dom/ai/panel/layout/bar-height.ts:3 (BAR_HEIGHT_VAR)" },
+    { name: "--site-logo-scale", reason: "owner-set homepage logo scale, set in dom/pages/routes/render-home.ts:applyScale (setDynProp)" },
 ];

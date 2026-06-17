@@ -2,7 +2,6 @@ import type { AssetExtractor, ChildTable, UserTableByColumn } from "./types.js";
 
 export const PLUGIN_USER_TABLES: UserTableByColumn[] = [
     // KEEP / REWRITE survivors
-    { table: "plugin_accounts", column: "account_hash" },
     { table: "plugin_combat_achievements", column: "account_hash" },
     { table: "plugin_combat_achievements_changes", column: "account_hash" },
     { table: "plugin_connection_status", column: "account_hash" },

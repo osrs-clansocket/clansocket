@@ -5,7 +5,7 @@
     overflow-block: auto;
     background: var(--base-graphite-900);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     margin-block-start: var(--sp-0);
 }
 .account__autocomplete-row {

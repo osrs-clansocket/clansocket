@@ -40,15 +40,24 @@ const AppEvents = {
     MEMORY_CHANGED: "memory:changed",
     LEADERBOARD_FOCUS: "leaderboard:focus",
     CLAN_BRANDING_CHANGED: "clan:branding-changed",
+    CLAN_TRANSFORM_CHANGED: "clan:transform-changed",
     AI_VAULT_CHANGED: "ai:vault-changed",
 } as const;
 
 export interface ClanBrandingChangedPayload {
     slug: string;
-    iconKind: "builtin" | "image" | null;
+    iconKind: "builtin" | "image" | "voxlab" | null;
     iconValue: string | null;
     color: string | null;
     imageVersion?: number;
+}
+
+// Fires per-slider-input during tweaker drags. Voxlab clan-avatar instances
+// elsewhere on the page subscribe to apply the same CSS transform to their
+// own host, keeping all voxlab previews in sync with the tweaker's editor.
+export interface ClanTransformChangedPayload {
+    slug: string;
+    transform: { scale: number; rotate: number; translateX: number; translateY: number };
 }
 
 export { events, AppEvents };

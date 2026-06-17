@@ -15,13 +15,13 @@ input[type="range"].slider:focus {
 input[type="range"].slider::-webkit-slider-runnable-track {
     background: var(--base-graphite-500);
     block-size: 0.1875rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 0;
 }
 input[type="range"].slider::-moz-range-track {
     background: var(--base-graphite-500);
     block-size: 0.1875rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     border: 0;
 }
 input[type="range"].slider::-webkit-slider-thumb {

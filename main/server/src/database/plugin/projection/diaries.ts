@@ -29,7 +29,7 @@ function upsertDiary(
 ): void {
     conn.prepare(
         `INSERT INTO plugin_diaries (account_hash, rsn, diary_id, diary_name, diary_region, tier, complete, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $diaryId, $diaryName, $region, $tier, $complete, $now, $now, $now)
          ON CONFLICT (account_hash, diary_id) DO UPDATE SET
             rsn = excluded.rsn,
             diary_name = excluded.diary_name,
@@ -42,7 +42,7 @@ function upsertDiary(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", diaryId, diaryName, region, tier, complete, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", diaryId, diaryName, region, tier, complete, now });
 }
 
 function insertChange(

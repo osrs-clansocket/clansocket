@@ -2,7 +2,7 @@ import { getDiscordGuildDb } from "../../database-discord.js";
 import type { RoleRow } from "../types.js";
 
 const LIST_SQL = `
-SELECT role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed
+SELECT role_id, guild_id, name, color, hoist, mentionable, position, permissions, managed, icon_url, unicode_emoji
 FROM discord_roles
 WHERE guild_id = ?
 ORDER BY position DESC
@@ -18,6 +18,8 @@ interface RoleSqlRow {
     position: number;
     permissions: string;
     managed: number;
+    icon_url: string | null;
+    unicode_emoji: string | null;
 }
 
 function toRoleRow(r: RoleSqlRow): RoleRow {
@@ -31,6 +33,8 @@ function toRoleRow(r: RoleSqlRow): RoleRow {
         position: r.position,
         permissions: r.permissions,
         managed: r.managed === 1,
+        icon_url: r.icon_url,
+        unicode_emoji: r.unicode_emoji,
     };
 }
 

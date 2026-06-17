@@ -8,6 +8,11 @@ defineRoute({
     path: AppRoutes.DATA_RIGHTS,
     match: (p) => p === AppRoutes.DATA_RIGHTS || p.startsWith(DATA_RIGHTS_QUERY_PREFIX),
     description: "Your data-rights browser — export or delete your stored data.",
+    seo: {
+        title: "Your Data Rights",
+        description: "Export or delete your stored ClanSocket data.",
+        hidden: true,
+    },
     guard: () => authState.isAuthed(),
     onReject: AppRoutes.HOME,
     render: async () => (await import("../../pages/routes/data-rights/index.js")).renderDataRights(),

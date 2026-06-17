@@ -1,5 +1,6 @@
 @import "./audit/index.css";
 @import "./discord/index.css";
+@import "./identity/index.css";
 @import "./clan-back-page.css";
 @import "./clan-body-page.css";
 @import "./clan-missing-page.css";

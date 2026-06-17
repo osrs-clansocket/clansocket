@@ -109,7 +109,7 @@ module.exports = {
         docs: {
             description:
                 "Every var(--X) use must resolve to an --X declared under styles/tokens/ or styles/auto-gen/ (or a @property registration). Closes the reference-side gap: no-raw-sizes bans raw literals but trusts any var name; no-mixed-css-scopes validates where tokens are defined; nothing validated that a var USE points at a real token. Dangling refs (typos, drops-after-rename, cross-concern misuse) silently fall back at runtime.",
-            url: "https://github.com/banesLab/ClanSocket/blob/main/CLAUDE.md",
+            url: "https://github.com/osrs-clansocket/clansocket/blob/main/CLAUDE.md",
         },
         schema: [],
         messages: {

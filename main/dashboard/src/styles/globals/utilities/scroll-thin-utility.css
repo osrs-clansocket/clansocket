@@ -12,7 +12,7 @@
 }
 .scroll-thin::-webkit-scrollbar-thumb {
     background: var(--base-graphite-600);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .scroll-thin::-webkit-scrollbar-thumb:hover {
     background: var(--base-graphite-500);

@@ -18,7 +18,7 @@
     color: var(--base-graphite-300);
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
     text-align: center;
 }
@@ -76,7 +76,7 @@
     padding: var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid var(--base-graphite-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
 }
 .clans-clan__map-row-content {

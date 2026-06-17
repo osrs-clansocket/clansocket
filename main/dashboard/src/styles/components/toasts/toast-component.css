@@ -6,7 +6,7 @@
     background: var(--base-graphite-900);
     border: 0.0625rem solid var(--base-graphite-500);
     border-inline-start: 0.1875rem solid var(--base-gold-500);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-1) var(--sp-2);
     box-shadow: var(--shadow-glow);
     animation: toast-in 0.2s ease-out;

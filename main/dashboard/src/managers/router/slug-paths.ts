@@ -2,6 +2,7 @@ const CLAN_PREFIX = "/clans/";
 const SINGULAR_CLAN_PREFIX = "/clan/";
 const MANAGE_SEGMENT = "/manage";
 const LIVE_SEGMENT = "/live";
+const VOXLAB_SEGMENT = "/voxlab";
 const CHAR_DASH = "-".charCodeAt(0);
 const CHAR_DIGIT_LO = "0".charCodeAt(0);
 const CHAR_DIGIT_HI = "9".charCodeAt(0);
@@ -34,9 +35,15 @@ function allSlugChars(s: string): boolean {
     return true;
 }
 
+function stripQuery(path: string): string {
+    const qAt = path.indexOf("?");
+    return qAt === -1 ? path : path.slice(0, qAt);
+}
+
 function slugBody(path: string): string {
-    if (!path.startsWith(CLAN_PREFIX)) return "";
-    const body = trimTrailingSlash(path.slice(CLAN_PREFIX.length));
+    const stripped = stripQuery(path);
+    if (!stripped.startsWith(CLAN_PREFIX)) return "";
+    const body = trimTrailingSlash(stripped.slice(CLAN_PREFIX.length));
     if (body.length === 0) return "";
     return allSlugChars(body) ? body : "";
 }
@@ -50,8 +57,9 @@ export function clanSlugFromPath(path: string): string {
 }
 
 function slugBodyWithSegment(path: string, segment: string): string {
-    if (!path.startsWith(CLAN_PREFIX)) return "";
-    const afterPrefix = path.slice(CLAN_PREFIX.length);
+    const stripped = stripQuery(path);
+    if (!stripped.startsWith(CLAN_PREFIX)) return "";
+    const afterPrefix = stripped.slice(CLAN_PREFIX.length);
     const segAt = afterPrefix.indexOf(segment);
     if (segAt <= 0) return "";
     const slug = afterPrefix.slice(0, segAt);
@@ -85,15 +93,41 @@ export function clanSlugFromLivePath(path: string): string {
     return liveSlugBody(path).toLowerCase();
 }
 
-export function manageTabFromPath(path: string): string | null {
+function voxlabSlugBody(path: string): string {
+    return slugBodyWithSegment(path, VOXLAB_SEGMENT);
+}
+
+export function matchClanVoxlabPath(path: string): boolean {
+    return voxlabSlugBody(path).length > 0;
+}
+
+export function clanSlugFromVoxlabPath(path: string): string {
+    return voxlabSlugBody(path).toLowerCase();
+}
+
+function manageTailSegments(path: string): readonly string[] {
     const slug = manageSlugBody(path);
-    if (slug.length === 0) return null;
+    if (slug.length === 0) return [];
     const afterSlug = path.slice(CLAN_PREFIX.length + slug.length + MANAGE_SEGMENT.length);
     const tail = trimTrailingSlash(afterSlug);
-    if (tail.length === 0) return null;
-    if (!tail.startsWith("/")) return null;
-    const tab = tail.slice(1);
+    if (tail.length === 0) return [];
+    if (!tail.startsWith("/")) return [];
+    return tail.slice(1).split("/");
+}
+
+export function manageTabFromPath(path: string): string | null {
+    const segs = manageTailSegments(path);
+    if (segs.length === 0) return null;
+    const tab = segs[0]!;
     return allSlugChars(tab) ? tab : null;
+}
+
+export function manageSubTabFromPath(path: string): string | null {
+    const segs = manageTailSegments(path);
+    if (segs.length < 2) return null;
+    const subTab = segs[1]!;
+    if (subTab.length === 0) return null;
+    return allSlugChars(subTab) ? subTab : null;
 }
 
 export function normalizeClanPath(path: string): string {

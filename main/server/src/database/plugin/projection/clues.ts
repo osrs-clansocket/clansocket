@@ -19,18 +19,23 @@ function upsertClue(
     now: number,
 ): void {
     conn.prepare(
-        `INSERT INTO plugin_clues (account_hash, rsn, tier, count, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO plugin_clues (
+            account_hash, rsn, tier,
+            count, count_source, count_updated_at,
+            first_seen, last_seen, updated_at
+         ) VALUES ($accountHash, $rsn, $tier, $count, 'plugin', $now, $now, $now, $now)
          ON CONFLICT (account_hash, tier) DO UPDATE SET
             rsn = excluded.rsn,
             count = excluded.count,
+            count_source = 'plugin',
+            count_updated_at = excluded.count_updated_at,
             last_seen = excluded.last_seen,
             updated_at = CASE
                 WHEN count != excluded.count
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", tier, count, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", tier, count, now });
 }
 
 function insertChange(

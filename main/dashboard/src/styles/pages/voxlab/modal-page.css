@@ -1,0 +1,103 @@
+.voxlab__modal-root {
+    position: relative;
+    z-index: var(--z-modal);
+}
+.voxlab__modal-overlay {
+    align-items: center;
+    background: rgb(0 0 0 / 0.65);
+    backdrop-filter: blur(0.125rem);
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    z-index: var(--z-modal);
+}
+.voxlab__modal-card {
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--clr-border-medium);
+    box-shadow: var(--shadow-dialog);
+    color: var(--base-graphite-100);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    max-inline-size: var(--tt-width);
+    min-inline-size: var(--grid-min);
+    padding: var(--sp-3) var(--sp-4);
+}
+.voxlab__modal-card-title {
+    color: var(--base-gold-200);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin-block-end: var(--sp-1);
+    text-transform: uppercase;
+}
+.voxlab__modal-card-body {
+    color: var(--base-graphite-100);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    margin-block-end: var(--sp-3);
+}
+.voxlab__modal-card-input {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    color: var(--base-gold-200);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    margin-block-end: var(--sp-3);
+    padding: var(--sp-1h) var(--sp-2);
+    inline-size: 100%;
+}
+.voxlab__modal-card-input:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.55);
+    outline: none;
+}
+.voxlab__modal-card-buttons {
+    display: flex;
+    gap: 0;
+    justify-content: stretch;
+    margin: 0 calc(var(--sp-4) * -1) calc(var(--sp-3) * -1);
+}
+.voxlab__modal-card-btn {
+    background: transparent;
+    border: 0;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    color: var(--base-graphite-100);
+    cursor: pointer;
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    padding: var(--sp-2) var(--sp-3);
+    text-transform: uppercase;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
+}
+.voxlab__modal-card-btn + .voxlab__modal-card-btn {
+    border-inline-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(180deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+}
+.voxlab__modal-card-btn:hover,
+.voxlab__modal-card-btn:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    color: var(--base-gold-200);
+    outline: none;
+}
+.voxlab__modal-card-btn--primary {
+    color: var(--base-gold-200);
+}
+.voxlab__modal-card-btn--primary:hover,
+.voxlab__modal-card-btn--primary:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+}
+.voxlab__modal-card-btn--danger {
+    color: var(--base-ember-300);
+}
+.voxlab__modal-card-btn--danger:hover,
+.voxlab__modal-card-btn--danger:focus-visible {
+    background: rgb(from var(--base-ember-300) r g b / 0.14);
+}

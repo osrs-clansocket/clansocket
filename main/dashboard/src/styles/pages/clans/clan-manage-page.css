@@ -10,7 +10,7 @@
     gap: 0;
     letter-spacing: 0;
     text-transform: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .clans-clan__manage-btn .bi {
     font-size: var(--icon-sm);

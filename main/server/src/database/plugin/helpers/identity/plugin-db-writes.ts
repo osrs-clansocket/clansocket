@@ -65,23 +65,6 @@ export function upsertSession(
     ).run(sessionId, identity.accountHash, identity.rsn, identity.world, worldTypes, pluginVersion, schemaVersion, now);
 }
 
-export function upsertAccount(
-    conn: Database.Database,
-    identity: PluginIdentityRecord,
-    existing: boolean,
-    now: number,
-): void {
-    if (existing) {
-        conn.prepare(
-            "UPDATE plugin_accounts SET latest_rsn = ?, account_type = COALESCE(?, account_type), last_seen = ? WHERE account_hash = ?",
-        ).run(identity.rsn, identity.accountType ?? null, now, identity.accountHash);
-    } else {
-        conn.prepare(
-            "INSERT INTO plugin_accounts (account_hash, first_rsn, latest_rsn, account_type, first_seen, last_seen) VALUES (?, ?, ?, ?, ?, ?)",
-        ).run(identity.accountHash, identity.rsn, identity.rsn, identity.accountType ?? null, now, now);
-    }
-}
-
 export function upsertCurrentState(
     conn: Database.Database,
     sessionId: string,

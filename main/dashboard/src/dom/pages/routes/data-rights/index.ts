@@ -28,9 +28,23 @@ function isMobile(): boolean {
     return window.matchMedia(`(width<=${MOBILE_BREAKPOINT_REM}rem)`).matches;
 }
 
-export async function renderDataRights(): Promise<HTMLElement> {
+export interface RenderDataRightsOptions {
+    clanFilter?: string;
+    embedded?: boolean;
+}
+
+const DR_EMBEDDED_CLASS = "route-data-rights--embedded";
+
+const NOOP_TEARDOWN = (): void => undefined;
+
+export async function renderDataRights(opts: RenderDataRightsOptions = {}): Promise<HTMLElement> {
     await scopesStore.refresh();
-    const scopes = [...scopesStore.list$(), ...getLocalScopes()];
+    let scopes = [...scopesStore.list$(), ...getLocalScopes()];
+    if (opts.clanFilter !== undefined) {
+        const slug = opts.clanFilter;
+        scopes = scopes.filter((s) => s.clanSlug === slug);
+    }
+    const managerView = opts.embedded === true && opts.clanFilter !== undefined;
     const fromUrl = readUrl(scopes);
     const initialScope = fromUrl.scope;
     const firstHasRows = initialScope?.tables.find((t) => (typeof t === "string" ? true : t.hasRows));
@@ -50,6 +64,7 @@ export async function renderDataRights(): Promise<HTMLElement> {
         selectedIndex: -1,
         from: fromUrl.from,
         to: fromUrl.to,
+        rsn: null,
         offset: 0,
         loadingMore: false,
         hasMore: false,
@@ -73,13 +88,14 @@ export async function renderDataRights(): Promise<HTMLElement> {
         meta: null,
     });
     const detailHost = div({ classes: [GLASS_PANE_CLASS, DR_DETAIL_HOST_CLASS], context: null, meta: null });
-    const root = section({ classes: [DR_ROOT_CLASS], data: { view: state.view }, context: null, meta: null }, [
+    const rootClasses = opts.embedded === true ? [DR_ROOT_CLASS, DR_EMBEDDED_CLASS] : [DR_ROOT_CLASS];
+    const root = section({ classes: rootClasses, data: { view: state.view }, context: null, meta: null }, [
         treeHost,
         listHost,
         detailHost,
     ]);
 
-    const tearDownOffsets = wireChromeOffsets(root.el);
+    const tearDownOffsets = opts.embedded === true ? NOOP_TEARDOWN : wireChromeOffsets(root.el);
     let liveHandle: LiveRowListHandle | null = null;
     let treeInstance: TreeInstance | null = null;
     let closeWritesStream: (() => void) | null = null;
@@ -130,11 +146,13 @@ export async function renderDataRights(): Promise<HTMLElement> {
             table: state.table,
             from: state.from,
             to: state.to,
+            rsn: state.rsn,
             limit: PAGE_SIZE,
             selectedKey,
             handlers,
             onSelectKey,
             onDeleteKey: (k) => void onDeleteKey(k),
+            managerView,
         });
         if (!handle) {
             listHost.setChildren(paragraph({ classes: [DR_EMPTY_CLASS], text: "No data.", context: null, meta: null }));
@@ -174,9 +192,10 @@ export async function renderDataRights(): Promise<HTMLElement> {
     };
 
     const handlers: RowListHandlers = {
-        onFilterChange: (from, to) => {
+        onFilterChange: (from, to, rsn) => {
             state.from = from;
             state.to = to;
+            state.rsn = rsn;
             selectedKey.set(null);
             writeUrl(state);
             void rebuildList();
@@ -219,6 +238,7 @@ export async function renderDataRights(): Promise<HTMLElement> {
                     state.table = t;
                     state.from = null;
                     state.to = null;
+                    state.rsn = null;
                     selectedKey.set(null);
                     state.view = isMobile() ? "list" : "tree";
                     root.setAttr("data-view", state.view);

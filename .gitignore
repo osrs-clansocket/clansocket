@@ -9,9 +9,11 @@ package-lock.json
 
 # Build outputs
 dist/
+desktop-dist/
 public/styles/
 .cache/
 main/dashboard/src/state/generated/
+main/electron/src/prod-config.js
 
 # Runtime data
 logs/
@@ -76,3 +78,5 @@ ecosystem.config.cjs
 
 /public/resources
 /main/devlay
+/clansocket.wiki
+/public/provide

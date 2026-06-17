@@ -5,7 +5,7 @@
     padding: var(--sp-0) var(--sp-1);
     background: var(--base-graphite-800);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     gap: var(--sp-1);
     min-inline-size: 0;
     line-height: var(--lh-snug);

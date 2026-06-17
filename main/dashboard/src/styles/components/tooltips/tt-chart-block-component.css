@@ -5,7 +5,7 @@
     padding: var(--sp-1);
     background: var(--base-graphite-800);
     border: 0.0625rem solid var(--base-graphite-600);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     block-size: 10rem;
     overflow: hidden;
 }

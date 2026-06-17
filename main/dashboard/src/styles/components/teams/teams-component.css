@@ -189,7 +189,7 @@
     font-size: var(--fs-2xs);
     text-decoration: none;
     padding: var(--sp-0) var(--sp-1);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     transition: background-color var(--dur-fast) var(--ease-out);
 }
 .teams__members .teams__member:hover {
@@ -212,7 +212,7 @@
     letter-spacing: var(--ls-wide);
     text-transform: uppercase;
     padding: var(--sp-0h) var(--sp-1h);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     cursor: pointer;
     display: none;
     text-align: center;

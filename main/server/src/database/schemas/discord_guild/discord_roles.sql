@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS discord_roles (
     position INTEGER NOT NULL,
     permissions TEXT NOT NULL DEFAULT '0',
     managed INTEGER NOT NULL DEFAULT 0,
+    icon_url TEXT,
+    unicode_emoji TEXT,
     updated_at INTEGER NOT NULL
 );
 

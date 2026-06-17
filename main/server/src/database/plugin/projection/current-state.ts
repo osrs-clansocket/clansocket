@@ -9,9 +9,9 @@ export function ensureCurrentStateRow(
 ): void {
     conn.prepare(
         `INSERT INTO plugin_current_state (account_hash, latest_rsn, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $now, $now, $now)
          ON CONFLICT(account_hash) DO UPDATE SET last_seen = excluded.last_seen`,
-    ).run(accountHash, rsn ?? "", now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", now });
 }
 
 export function handleVitals(
@@ -24,20 +24,22 @@ export function handleVitals(
     ensureCurrentStateRow(conn, accountHash, rsn, now);
     conn.prepare(
         `UPDATE plugin_current_state
-            SET energy = ?, weight = ?, spec = ?, hitpoints = ?, prayer = ?, max_hitpoints = ?, max_prayer = ?, last_seen = ?, updated_at = ?
-            WHERE account_hash = ?`,
-    ).run(
-        typeof payload.energy === "number" ? payload.energy : null,
-        typeof payload.weight === "number" ? payload.weight : null,
-        typeof payload.spec === "number" ? payload.spec : null,
-        typeof payload.hitpoints === "number" ? payload.hitpoints : null,
-        typeof payload.prayer === "number" ? payload.prayer : null,
-        typeof payload.maxHitpoints === "number" ? payload.maxHitpoints : null,
-        typeof payload.maxPrayer === "number" ? payload.maxPrayer : null,
-        now,
+            SET energy = $energy, weight = $weight, spec = $spec,
+                hitpoints = $hitpoints, prayer = $prayer,
+                max_hitpoints = $maxHitpoints, max_prayer = $maxPrayer,
+                last_seen = $now, updated_at = $now
+            WHERE account_hash = $accountHash`,
+    ).run({
+        energy: typeof payload.energy === "number" ? payload.energy : null,
+        weight: typeof payload.weight === "number" ? payload.weight : null,
+        spec: typeof payload.spec === "number" ? payload.spec : null,
+        hitpoints: typeof payload.hitpoints === "number" ? payload.hitpoints : null,
+        prayer: typeof payload.prayer === "number" ? payload.prayer : null,
+        maxHitpoints: typeof payload.maxHitpoints === "number" ? payload.maxHitpoints : null,
+        maxPrayer: typeof payload.maxPrayer === "number" ? payload.maxPrayer : null,
         now,
         accountHash,
-    );
+    });
 }
 
 export function handleInteracting(
@@ -53,7 +55,8 @@ export function handleInteracting(
     const name = kind === "PLAYER" ? null : typeof payload.targetName === "string" ? payload.targetName : null;
     conn.prepare(
         `UPDATE plugin_current_state
-            SET interacting_kind = ?, interacting_id = ?, interacting_name = ?, last_seen = ?, updated_at = ?
-            WHERE account_hash = ?`,
-    ).run(kind, id, name, now, now, accountHash);
+            SET interacting_kind = $kind, interacting_id = $id, interacting_name = $name,
+                last_seen = $now, updated_at = $now
+            WHERE account_hash = $accountHash`,
+    ).run({ kind, id, name, now, accountHash });
 }

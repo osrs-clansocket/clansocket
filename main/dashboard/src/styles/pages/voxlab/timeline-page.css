@@ -1,0 +1,201 @@
+.voxlab__timeline-center-column {
+    --timeline-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-inline-size: 0;
+    overflow: hidden;
+}
+.voxlab__timeline-center-column .voxlab__stage {
+    flex: 1;
+    min-block-size: 0;
+    position: relative;
+}
+.voxlab__timeline-resizer {
+    background: var(--clr-border-medium);
+    cursor: ns-resize;
+    flex: 0 0 var(--sp-1);
+    transition: background var(--dur-fast) var(--ease-out);
+    display: none;
+    touch-action: none;
+}
+.voxlab__timeline-resizer:hover {
+    background: var(--base-gold-500);
+}
+.voxlab__timeline-panel {
+    background: var(--base-graphite-800);
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    box-sizing: border-box;
+    display: none;
+    flex: 0 0 var(--timeline-height);
+    flex-direction: column;
+    gap: var(--sp-2);
+    min-inline-size: 0;
+    overflow-inline: hidden;
+    overflow-block: auto;
+    padding: var(--sp-3) var(--sp-6) var(--sp-4);
+    scrollbar-color: rgb(from var(--base-gold-500) r g b / 0.35) transparent;
+    scrollbar-width: thin;
+    inline-size: 100%;
+}
+.voxlab__timeline-center-column[data-timeline-active="true"] .voxlab__timeline-resizer {
+    display: block;
+}
+.voxlab__timeline-center-column[data-timeline-active="true"] .voxlab__timeline-panel {
+    display: flex;
+}
+.voxlab__timeline-panel-transport {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--sp-2);
+    min-inline-size: 0;
+    inline-size: 100%;
+}
+.voxlab__timeline-panel-buttons {
+    align-items: stretch;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: var(--sp-1h);
+    min-inline-size: 0;
+}
+.voxlab__timeline-panel-btn {
+    align-items: center;
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.55);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+    color: var(--base-gold-200);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 0 0 auto;
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    block-size: var(--sp-8);
+    justify-content: center;
+    letter-spacing: var(--ls-wide);
+    line-height: var(--lh-flat);
+    min-inline-size: var(--sp-8);
+    padding: 0 var(--sp-2);
+    text-transform: uppercase;
+    transition:
+        background-color var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out);
+}
+.voxlab__timeline-panel-btn:hover,
+.voxlab__timeline-panel-btn:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.22);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.75);
+    outline: none;
+}
+.voxlab__timeline-panel-btn svg {
+    display: block;
+    block-size: var(--icon-md);
+    inline-size: var(--icon-md);
+}
+.voxlab__timeline-panel-btn--loop[data-active="true"] {
+    background: rgb(from var(--base-gold-500) r g b / 0.35);
+    border-color: var(--base-gold-200);
+}
+.voxlab__timeline-panel-readout {
+    color: var(--base-graphite-300);
+    flex: 1 1 auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    text-align: end;
+}
+.voxlab__timeline-panel-scrubber {
+    box-sizing: border-box;
+    display: block;
+    flex: 0 0 auto;
+    margin: 0;
+    max-inline-size: 100%;
+    min-inline-size: 0;
+    inline-size: 100%;
+}
+.voxlab__timeline-panel-markers {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    block-size: var(--sp-3);
+    margin: 0;
+    position: relative;
+    inline-size: 100%;
+}
+.voxlab__timeline-panel-marker {
+    background: var(--base-gold-200);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.8);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-elev-1);
+    cursor: grab;
+    block-size: var(--sp-2h);
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    inset-block-start: 0.0625rem;
+    inset-inline-start: var(--marker-pos, 0%);
+    touch-action: none;
+    transform: translateX(-50%);
+    transition:
+        transform var(--dur-fast) var(--ease-out),
+        background var(--dur-fast) var(--ease-out);
+    inline-size: var(--sp-2h);
+    z-index: var(--z-raised);
+}
+.voxlab__timeline-panel-marker:hover,
+.voxlab__timeline-panel-marker:focus-visible {
+    background: var(--base-cream-100);
+    outline: none;
+    transform: translateX(-50%) scale(1.4);
+}
+.voxlab__timeline-panel-keyframe-actions {
+    display: flex;
+    gap: 0;
+    margin-block-start: var(--sp-1);
+}
+.voxlab__timeline-panel-keyframe-btn {
+    background: transparent;
+    border: 0.0625rem solid var(--clr-border-medium);
+    border-inline-end-width: 0;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    padding: var(--sp-1) var(--sp-1h);
+    text-transform: uppercase;
+    transition:
+        background var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+}
+.voxlab__timeline-panel-keyframe-btn:last-child {
+    border-inline-end-width: 0.0625rem;
+}
+.voxlab__timeline-panel-keyframe-btn:hover,
+.voxlab__timeline-panel-keyframe-btn:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.1);
+    color: var(--base-gold-200);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.55);
+    outline: none;
+}
+.voxlab__timeline-panel-keyframe-btn--danger {
+    color: rgb(from var(--base-ember-300) r g b / 0.8);
+}
+.voxlab__timeline-panel-keyframe-btn--danger:hover,
+.voxlab__timeline-panel-keyframe-btn--danger:focus-visible {
+    background: rgb(from var(--base-ember-300) r g b / 0.12);
+    color: var(--base-ember-300);
+    border-color: rgb(from var(--base-ember-300) r g b / 0.6);
+}
+.voxlab__timeline-panel-marker[data-dragging="true"] {
+    background: var(--base-cream-100);
+    cursor: grabbing;
+    transform: translateX(-50%) scale(1.4);
+    transition: none;
+}

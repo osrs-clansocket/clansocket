@@ -6,7 +6,7 @@
     padding: var(--sp-1) var(--sp-2);
     background: var(--gradient-surface);
     border: var(--sp-hairline) solid rgb(from var(--base-graphite-500) r g b / 0.2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: var(--fs-2xs);
 }
 .feed-row__kind {
@@ -16,7 +16,7 @@
     color: var(--base-gold-500);
     padding: var(--sp-hairline) var(--sp-1h);
     background: var(--base-graphite-800);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .feed-row__main {
     color: var(--base-cream-100);

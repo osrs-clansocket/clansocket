@@ -15,7 +15,10 @@ export async function recordVerify(
     const registered = getVaultEntryType(entry_key);
     if (registered === null) return;
     const db = getClanVaultDb(clanId);
-    db.prepare("UPDATE vault_entries SET last_verified_at = ?, last_verified_status = ? WHERE entry_key = ?")
-        .run(NOW(), status, entry_key);
+    db.prepare("UPDATE vault_entries SET last_verified_at = ?, last_verified_status = ? WHERE entry_key = ?").run(
+        NOW(),
+        status,
+        entry_key,
+    );
     recordVaultAudit(clanId, registered.auditActions.verify, entry_key, actor, { status });
 }

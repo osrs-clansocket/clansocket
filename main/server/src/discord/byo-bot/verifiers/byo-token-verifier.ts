@@ -1,10 +1,6 @@
 import type { VerifyStatus } from "../../../clan-vault/shared/vault-types.js";
 import { MIME_JSON } from "../../../shared/http/http-mime.js";
-import {
-    HTTP_FORBIDDEN,
-    HTTP_TOO_MANY_REQUESTS,
-    HTTP_UNAUTHORIZED,
-} from "../../../shared/http/http-status.js";
+import { HTTP_FORBIDDEN, HTTP_TOO_MANY_REQUESTS, HTTP_UNAUTHORIZED } from "../../../shared/http/http-status.js";
 import type { DiscordBotPayload } from "../types/byo-bot-types.js";
 
 const DISCORD_BOT_USERS_ME = "https://discord.com/api/v10/users/@me";
@@ -23,9 +19,7 @@ export interface VerifyDiscordBotResult {
     };
 }
 
-export async function verifyDiscordBotCredentials(
-    payload: DiscordBotPayload,
-): Promise<VerifyDiscordBotResult> {
+export async function verifyDiscordBotCredentials(payload: DiscordBotPayload): Promise<VerifyDiscordBotResult> {
     const res = await fetch(DISCORD_BOT_USERS_ME, {
         method: "GET",
         headers: {

@@ -22,7 +22,7 @@
     align-items: center;
     background: transparent;
     border: 0;
-    color: var(--base-cream-100);
+    color: var(--base-graphite-300);
     cursor: pointer;
     display: flex;
     flex-shrink: 0;
@@ -33,20 +33,12 @@
     transition:
         color var(--dur-fast) var(--ease-out),
         filter var(--dur-fast) var(--ease-out),
-        transform var(--dur-fast) var(--ease-out),
         opacity var(--dur-fast) var(--ease-out);
     inline-size: clamp(1.1rem, 3.6vi, 1.4rem);
-    will-change: transform;
 }
 .dashboard__nav-icon > * {
     font-size: clamp(0.95rem, 3.2vi, 1.25rem);
     line-height: var(--lh-flat);
-    transform: scale(0.8);
-    transition: transform var(--dur-base) var(--ease-out);
-    will-change: transform;
-}
-.dashboard__nav-icon--active > * {
-    transform: scale(1);
 }
 .dashboard__nav-icon:hover {
     color: var(--base-gold-300);

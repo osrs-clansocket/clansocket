@@ -27,7 +27,7 @@ function upsertQuest(
 ): void {
     conn.prepare(
         `INSERT INTO plugin_quests (account_hash, rsn, quest_id, quest_name, state, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $questId, $questName, $state, $now, $now, $now)
          ON CONFLICT (account_hash, quest_id) DO UPDATE SET
             rsn = excluded.rsn,
             quest_name = excluded.quest_name,
@@ -38,7 +38,7 @@ function upsertQuest(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", questId, questName, state, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", questId, questName, state, now });
 }
 
 function insertChange(

@@ -1,7 +1,15 @@
-import { button, derived, div, effect, span, type Instance } from "../../../factory";
+import {
+    button,
+    derived,
+    div,
+    effect,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
+    span,
+    type Instance,
+} from "../../../factory";
 import type { ConsentRecord } from "../../../../state/identity/consent/consent-client.js";
 import { timeStore } from "../../../../state/stores/time-store";
-import { glassConfirm } from "../../../forms/glass/modals/glass-confirm.js";
 import {
     ACCOUNT_DEVICE_ROW_CLASS,
     ACCOUNT_ROW_META_CLASS,
@@ -27,20 +35,20 @@ export function buildPendingRow(r: ConsentRecord, refresh: () => void, status: I
         text: derived(() => formatRemaining(r.expiresAt, timeStore.now$())),
     });
     let expired = false;
+    const cancelHost = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
     const cancel = button({
         classes: [ACCOUNT_TOKEN_REVOKE_CLASS, ACCOUNT_TOKEN_REVOKE_NEUTRAL_CLASS],
         text: "Cancel",
         context: "cancel this pending consent request",
         meta: ["action"],
         onClick: async () => {
-            const clan = r.declaredClanName ? ` against ${r.declaredClanName}` : "";
             const kindStr = KIND_LABELS[r.kind] ?? r.kind;
-            const confirmed = await glassConfirm({
-                title: "Cancel consent request",
-                message: `Cancel pending ${kindStr} for '${r.targetRsn}'${clan}? u can re-submit later.`,
-                confirmLabel: "Cancel request",
+            const confirmed = await inlineConfirm(cancelHost, {
                 cancelLabel: "Keep",
+                confirmLabel: "Cancel request",
                 danger: true,
+                cancelContext: `keep the pending ${kindStr} request for '${r.targetRsn}'`,
+                confirmContext: `confirm cancelling the pending ${kindStr} request for '${r.targetRsn}'`,
             });
             if (!confirmed) return;
             const result = await cancelConsent(r);
@@ -50,10 +58,11 @@ export function buildPendingRow(r: ConsentRecord, refresh: () => void, status: I
             } else setStatus(status, `Cancel failed: ${result.error}`);
         },
     });
+    cancelHost.addChild(cancel);
     const row = div({ classes: [ACCOUNT_DEVICE_ROW_CLASS], context: null, meta: null }, [
         span({ classes: [ACCOUNT_ROW_PRIMARY_CLASS], text: primaryText(r), context: null, meta: null }),
         meta,
-        cancel,
+        cancelHost,
     ]);
     row.trackDispose(
         effect(() => {

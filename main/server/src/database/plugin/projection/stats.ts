@@ -16,6 +16,13 @@ interface PriorStat {
     xp: number;
 }
 
+function normalizeSkill(raw: unknown): string | null {
+    if (typeof raw !== "string") return null;
+    const trimmed = raw.trim();
+    if (trimmed.length === 0) return null;
+    return trimmed.toLowerCase();
+}
+
 function readPriorStat(conn: Database.Database, accountHash: string, skill: string): PriorStat | null {
     const row = conn
         .prepare("SELECT level, xp FROM plugin_stats WHERE account_hash = ? AND skill = ?")
@@ -34,20 +41,29 @@ function upsertStat(
     now: number,
 ): void {
     conn.prepare(
-        `INSERT INTO plugin_stats (account_hash, rsn, skill, level, boosted, xp, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO plugin_stats (
+            account_hash, rsn, skill,
+            level, level_source, level_updated_at,
+            boosted,
+            xp, xp_source, xp_updated_at,
+            first_seen, last_seen, updated_at
+         ) VALUES ($accountHash, $rsn, $skill, $level, 'plugin', $now, $boosted, $xp, 'plugin', $now, $now, $now, $now)
          ON CONFLICT (account_hash, skill) DO UPDATE SET
             rsn = excluded.rsn,
             level = excluded.level,
+            level_source = 'plugin',
+            level_updated_at = excluded.level_updated_at,
             boosted = excluded.boosted,
             xp = excluded.xp,
+            xp_source = 'plugin',
+            xp_updated_at = excluded.xp_updated_at,
             last_seen = excluded.last_seen,
             updated_at = CASE
                 WHEN level != excluded.level OR boosted != excluded.boosted OR xp != excluded.xp
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", skill, level, boosted, xp, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", skill, level, boosted, xp, now });
 }
 
 function insertStatChange(
@@ -116,8 +132,7 @@ export function handleStats(
     const skills: SkillEntry[] = Array.isArray(payload.skills) ? payload.skills : [];
     conn.transaction(() => {
         for (const entry of skills) {
-            const skill =
-                typeof entry.name === "string" ? entry.name : typeof entry.skill === "string" ? entry.skill : null;
+            const skill = normalizeSkill(entry.name) ?? normalizeSkill(entry.skill);
             if (skill === null) continue;
             const level = typeof entry.level === "number" ? entry.level : 0;
             const boosted = typeof entry.boosted === "number" ? entry.boosted : level;
@@ -135,7 +150,7 @@ export function handleLevelUp(
     now: number,
     envelope: EventEnvelopeCols,
 ): void {
-    const skill = typeof payload.skill === "string" ? payload.skill : null;
+    const skill = normalizeSkill(payload.skill);
     if (skill === null) return;
     const where = extractWhere(payload);
     const levelAfter = typeof payload.level === "number" ? payload.level : 0;
@@ -160,7 +175,7 @@ export function handleXpGained(
     payload: Payload,
     now: number,
 ): void {
-    const skill = typeof payload.skill === "string" ? payload.skill : null;
+    const skill = normalizeSkill(payload.skill);
     const xpAfter = typeof payload.xp === "number" ? payload.xp : null;
     if (skill === null || xpAfter === null) return;
     const prior = readPriorStat(conn, accountHash, skill);

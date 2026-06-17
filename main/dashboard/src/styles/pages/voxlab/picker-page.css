@@ -1,0 +1,118 @@
+.voxlab__picker {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+.voxlab__picker-swatch {
+    background: transparent;
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    block-size: var(--sp-4);
+    padding: 0;
+    transition:
+        border-color var(--dur-fast) var(--ease-out),
+        transform var(--dur-fast) var(--ease-out);
+    inline-size: var(--sp-8);
+}
+.voxlab__picker-swatch:hover,
+.voxlab__picker-swatch:focus-visible {
+    border-color: rgb(from var(--base-gold-500) r g b / 0.75);
+    outline: none;
+    transform: scale(1.05);
+}
+.voxlab__picker-popup {
+    background: var(--base-graphite-800);
+    border: 0.0625rem solid var(--clr-border-medium);
+    box-shadow: var(--shadow-popup);
+    color: var(--base-graphite-100);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    gap: var(--sp-1h);
+    padding: var(--sp-2h);
+    position: fixed;
+    inline-size: var(--grid-min);
+    z-index: var(--z-toast);
+}
+.voxlab__picker-popup--wide {
+    inline-size: var(--tt-width);
+}
+.voxlab__picker-popup-columns {
+    column-gap: var(--sp-2h);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.voxlab__picker-popup-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+}
+.voxlab__picker-popup-column-title {
+    color: var(--base-gold-200);
+    font-size: var(--fs-3xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wider);
+    margin-block-end: var(--sp-0);
+    text-transform: uppercase;
+}
+.voxlab__picker-popup-preview {
+    border: 0.0625rem solid var(--clr-border-medium);
+    block-size: var(--sp-6);
+    inline-size: 100%;
+}
+.voxlab__picker-popup-row {
+    align-items: center;
+    column-gap: var(--sp-1h);
+    display: grid;
+    font-size: var(--fs-2xs);
+    grid-template-columns: var(--sp-4) 1fr var(--sp-6);
+}
+.voxlab__picker-popup-row > label {
+    color: var(--base-graphite-300);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+}
+.voxlab__picker-popup .voxlab__control-slider::-webkit-slider-thumb {
+    inline-size: var(--sp-2h);
+    block-size: var(--sp-2h);
+}
+.voxlab__picker-popup .voxlab__control-slider::-moz-range-thumb {
+    inline-size: var(--sp-2h);
+    block-size: var(--sp-2h);
+}
+.voxlab__picker-popup-value {
+    color: var(--base-gold-200);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    text-align: end;
+}
+.voxlab__picker-popup-hex {
+    align-items: center;
+    column-gap: var(--sp-1h);
+    display: grid;
+    grid-template-columns: var(--sp-8) 1fr;
+}
+.voxlab__picker-popup-hex > label {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+}
+.voxlab__picker-popup-hex-input {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    color: var(--base-gold-200);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    padding: var(--sp-0h) var(--sp-1h);
+    text-transform: lowercase;
+}
+.voxlab__picker-popup-hex-input:focus-visible {
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.55);
+    outline: none;
+}

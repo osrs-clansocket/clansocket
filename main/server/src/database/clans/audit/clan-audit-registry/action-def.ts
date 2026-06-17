@@ -49,18 +49,32 @@ import type {
     DiscordGuildSettingsSetVerificationLevelPayload,
     DiscordGuildSettingsSetWelcomeScreenPayload,
     DiscordChannelsDeletePermissionsPayload,
+    DiscordAutoHookCreatedPayload,
+    DiscordAutoHookUpdatedPayload,
+    DiscordAutoHookDeletedPayload,
+    DiscordAutoHookToggledPayload,
+    DiscordWebhookTokenRevokedPayload,
     ManagerGrantedPayload,
     ManagerRequestCreatedPayload,
     ManagerRequestResolvedPayload,
     ManagerRevokedPayload,
     ReadAuditPayload,
     RosterChangedPayload,
+    SeoUpdatedPayload,
     VaultDiscordBotDeletePayload,
     VaultDiscordBotReadPayload,
     VaultDiscordBotVerifyPayload,
     VaultDiscordBotWritePayload,
+    VaultWomDeletePayload,
+    VaultWomReadPayload,
+    VaultWomVerifyPayload,
+    VaultWomWritePayload,
     WhitelistAddedPayload,
     WhitelistRemovedPayload,
+    WomBackfillCompletedPayload,
+    WomBackfillFailedPayload,
+    WomLinkLinkerReassignedPayload,
+    WomRsnChangedPayload,
 } from "./payload-types.js";
 
 type TypedAction =
@@ -77,6 +91,7 @@ type TypedAction =
     | { action: typeof ClanAuditActions.ManagerRequestDenied; payload: ManagerRequestResolvedPayload }
     | { action: typeof ClanAuditActions.BrandingUpdated; payload: BrandingUpdatedPayload }
     | { action: typeof ClanAuditActions.BrandingCustomized; payload: BrandingCustomizedPayload }
+    | { action: typeof ClanAuditActions.SeoUpdated; payload: SeoUpdatedPayload }
     | { action: typeof ClanAuditActions.WhitelistAdded; payload: WhitelistAddedPayload }
     | { action: typeof ClanAuditActions.WhitelistRemoved; payload: WhitelistRemovedPayload }
     | { action: "server:read.managers"; payload: ReadAuditPayload }
@@ -124,12 +139,40 @@ type TypedAction =
     | { action: typeof ClanAuditActions.DiscordGuildSettingsSetName; payload: DiscordGuildSettingsSetNamePayload }
     | { action: typeof ClanAuditActions.DiscordGuildSettingsSetIcon; payload: DiscordGuildSettingsSetIconPayload }
     | { action: typeof ClanAuditActions.DiscordGuildSettingsSetBanner; payload: DiscordGuildSettingsSetBannerPayload }
-    | { action: typeof ClanAuditActions.DiscordGuildSettingsSetDescription; payload: DiscordGuildSettingsSetDescriptionPayload }
-    | { action: typeof ClanAuditActions.DiscordGuildSettingsSetSystemChannel; payload: DiscordGuildSettingsSetSystemChannelPayload }
+    | {
+          action: typeof ClanAuditActions.DiscordGuildSettingsSetDescription;
+          payload: DiscordGuildSettingsSetDescriptionPayload;
+      }
+    | {
+          action: typeof ClanAuditActions.DiscordGuildSettingsSetSystemChannel;
+          payload: DiscordGuildSettingsSetSystemChannelPayload;
+      }
     | { action: typeof ClanAuditActions.DiscordGuildSettingsSetAfk; payload: DiscordGuildSettingsSetAfkPayload }
-    | { action: typeof ClanAuditActions.DiscordGuildSettingsSetWelcomeScreen; payload: DiscordGuildSettingsSetWelcomeScreenPayload }
-    | { action: typeof ClanAuditActions.DiscordGuildSettingsSetVerificationLevel; payload: DiscordGuildSettingsSetVerificationLevelPayload }
-    | { action: typeof ClanAuditActions.DiscordChannelsDeletePermissions; payload: DiscordChannelsDeletePermissionsPayload };
+    | {
+          action: typeof ClanAuditActions.DiscordGuildSettingsSetWelcomeScreen;
+          payload: DiscordGuildSettingsSetWelcomeScreenPayload;
+      }
+    | {
+          action: typeof ClanAuditActions.DiscordGuildSettingsSetVerificationLevel;
+          payload: DiscordGuildSettingsSetVerificationLevelPayload;
+      }
+    | {
+          action: typeof ClanAuditActions.DiscordChannelsDeletePermissions;
+          payload: DiscordChannelsDeletePermissionsPayload;
+      }
+    | { action: typeof ClanAuditActions.DiscordAutoHookCreated; payload: DiscordAutoHookCreatedPayload }
+    | { action: typeof ClanAuditActions.DiscordAutoHookUpdated; payload: DiscordAutoHookUpdatedPayload }
+    | { action: typeof ClanAuditActions.DiscordAutoHookDeleted; payload: DiscordAutoHookDeletedPayload }
+    | { action: typeof ClanAuditActions.DiscordAutoHookToggled; payload: DiscordAutoHookToggledPayload }
+    | { action: typeof ClanAuditActions.DiscordWebhookTokenRevoked; payload: DiscordWebhookTokenRevokedPayload }
+    | { action: typeof ClanAuditActions.VaultWomRead; payload: VaultWomReadPayload }
+    | { action: typeof ClanAuditActions.VaultWomWrite; payload: VaultWomWritePayload }
+    | { action: typeof ClanAuditActions.VaultWomDelete; payload: VaultWomDeletePayload }
+    | { action: typeof ClanAuditActions.VaultWomVerify; payload: VaultWomVerifyPayload }
+    | { action: typeof ClanAuditActions.WomLinkLinkerReassigned; payload: WomLinkLinkerReassignedPayload }
+    | { action: typeof ClanAuditActions.WomRsnChanged; payload: WomRsnChangedPayload }
+    | { action: typeof ClanAuditActions.WomBackfillCompleted; payload: WomBackfillCompletedPayload }
+    | { action: typeof ClanAuditActions.WomBackfillFailed; payload: WomBackfillFailedPayload };
 
 export type AnyAuditAction = TypedAction["action"];
 export type PayloadFor<A extends AnyAuditAction> = Extract<TypedAction, { action: A }>["payload"];

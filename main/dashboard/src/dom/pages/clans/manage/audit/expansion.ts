@@ -1,10 +1,20 @@
-import { BTN_VARIANT_OUTLINE, button, div, paragraph, pre, snapshot, span, type Instance } from "../../../../factory";
+import {
+    BTN_VARIANT_OUTLINE,
+    button,
+    div,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
+    paragraph,
+    pre,
+    snapshot,
+    span,
+    type Instance,
+} from "../../../../factory";
 import {
     clansClient,
     type ClanAuditEntry,
     type ClanRosterDiff,
 } from "../../../../../state/clans/clans-client/index.js";
-import { glassConfirm } from "../../../../forms/glass/modals/glass-confirm.js";
 import { fmtBeforeAfterValue, fmtDiffEvent } from "../../../../../state/clans/audit/format.js";
 import {
     AUDIT_BA_AFTER_CLASS,
@@ -127,6 +137,7 @@ function buildRawPayload(entry: ClanAuditEntry): Instance {
 }
 
 function buildRevertSection(entry: ClanAuditEntry, slug: string, onReverted: () => void): Instance {
+    const host = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
     const btn = button({
         variant: BTN_VARIANT_OUTLINE,
         classes: [AUDIT_REVERT_BTN_CLASS],
@@ -137,11 +148,12 @@ function buildRevertSection(entry: ClanAuditEntry, slug: string, onReverted: () 
         meta: ["action", "audit"],
         onClick: async (e) => {
             e.stopPropagation();
-            const confirmed = await glassConfirm({
-                title: "Revert this change?",
-                message: `Restores this entry's prior state. Newer changes to the same target are overwritten.`,
+            const confirmed = await inlineConfirm(host, {
+                cancelLabel: "Cancel",
                 confirmLabel: "Revert",
                 danger: true,
+                cancelContext: `keep audit entry #${entry.id} as-is`,
+                confirmContext: `confirm reverting audit entry #${entry.id} to its prior state`,
             });
             if (!confirmed) return;
             btn.el.disabled = true;
@@ -155,7 +167,8 @@ function buildRevertSection(entry: ClanAuditEntry, slug: string, onReverted: () 
             onReverted();
         },
     });
-    return div({ classes: [AUDIT_REVERT_CLASS], context: null, meta: null }, [btn]);
+    host.addChild(btn);
+    return div({ classes: [AUDIT_REVERT_CLASS], context: null, meta: null }, [host]);
 }
 
 export async function loadExpansion(entry: ClanAuditEntry, slug: string, onReverted: () => void): Promise<Instance> {

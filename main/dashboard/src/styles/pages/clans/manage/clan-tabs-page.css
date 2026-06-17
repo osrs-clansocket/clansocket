@@ -3,5 +3,7 @@
     gap: var(--sp-1);
     flex-wrap: wrap;
     padding: var(--sp-1) var(--sp-3);
+    background: var(--gradient-surface-opaque);
+    backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
     border-block-end: 0.0625rem solid var(--base-graphite-500);
 }

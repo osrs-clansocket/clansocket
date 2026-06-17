@@ -1,0 +1,197 @@
+.voxlab__control-file-input {
+    background: rgb(from var(--base-gold-500) r g b / 0.08);
+    border: 0;
+    border-block-start: var(--bw-hairline) solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgb(from var(--base-gold-500) r g b / 0.4) 50%, transparent) 1;
+    border-radius: 0;
+    color: var(--base-gold-200);
+    cursor: pointer;
+    display: block;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    letter-spacing: var(--ls-normal);
+    margin: 0 calc(var(--sp-2h) * -1);
+    padding: var(--sp-1h) var(--sp-2h);
+    text-align: center;
+    text-transform: uppercase;
+    transition: background var(--dur-base) var(--ease-out);
+    inline-size: calc(100% + var(--sp-2h) * 2);
+}
+.voxlab__control-file-input:hover {
+    background: rgb(from var(--base-gold-500) r g b / 0.14);
+}
+.voxlab__control-file-input input {
+    display: none;
+}
+.voxlab__control-stat-row {
+    color: var(--base-graphite-300);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    justify-content: space-between;
+    padding: var(--sp-0) 0;
+}
+.voxlab__control-stat-row span:last-child {
+    color: var(--base-graphite-100);
+}
+.voxlab__control {
+    align-items: center;
+    column-gap: var(--sp-2);
+    display: grid;
+    font-size: var(--fs-xs);
+    grid-template-columns: minmax(var(--sp-16), 0.9fr) minmax(0, 1.3fr) auto;
+    margin-block-end: var(--sp-0h);
+    min-block-size: var(--sp-6);
+}
+.voxlab__control--color {
+    grid-template-columns: 1fr auto;
+}
+.voxlab__control--number {
+    grid-template-columns: minmax(var(--sp-16), 0.9fr) 1fr;
+}
+.voxlab__control--dropdown {
+    grid-template-columns: minmax(var(--sp-16), 0.9fr) 1fr;
+}
+.voxlab__control--toggle {
+    display: flex;
+    gap: var(--sp-2);
+}
+.voxlab__control:last-child {
+    margin-block-end: 0;
+}
+.voxlab__control > label {
+    color: var(--base-graphite-300);
+    font-size: var(--fs-2xs);
+    letter-spacing: var(--ls-wide);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.voxlab__control input[type="number"] {
+    appearance: textfield;
+    background-color: rgb(from var(--base-gold-500) r g b / 0.08);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    border-radius: var(--radius-md);
+    color: var(--base-gold-200);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    min-inline-size: 0;
+    padding: var(--sp-0h) var(--sp-1h);
+    transition:
+        background-color var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out);
+    inline-size: 100%;
+}
+.voxlab__control input[type="number"]:hover,
+.voxlab__control input[type="number"]:focus-visible {
+    background-color: rgb(from var(--base-gold-500) r g b / 0.14);
+    border-color: rgb(from var(--base-gold-500) r g b / 0.55);
+    outline: none;
+}
+.voxlab__control input[type="number"]::-webkit-inner-spin-button,
+.voxlab__control input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    background-color: rgb(from var(--base-gold-500) r g b / 0.14);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M4 1 L7 4 L1 4 Z' fill='%23ebd88a'/%3E%3Cpath d='M4 11 L1 8 L7 8 Z' fill='%23ebd88a'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: var(--sp-1h);
+    border-inline-start: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    cursor: pointer;
+    block-size: 100%;
+    margin: 0 calc(var(--sp-1h) * -1) 0 var(--sp-1h);
+    opacity: 1;
+    transition: background-color var(--dur-fast) var(--ease-out);
+    inline-size: var(--sp-4);
+}
+.voxlab__control input[type="number"]::-webkit-inner-spin-button:hover,
+.voxlab__control input[type="number"]::-webkit-outer-spin-button:hover {
+    background-color: rgb(from var(--base-gold-500) r g b / 0.22);
+}
+.voxlab__control-toggle {
+    align-items: center;
+    color: var(--base-graphite-300);
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    font-size: var(--fs-xs);
+    gap: var(--sp-1h);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    user-select: none;
+}
+.voxlab__control-toggle input {
+    appearance: none;
+    background-color: var(--base-graphite-900);
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    flex-shrink: 0;
+    block-size: var(--sp-3);
+    margin: 0;
+    position: relative;
+    transition:
+        background-color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out);
+    inline-size: var(--sp-3);
+}
+.voxlab__control-toggle input:hover {
+    border-color: rgb(from var(--base-gold-500) r g b / 0.65);
+}
+.voxlab__control-toggle input:checked {
+    background-color: var(--base-gold-200);
+    border-color: var(--base-gold-200);
+}
+.voxlab__control-toggle input:checked::after {
+    border: solid var(--base-graphite-900);
+    border-width: 0 var(--sp-0) var(--sp-0) 0;
+    content: "";
+    block-size: var(--sp-1h);
+    inset-inline-start: 50%;
+    position: absolute;
+    inset-block-start: 45%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    inline-size: var(--sp-0h);
+}
+.voxlab__control-toggle input:focus-visible {
+    border-color: var(--base-gold-200);
+    outline: 0.125rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    outline-offset: 0.0625rem;
+}
+.voxlab__control-header {
+    display: contents;
+}
+.voxlab__control-value {
+    color: var(--base-gold-200);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semi);
+    min-inline-size: var(--sp-8);
+    text-align: end;
+}
+.voxlab__control-slider {
+    accent-color: var(--base-gold-200);
+    background: transparent;
+    cursor: pointer;
+    block-size: var(--sp-3);
+    min-inline-size: 0;
+    inline-size: 100%;
+}
+.voxlab__control-color {
+    background: transparent;
+    border: 0.0625rem solid rgb(from var(--base-gold-500) r g b / 0.35);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    block-size: var(--sp-4);
+    padding: 0;
+    inline-size: var(--sp-8);
+}
+.voxlab__control-color::-webkit-color-swatch-wrapper {
+    padding: var(--sp-hairline);
+}
+.voxlab__control-color::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--radius-md);
+}

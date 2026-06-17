@@ -29,7 +29,9 @@ router.post(
             replaceOverwritesForChannel(clanId, guildId, channelId, body.overwrites);
             res.status(HTTP_OK).json({ ok: true, count: body.overwrites.length });
         } catch (err) {
-            logger.error(`[discord] channel-overwrites sync failed for ${guildId}/${channelId}: ${(err as Error).message}`);
+            logger.error(
+                `[discord] channel-overwrites sync failed for ${guildId}/${channelId}: ${(err as Error).message}`,
+            );
             res.status(HTTP_INTERNAL_ERROR).json({ error: "channel_overwrites_sync_failed" });
         }
     }),

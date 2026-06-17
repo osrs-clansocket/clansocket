@@ -2,6 +2,7 @@ import { identityClient } from "../../identity/identity-client/index.js";
 import { readJsonOrFallback } from "../../fetch-result.js";
 import { sameOriginFetch } from "../../../shared/helpers/fetch-helper.js";
 import type { ClanIconKind, IconTransform } from "./branding.js";
+import type { RouteSeoData } from "../../../managers/router/types.js";
 
 export interface ClanRosterMember {
     name: string;
@@ -106,4 +107,39 @@ export async function listClanTitles(slug: string): Promise<ClanTitleLadderEntry
 export async function removeClan(slug: string): Promise<boolean> {
     const res = await identityClient.authedFetch(`/api/clans/${encodeURIComponent(slug)}`, { method: "DELETE" });
     return res.ok;
+}
+
+export async function fetchClanSeo(slug: string): Promise<RouteSeoData | null> {
+    const res = await sameOriginFetch(`/api/clans/${encodeURIComponent(slug)}/seo`);
+    return readJsonOrFallback<RouteSeoData | null>(res, null);
+}
+
+export interface ManageClanSeo {
+    title: string | null;
+    description: string | null;
+    image: string | null;
+    isPublic: boolean;
+    displayName: string;
+    publicToggledAt: number | null;
+}
+
+export interface ManageClanSeoPatch {
+    title?: string | null;
+    description?: string | null;
+    image?: string | null;
+    isPublic?: boolean;
+}
+
+export async function fetchManageClanSeo(slug: string): Promise<ManageClanSeo | null> {
+    const res = await identityClient.authedFetch(`/api/clans/${encodeURIComponent(slug)}/manage/seo`);
+    return readJsonOrFallback<ManageClanSeo | null>(res, null);
+}
+
+export async function updateClanSeo(slug: string, patch: ManageClanSeoPatch): Promise<ManageClanSeo | null> {
+    const res = await identityClient.authedFetch(`/api/clans/${encodeURIComponent(slug)}/manage/seo`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patch),
+    });
+    return readJsonOrFallback<ManageClanSeo | null>(res, null);
 }

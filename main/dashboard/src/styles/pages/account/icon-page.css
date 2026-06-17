@@ -8,7 +8,7 @@
     line-height: var(--lh-flat);
     display: inline-flex;
     align-items: center;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 .account__icon-btn:hover {
     color: var(--base-gold-300);

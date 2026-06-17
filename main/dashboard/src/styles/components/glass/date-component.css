@@ -15,7 +15,7 @@
     );
     backdrop-filter: blur(var(--blur-sm)) saturate(1.2);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-gold-300);
     font-family: var(--font-data);
     font-variant-numeric: tabular-nums;
@@ -62,7 +62,7 @@
     );
     backdrop-filter: blur(var(--blur-md)) saturate(1.3);
     border: var(--border-hairline-active);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-elev-3);
     min-inline-size: 11rem;
 }
@@ -117,7 +117,7 @@
 .glass-date__day {
     background: transparent;
     border: var(--sp-hairline) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-data);
     font-variant-numeric: tabular-nums;

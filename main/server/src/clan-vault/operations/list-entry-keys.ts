@@ -13,10 +13,14 @@ interface MetadataRow {
 export async function listVaultEntryKeys(clanId: string, actor: Actor): Promise<EntryMetadata[]> {
     assertActor(actor);
     const db = getClanVaultDb(clanId);
-    const rows = db.prepare(`
+    const rows = db
+        .prepare(
+            `
         SELECT entry_key, entry_type, set_at, last_verified_at, last_verified_status
         FROM vault_entries
-    `).all() as ReadonlyArray<MetadataRow>;
+    `,
+        )
+        .all() as ReadonlyArray<MetadataRow>;
     return rows.map((r) => ({
         entry_key: r.entry_key,
         entry_type: r.entry_type,

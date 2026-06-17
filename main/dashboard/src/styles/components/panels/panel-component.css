@@ -2,7 +2,7 @@
     background: var(--gradient-surface);
     backdrop-filter: blur(var(--blur-sm)) saturate(1.15);
     border: var(--border-dim);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     padding: var(--sp-2) var(--sp-3);
     overflow: hidden;
     contain: layout paint;

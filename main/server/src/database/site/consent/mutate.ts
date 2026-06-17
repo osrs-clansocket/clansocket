@@ -5,10 +5,10 @@ export function expirePendingConsents(now: number = Date.now()): number {
     return db
         .prepare(
             `UPDATE clansocket_consent_requests
-             SET status = 'expired', resolved_at = ?
-             WHERE status = 'pending' AND expires_at < ?`,
+             SET status = 'expired', resolved_at = $now
+             WHERE status = 'pending' AND expires_at < $now`,
         )
-        .run(now, now).changes;
+        .run({ now }).changes;
 }
 
 export function cancelConsentRequest(id: number, requestingSiteAccountId: string): boolean {

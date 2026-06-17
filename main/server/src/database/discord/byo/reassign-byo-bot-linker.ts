@@ -14,8 +14,6 @@ interface ReassignParams {
 
 export function reassignByoBotLinker(params: ReassignParams): boolean {
     const db = getDb(DB_NAMES.DISCORD_BOT);
-    const result = db
-        .prepare(SQL)
-        .run(params.newLinkerSiteAccountId, Date.now(), OWNER_KIND_BYO, params.clanId);
+    const result = db.prepare(SQL).run(params.newLinkerSiteAccountId, Date.now(), OWNER_KIND_BYO, params.clanId);
     return result.changes > 0;
 }

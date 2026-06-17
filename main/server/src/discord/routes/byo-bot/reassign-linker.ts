@@ -92,9 +92,7 @@ router.post(
                 },
             });
         } catch (err) {
-            logger.error(
-                `[discord-byo] reassign-linker failed slug=${slug}: ${(err as Error).message}`,
-            );
+            logger.error(`[discord-byo] reassign-linker failed slug=${slug}: ${(err as Error).message}`);
             res.status(HTTP_INTERNAL_ERROR).json({ error: "reassign_failed" });
         }
     }),

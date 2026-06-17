@@ -20,4 +20,4 @@ export { clanAvatarInner } from "./clan-avatar";
 export type { ClanAvatarInnerProps } from "./clan-avatar";
 export { cloneByKey, tryCloneByKey, missingRef, visitPagePlaceholder, isValidDataKey } from "./clone-by-key";
 export { treeView, TREE_ICON_CLASS } from "./tree";
-export type { TreeNode, TreeLeaf, TreeFolder } from "./tree";
+export type { TreeNode, TreeLeaf, TreeFolder, ReorderEvent } from "./tree";

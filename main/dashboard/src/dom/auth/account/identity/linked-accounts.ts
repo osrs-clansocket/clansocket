@@ -4,6 +4,8 @@ import {
     div,
     effect,
     heading,
+    INLINE_CONFIRM_HOST_CLASS,
+    inlineConfirm,
     paragraph,
     signal,
     span,
@@ -12,7 +14,6 @@ import {
 } from "../../../factory/index.js";
 import { identityClient, type LinkedProvider } from "../../../../state/identity/identity-client/index.js";
 import { providersStore } from "../../../../state/identity/stores/providers-store.js";
-import { glassConfirm } from "../../../forms/glass/modals/glass-confirm.js";
 import { FORM_HINT } from "../../../forms/form-classes.js";
 import {
     ACCOUNT_CLAN_PANEL_CLASS,
@@ -55,24 +56,27 @@ function buildLinkButton(name: ProviderName): Instance {
 }
 
 function buildUnlinkButton(name: ProviderName, labelText: string, onChange: () => void): Instance {
-    return button({
+    const host = div({ classes: [INLINE_CONFIRM_HOST_CLASS], context: null, meta: null });
+    const unlinkBtn = button({
         classes: [ACCOUNT_TOKEN_REVOKE_CLASS],
         text: "Unlink",
         context: `unlink ${labelText} as a sign-in method`,
         meta: ["destructive", "account"],
         onClick: async () => {
-            const confirmed = await glassConfirm({
-                title: `Unlink ${labelText}`,
-                message: `Remove ${labelText} as a sign-in method? u wont be able to use ${labelText} to log in until u link it again.`,
-                confirmLabel: "Unlink",
+            const confirmed = await inlineConfirm(host, {
                 cancelLabel: "Cancel",
+                confirmLabel: "Unlink",
                 danger: true,
+                cancelContext: `keep ${labelText} linked`,
+                confirmContext: `confirm unlinking ${labelText}`,
             });
             if (!confirmed) return;
             const result = await identityClient.unlinkProvider(name);
             if (result.ok) onChange();
         },
     });
+    host.addChild(unlinkBtn);
+    return host;
 }
 
 function buildProviderRow(name: ProviderName, linked: LinkedProvider | null, onChange: () => void): Instance {

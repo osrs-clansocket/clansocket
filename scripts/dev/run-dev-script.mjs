@@ -12,12 +12,14 @@ const COLORS = {
 	server: "\x1b[97m",
 	discord: "\x1b[94m",
 	dashboard: "\x1b[93m",
+	electron: "\x1b[96m",
 };
 const EMOJIS = {
 	launcher: "📡",
 	server: "⚡",
 	discord: "👾",
 	dashboard: "🖥️ ",
+	electron: "🛰️ ",
 };
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 
@@ -128,12 +130,29 @@ function pipeChild(child, proc) {
 	child.stderr.on("data", (c) => { errBuf = flushLines(errBuf + c.toString(), proc); });
 }
 
-function spawnChild(cmd, args, proc) {
-	const child = spawn(cmd, args, {
+function quoteArg(a) {
+	for (let i = 0; i < a.length; i++) {
+		const c = a.charAt(i);
+		if (c === " " || c === "\t") return "\"" + a + "\"";
+	}
+	return a;
+}
+
+function buildChildEnv(extraEnv) {
+	const existing = process.env.NODE_OPTIONS ? process.env.NODE_OPTIONS + " " : "";
+	const env = { ...process.env, NODE_OPTIONS: existing + "--trace-deprecation" };
+	if (extraEnv) Object.assign(env, extraEnv);
+	return env;
+}
+
+function spawnChild(cmd, args, proc, extraEnv) {
+	const quoted = [cmd];
+	for (const a of args) quoted.push(quoteArg(a));
+	const child = spawn(quoted.join(" "), {
 		stdio: ["ignore", "pipe", "pipe"],
 		shell: true,
 		cwd: APP_ROOT,
-		env: { ...process.env },
+		env: buildChildEnv(extraEnv),
 	});
 	pipeChild(child, proc);
 	return child;
@@ -233,9 +252,13 @@ async function main() {
 	} catch {
 		logProc("launcher", "dashboard wait timeout, continuing anyway");
 	}
-	const { existsSync } = await import("node:fs");
+	logProc("launcher", "dashboard ready, spawning electron");
+
+	const electron = spawnChild("npx", ["electron", "main/electron"], "electron", { NODE_ENV: "development" });
+	electron.on("exit", () => logProc("launcher", "electron exited"));
 
 	const cleanup = () => {
+		killTree(electron);
 		killTree(discord);
 		killTree(dashboard);
 		killTree(server);

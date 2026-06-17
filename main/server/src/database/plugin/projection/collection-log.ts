@@ -1,7 +1,7 @@
 import type Database from "better-sqlite3";
 import type { EventEnvelopeCols } from "./envelope.js";
 import { rowDedupHash } from "./envelope.js";
-import { extractWhere, type Payload } from "./helpers.js";
+import { extractWhere, sanitizeItemName, type Payload } from "./helpers.js";
 import { upsertItemsCatalog } from "./items-catalog.js";
 
 interface CollectionLogSnapshotItem {
@@ -27,12 +27,12 @@ function upsertCollectionLogItem(
     now: number,
 ): void {
     if (typeof item.itemId !== "number") return;
-    const itemName = typeof item.name === "string" ? item.name : "";
+    const itemName = typeof item.name === "string" ? sanitizeItemName(item.name) : "";
     const category = typeof item.category === "string" ? item.category : "";
     const qty = typeof item.quantity === "number" ? item.quantity : 0;
     conn.prepare(
         `INSERT INTO plugin_collection_log (account_hash, rsn, item_id, item_name, category, qty, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $itemId, $itemName, $category, $qty, $now, $now, $now)
          ON CONFLICT (account_hash, item_id) DO UPDATE SET
             rsn = excluded.rsn,
             item_name = excluded.item_name,
@@ -46,7 +46,7 @@ function upsertCollectionLogItem(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", item.itemId, itemName, category, qty, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", itemId: item.itemId, itemName, category, qty, now });
 }
 
 export function handleCollectionLogSnapshot(
@@ -75,7 +75,7 @@ export function handleCollectionLogEntry(
 ): void {
     const entry: CollectionLogEntry = payload;
     if (typeof entry.itemId !== "number") return;
-    const itemName = typeof entry.itemName === "string" ? entry.itemName : "";
+    const itemName = typeof entry.itemName === "string" ? sanitizeItemName(entry.itemName) : "";
     const category = typeof entry.category === "string" ? entry.category : "";
     const sourceKind = typeof entry.sourceKind === "string" ? entry.sourceKind : "other";
     const where = extractWhere(payload);

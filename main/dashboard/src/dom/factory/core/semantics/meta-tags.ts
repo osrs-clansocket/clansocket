@@ -27,6 +27,8 @@ export const META_TAGS = [
     "copy",
     "discord",
     "emoji",
+    "external",
+    "plugin-config",
 ] as const;
 
 export type MetaTag = (typeof META_TAGS)[number];

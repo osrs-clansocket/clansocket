@@ -4,7 +4,7 @@ import type { MemberRow } from "../types.js";
 const LIST_SQL = `
 SELECT user_id, guild_id, name, display_name, nickname,
        joined_at, premium_since, communication_disabled_until,
-       is_boosting, is_bot, role_ids_json, avatar_url
+       is_boosting, is_bot, role_ids_json, avatar_url, pending, flags
 FROM discord_members
 WHERE guild_id = ?
 ORDER BY LOWER(COALESCE(nickname, display_name, name)) ASC
@@ -23,6 +23,8 @@ interface MemberSqlRow {
     is_bot: number;
     role_ids_json: string;
     avatar_url: string | null;
+    pending: number;
+    flags: string;
 }
 
 const FLAG_TRUE = 1;
@@ -51,6 +53,8 @@ function toMemberRow(r: MemberSqlRow): MemberRow {
         is_bot: r.is_bot === FLAG_TRUE,
         role_ids: parseRoleIds(r.role_ids_json),
         avatar_url: r.avatar_url,
+        pending: r.pending === FLAG_TRUE,
+        flags: r.flags,
     };
 }
 

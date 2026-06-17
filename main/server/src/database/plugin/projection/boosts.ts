@@ -8,6 +8,13 @@ interface BoostEntry {
     diff?: number;
 }
 
+function normalizeSkill(raw: unknown): string | null {
+    if (typeof raw !== "string") return null;
+    const trimmed = raw.trim();
+    if (trimmed.length === 0) return null;
+    return trimmed.toLowerCase();
+}
+
 function readPriorBoost(conn: Database.Database, accountHash: string, skill: string): number | null {
     const row = conn
         .prepare("SELECT diff FROM plugin_boosts WHERE account_hash = ? AND skill = ?")
@@ -25,7 +32,7 @@ function upsertBoost(
 ): void {
     conn.prepare(
         `INSERT INTO plugin_boosts (account_hash, rsn, skill, diff, first_seen, last_seen, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)
+         VALUES ($accountHash, $rsn, $skill, $diff, $now, $now, $now)
          ON CONFLICT (account_hash, skill) DO UPDATE SET
             rsn = excluded.rsn,
             diff = excluded.diff,
@@ -35,7 +42,7 @@ function upsertBoost(
                 THEN excluded.updated_at
                 ELSE updated_at
             END`,
-    ).run(accountHash, rsn ?? "", skill, diff, now, now, now);
+    ).run({ accountHash, rsn: rsn ?? "", skill, diff, now });
 }
 
 export function handleBoosts(
@@ -93,7 +100,7 @@ export function handleBoosts(
     conn.transaction(() => {
         const seen = new Set<string>();
         for (const entry of entries) {
-            const skill = typeof entry.skill === "string" ? entry.skill : null;
+            const skill = normalizeSkill(entry.skill);
             if (skill === null) continue;
             seen.add(skill);
             const diffAfter = typeof entry.diff === "number" ? entry.diff : 0;

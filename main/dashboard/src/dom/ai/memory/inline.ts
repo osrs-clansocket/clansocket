@@ -1,9 +1,8 @@
-import { button, createInstance, div, effect, type Instance } from "../../factory";
+import { button, createInstance, div, effect, inlineConfirm, type Instance } from "../../factory";
 import { memoryClient, type MemoryFile, type MemoryResult } from "../../../ai/memory-client";
 import { memoryStore } from "../../../state/stores/memory-store";
 import { renderList, renderLoading } from "./list";
 import { renderEditor, emptyDraft, MODE_EDIT, MODE_CREATE, type Mode } from "./editor";
-import { glassConfirm } from "../../forms/glass/modals/glass-confirm.js";
 import {
     AI_MEMORY_CONTENT_CLASS,
     AI_MEMORY_INLINE_BODY_CLASS,
@@ -70,11 +69,12 @@ function openEditor(h: Handles, mode: Mode, file: MemoryFile): void {
             );
         },
         onDelete: async (id) => {
-            const confirmed = await glassConfirm({
-                title: "Delete memory",
-                message: `Permanently delete "${id}"? This cannot be undone.`,
+            const confirmed = await inlineConfirm(h.content, {
+                cancelLabel: "Cancel",
                 confirmLabel: "Delete",
                 danger: true,
+                cancelContext: `keep memory file "${id}"`,
+                confirmContext: `confirm deleting memory file "${id}"`,
             });
             if (confirmed) await runWriteOp(h, `Deleted ${id}`, () => memoryClient.remove(id));
         },

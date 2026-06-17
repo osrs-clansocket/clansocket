@@ -1,8 +1,6 @@
 import type { ClanAuditAction } from "../../database/clans/audit/clan-audit-actions.js";
 
-export type Actor =
-    | { kind: "user"; user_id: string }
-    | { kind: "system"; component: string };
+export type Actor = { kind: "user"; user_id: string } | { kind: "system"; component: string };
 
 export type VerifyStatus = "ok" | "auth-failed" | "rate-limited" | "unreachable";
 

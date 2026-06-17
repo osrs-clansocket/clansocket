@@ -26,7 +26,10 @@ export async function readVaultEntry<T>(
     try {
         plaintext = decryptToken(row.ciphertext_b64, row.iv_b64, getClanVaultMasterKey());
     } catch {
-        recordVaultAudit(clanId, registered.auditActions.read, entry_key, actor, { hit: true, reason: "decrypt-failed" });
+        recordVaultAudit(clanId, registered.auditActions.read, entry_key, actor, {
+            hit: true,
+            reason: "decrypt-failed",
+        });
         return null;
     }
     let parsed: unknown;
@@ -37,7 +40,10 @@ export async function readVaultEntry<T>(
         return null;
     }
     if (!validate(parsed)) {
-        recordVaultAudit(clanId, registered.auditActions.read, entry_key, actor, { hit: true, reason: "schema-violation" });
+        recordVaultAudit(clanId, registered.auditActions.read, entry_key, actor, {
+            hit: true,
+            reason: "schema-violation",
+        });
         return null;
     }
     db.prepare("UPDATE vault_entries SET last_used_at = ? WHERE entry_key = ?").run(NOW(), entry_key);

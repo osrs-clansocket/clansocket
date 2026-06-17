@@ -20,7 +20,7 @@
     padding: var(--sp-0) var(--sp-1);
     background: transparent;
     border: var(--bw-hairline) solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--base-cream-100);
     font-family: var(--font-body);
     font-size: var(--fs-2xs);
